@@ -1,0 +1,2 @@
+0.1.0 - Initial Release
+0.1.1 - Added increased rocket launchers range for mk2 and mk3, slightly reduced the recipe materials
