@@ -1,6 +1,8 @@
- - add a logistics tab 
- - increase rocket launcher range per mk2/mk3 > DONE
- - increase size per mk2/mk3
+ - add a logistics tab
+ - increase the individual size of Spidertron MK2 and Spidertron MK3
  - increase stride distance for maximum stickbugness
  - add impalement/damage on contact with enemies
+ - LOW PRIORITY - fix Spidertron MK2 and Spidertron MK3 item icon iconsistencies if used as map pins 
  
+ - DONE: increase rocket launcher maximum range for Spidertron MK2 and Spidertron MK3
+ - DONE: changed Spidertron MK2 and Spidertron MK3 base color on placement so they look different from the vanilla one
