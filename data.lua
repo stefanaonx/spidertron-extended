@@ -25,6 +25,25 @@ local spidertronmk3_grid = {
 }
 
 -- MK2 spidertronmk2
+
+-- i require new launchers item
+local spidertronmk2_rocket_launcher_1_item = table_deepcopy(data.raw["gun"]["spidertron-rocket-launcher-1"])
+spidertronmk2_rocket_launcher_1_item.name = "spidertronmk2-rocket-launcher-1"
+spidertronmk2_rocket_launcher_1_item.attack_parameters.range = 54
+
+local spidertronmk2_rocket_launcher_2_item = table_deepcopy(data.raw["gun"]["spidertron-rocket-launcher-2"])
+spidertronmk2_rocket_launcher_2_item.name = "spidertronmk2-rocket-launcher-2"
+spidertronmk2_rocket_launcher_2_item.attack_parameters.range = 54
+
+local spidertronmk2_rocket_launcher_3_item = table_deepcopy(data.raw["gun"]["spidertron-rocket-launcher-3"])
+spidertronmk2_rocket_launcher_3_item.name = "spidertronmk2-rocket-launcher-3"
+spidertronmk2_rocket_launcher_3_item.attack_parameters.range = 54
+
+local spidertronmk2_rocket_launcher_4_item = table_deepcopy(data.raw["gun"]["spidertron-rocket-launcher-4"])
+spidertronmk2_rocket_launcher_4_item.name = "spidertronmk2-rocket-launcher-4"
+spidertronmk2_rocket_launcher_4_item.attack_parameters.range = 54
+
+
 local spidertronmk2_entity = table_deepcopy(data.raw["spider-vehicle"]["spidertron"])
 spidertronmk2_entity.name = "spidertronmk2"
 spidertronmk2_entity.icon = nil
@@ -75,7 +94,7 @@ spidertronmk2_entity.resistances = {
 }
 spidertronmk2_entity.chunk_exploration_radius = 5
 spidertronmk2_entity.automatic_weapon_cycling = true
--- spidertronmk2_entity.guns = {"spidertron-rocket-launcher-1", "spidertron-rocket-launcher-2", "spidertron-rocket-launcher-3", "spidertron-rocket-launcher-4", "tank-cannon", "tank-flamethrower"}
+spidertronmk2_entity.guns = {"spidertronmk2-rocket-launcher-1", "spidertronmk2-rocket-launcher-2", "spidertronmk2-rocket-launcher-3", "spidertronmk2-rocket-launcher-4"}
 spidertronmk2_entity.chain_shooting_cooldown_modifier = 0.4
 spidertronmk2_entity.braking_force = 2
 
@@ -95,11 +114,11 @@ local spidertronmk2_recipe = {
     ingredients = {
         {"spidertron",1},
         {"low-density-structure",200},
-        {"fusion-reactor-equipment",3},
-        {"rocket-control-unit",50},
-        {"beacon",25},
-        {"speed-module-3",25},
-        {"effectivity-module-3",25}
+        {"fusion-reactor-equipment",2},
+        {"rocket-control-unit",20},
+        {"beacon",10},
+        {"speed-module-3",10},
+        {"effectivity-module-3",10}
     },
     result = "spidertronmk2"
 }
@@ -135,7 +154,26 @@ local spidertronmk2_technology = {
 
 -- table.insert(data.raw["technology"]["spidertron"].effects, 2, {type = "unlock-recipe", recipe = "spidertronmk2"})
 -- table.insert(data.raw["technology"]["spidertron"].order, 2, {type = "item", name = "spidertronmk2", order = "ab",})
+
 -- MK3
+
+-- i require new launchers item
+local spidertronmk3_rocket_launcher_1_item = table_deepcopy(data.raw["gun"]["spidertron-rocket-launcher-1"])
+spidertronmk3_rocket_launcher_1_item.name = "spidertronmk3-rocket-launcher-1"
+spidertronmk3_rocket_launcher_1_item.attack_parameters.range = 72
+
+local spidertronmk3_rocket_launcher_2_item = table_deepcopy(data.raw["gun"]["spidertron-rocket-launcher-2"])
+spidertronmk3_rocket_launcher_2_item.name = "spidertronmk3-rocket-launcher-2"
+spidertronmk3_rocket_launcher_2_item.attack_parameters.range = 72
+
+local spidertronmk3_rocket_launcher_3_item = table_deepcopy(data.raw["gun"]["spidertron-rocket-launcher-3"])
+spidertronmk3_rocket_launcher_3_item.name = "spidertronmk3-rocket-launcher-3"
+spidertronmk3_rocket_launcher_3_item.attack_parameters.range = 72
+
+local spidertronmk3_rocket_launcher_4_item = table_deepcopy(data.raw["gun"]["spidertron-rocket-launcher-4"])
+spidertronmk3_rocket_launcher_4_item.name = "spidertronmk3-rocket-launcher-4"
+spidertronmk3_rocket_launcher_4_item.attack_parameters.range = 72
+
 
 local spidertronmk3_entity = table_deepcopy(data.raw["spider-vehicle"]["spidertron"])
 spidertronmk3_entity.name = "spidertronmk3"
@@ -188,7 +226,7 @@ spidertronmk3_entity.resistances = {
 spidertronmk3_entity.chunk_exploration_radius = 7
 spidertronmk3_entity.automatic_weapon_cycling = true
 -- wanted to try flamethrower, it works but with cycling it's not fun
--- spidertronmk3_entity.guns = {"spidertron-rocket-launcher-1", "spidertron-rocket-launcher-2", "spidertron-rocket-launcher-3", "spidertron-rocket-launcher-4","tank-cannon", "tank-cannon", "tank-cannon", "tank-flamethrower"}
+spidertronmk3_entity.guns = {"spidertronmk3-rocket-launcher-1", "spidertronmk3-rocket-launcher-2", "spidertronmk3-rocket-launcher-3", "spidertronmk3-rocket-launcher-4"}
 spidertronmk3_entity.chain_shooting_cooldown_modifier = 0.3
 spidertronmk3_entity.healing_per_tick = 0.5
 spidertronmk3_entity.braking_force = 4
@@ -210,10 +248,10 @@ local spidertronmk3_recipe = {
     ingredients = {
         {"spidertronmk2",1},
         {"low-density-structure",250},
-        {"fusion-reactor-equipment",4},
-        {"beacon",50},
-        {"speed-module-3",50},
-        {"effectivity-module-3",50},
+        {"fusion-reactor-equipment",2},
+        {"beacon",25},
+        {"speed-module-3",25},
+        {"effectivity-module-3",25},
         {"satellite",1}
     },
     result = "spidertronmk3"
@@ -257,12 +295,20 @@ local spidertronmk3_technology = {
 -- )
 
 data:extend{
+    spidertronmk2_rocket_launcher_1_item,
+    spidertronmk2_rocket_launcher_2_item,
+    spidertronmk2_rocket_launcher_3_item,
+    spidertronmk2_rocket_launcher_4_item,
     spidertronmk2_grid,
     spidertronmk2_entity,
     spidertronmk2_item,
     spidertronmk2_technology,
     spidertronmk2_recipe,
     spidertronmk3_grid,
+    spidertronmk3_rocket_launcher_1_item,
+    spidertronmk3_rocket_launcher_2_item,
+    spidertronmk3_rocket_launcher_3_item,
+    spidertronmk3_rocket_launcher_4_item,
     spidertronmk3_entity,
     spidertronmk3_item,
     spidertronmk3_technology,
