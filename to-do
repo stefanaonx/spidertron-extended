@@ -1,6 +1,8 @@
- - add a logistics tab
- - increase the individual size of Spidertron MK2 and Spidertron MK3
- - increase stride distance for maximum stickbugness
+ - add a logistics tab (devs confirmed planning to add a logistics tab in the future)
+ - TBD: consider adding a weaponless Spidertron with a large inventory for use in construction
+ - TBD: consider adding an early game Spidertron with limited functionality (maybe between car and tank tech ?) that requires fuel to move
+ - increase the individual size of Spidertron MK2 and Spidertron MK3 (50% done)
+ - increase stride distance for maximum stickbugness (added for next release)
  - add impalement/damage on contact with enemies
  - LOW PRIORITY - fix Spidertron MK2 and Spidertron MK3 item icon iconsistencies if used as map pins 
  
