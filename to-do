@@ -5,6 +5,7 @@
  - increase stride distance for maximum stickbugness (added for next release)
  - add impalement/damage on contact with enemies
  - LOW PRIORITY - fix Spidertron MK2 and Spidertron MK3 item icon iconsistencies if used as map pins 
+ - REFACTORING
  
  - DONE: increase rocket launcher maximum range for Spidertron MK2 and Spidertron MK3
  - DONE: changed Spidertron MK2 and Spidertron MK3 base color on placement so they look different from the vanilla one
