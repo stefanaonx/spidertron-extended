@@ -1,5 +1,9 @@
 --control.lua
 
+require "util"
+
+local table_deepcopy = util.table.deepcopy
+
 -- script to modify the spidertronmk2 and spidertronmk3 color on placement
 script.on_event(defines.events.on_built_entity,
 function(event)

@@ -91,129 +91,131 @@ spidertronmk2_entity.minimap_representation = {
     size = {128, 128},
     scale = 0.6
 }
--- trying to change size
-spidertronmk2_entity.height = 1.75
 
--- modify the main body size
-spidertronmk2_entity.graphics_set.animation.layers[1].hr_version.scale = 0.60
-spidertronmk2_entity.graphics_set.animation.layers[2].hr_version.scale = 0.60
+if not settings.startup["vanilla-spidertron-size"].value then
+    spidertronmk2_entity.height = 1.75
 
-spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
-spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
+    -- modify the main body size
+    spidertronmk2_entity.graphics_set.animation.layers[1].hr_version.scale = 0.60
+    spidertronmk2_entity.graphics_set.animation.layers[2].hr_version.scale = 0.60
 
-spidertronmk2_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.60
-spidertronmk2_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.60
+    spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
+    spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
 
-spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
-spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
+    spidertronmk2_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.60
+    spidertronmk2_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.60
 
-spidertronmk2_entity.spider_engine = {
-    legs = {
-        -- 5PM ordering them the way it's in the original
-        {
-            blocking_legs = {2},
-            ground_position = {2.8125, -3.125},
-            leg = "spidertronmk2-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {0.46875 * 1.2, -0.6875 * 1.2},
+    spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
+    spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
+
+    spidertronmk2_entity.spider_engine = {
+        legs = {
+            -- 5PM ordering them the way it's in the original
+            {
+                blocking_legs = {2},
+                ground_position = {2.8125, -3.125},
+                leg = "spidertronmk2-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {0.46875 * 1.2, -0.6875 * 1.2},
+            },
+            -- 4PM
+            {
+                blocking_legs = {1, 3},
+                ground_position = {4, -1.25},
+                leg = "spidertronmk2-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {0.71875 * 1.2, -0.3125 * 1.2},
+            },
+            -- 2PM
+            {
+                blocking_legs = {2, 4},
+                ground_position = {4, 1.25},
+                leg = "spidertronmk2-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {0.78125 * 1.2, 0.125 * 1.2},
+            },
+            -- 1PM
+            {
+                blocking_legs = {3},
+                ground_position = {2.8125, 3.125},
+                leg = "spidertronmk2-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {0.46875 * 1.2, 0.53125 * 1.2},
+            },
+            -- 7PM
+            {
+                blocking_legs = {6},
+                ground_position = {-2.8125, -3.125},
+                leg = "spidertronmk2-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {-0.46875 * 1.2, -0.6875 * 1.2},
+            },
+            -- 8PM
+            {
+                blocking_legs = {5, 7},
+                ground_position = {-4, -1.25},
+                leg = "spidertronmk2-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {-0.71875 * 1.2, -0.3125 * 1.2},
+            },
+            -- 10PM
+            {
+                blocking_legs = {6, 8},
+                ground_position = {-4, 1.25},
+                leg = "spidertronmk2-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {-0.78125 * 1.2, 0.125 * 1.2},
+            },
+            -- 11PM
+            {
+                blocking_legs = {7},
+                ground_position = {-2.8125, 3.125},
+                leg = "spidertronmk2-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {-0.46875 * 1.2, 0.53125 * 1.2},
+            }
         },
-        -- 4PM
-        {
-            blocking_legs = {1, 3},
-            ground_position = {4, -1.25},
-            leg = "spidertronmk2-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {0.71875 * 1.2, -0.3125 * 1.2},
-        },
-        -- 2PM
-        {
-            blocking_legs = {2, 4},
-            ground_position = {4, 1.25},
-            leg = "spidertronmk2-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {0.78125 * 1.2, 0.125 * 1.2},
-        },
-        -- 1PM
-        {
-            blocking_legs = {3},
-            ground_position = {2.8125, 3.125},
-            leg = "spidertronmk2-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {0.46875 * 1.2, 0.53125 * 1.2},
-        },
-        -- 7PM
-        {
-            blocking_legs = {6},
-            ground_position = {-2.8125, -3.125},
-            leg = "spidertronmk2-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {-0.46875 * 1.2, -0.6875 * 1.2},
-        },
-        -- 8PM
-        {
-            blocking_legs = {5, 7},
-            ground_position = {-4, -1.25},
-            leg = "spidertronmk2-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {-0.71875 * 1.2, -0.3125 * 1.2},
-        },
-        -- 10PM
-        {
-            blocking_legs = {6, 8},
-            ground_position = {-4, 1.25},
-            leg = "spidertronmk2-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {-0.78125 * 1.2, 0.125 * 1.2},
-        },
-        -- 11PM
-        {
-            blocking_legs = {7},
-            ground_position = {-2.8125, 3.125},
-            leg = "spidertronmk2-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {-0.46875 * 1.2, 0.53125 * 1.2},
-        }
-    },
-    military_target = 'spidertron-military-target',
-    resistances = {
-        {
-            type = "acid",
-            decrease = 0,
-            percent = 75
-        },
-        {
-            type = "electric",
-            decrease = 0,
-            percent = 75
-        },
-        {
-            type = "explosion",
-            decrease = 60,
-            percent = 80
-        },
-        {
-            type = "fire",
-            decrease = 20,
-            percent = 65
-        },
-        {
-            type = "impact",
-            decrease = 50,
-            percent = 80
-        },
-        {
-            type = "laser",
-            decrease = 0,
-            percent = 70
-        },
-        {
-            type = "physical",
-            decrease = 20,
-            percent = 65
+        military_target = 'spidertron-military-target',
+        resistances = {
+            {
+                type = "acid",
+                decrease = 0,
+                percent = 75
+            },
+            {
+                type = "electric",
+                decrease = 0,
+                percent = 75
+            },
+            {
+                type = "explosion",
+                decrease = 60,
+                percent = 80
+            },
+            {
+                type = "fire",
+                decrease = 20,
+                percent = 65
+            },
+            {
+                type = "impact",
+                decrease = 50,
+                percent = 80
+            },
+            {
+                type = "laser",
+                decrease = 0,
+                percent = 70
+            },
+            {
+                type = "physical",
+                decrease = 20,
+                percent = 65
+            }
         }
     }
-}
-
+end
+    
 -- MK3
 local spidertronmk3_entity = table_deepcopy(data.raw["spider-vehicle"]["spidertron"])
 spidertronmk3_entity.name = "spidertronmk3"
@@ -283,129 +285,131 @@ spidertronmk3_entity.minimap_representation = {
     scale = 0.7
 }
 -- trying to change size
-spidertronmk3_entity.height = 2.0
 -- spidertronmk3_entity.selection_box = {{-2, -2}, {2, 2}}
 -- spidertronmk3_entity.collision_box = {{-2, -2}, {2, 2}}
 
 -- trying to move copy the spidertron legs
-spidertronmk3_entity.spider_engine = {
-    legs = {
-        -- 5PM ordering them on the analog clock
-        {
-            blocking_legs = {2},
-            ground_position = {3.375, -3.75},
-            leg = "spidertronmk3-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {0.46875 * 1.4, -0.6875 * 1.4},
+if not settings.startup["vanilla-spidertron-size"].value then
+    spidertronmk3_entity.height = 2.0
+    spidertronmk3_entity.spider_engine = {
+        legs = {
+            -- 5PM ordering them on the analog clock
+            {
+                blocking_legs = {2},
+                ground_position = {3.375, -3.75},
+                leg = "spidertronmk3-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {0.46875 * 1.4, -0.6875 * 1.4},
+            },
+            -- 4PM
+            {
+                blocking_legs = {1, 3},
+                ground_position = {5, -1.5},
+                leg = "spidertronmk3-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {0.71875 * 1.4, -0.3125 * 1.4},
+            },
+            -- 2PM
+            {
+                blocking_legs = {2, 4},
+                ground_position = {5, 1.5},
+                leg = "spidertronmk3-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {0.78125 * 1.4, 0.125 * 1.4},
+            },
+            -- 1PM
+            {
+                blocking_legs = {3},
+                ground_position = {3.375, 3.75},
+                leg = "spidertronmk3-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {0.46875 * 1.4, 0.53125 * 1.4},
+            },
+            -- 7PM
+            {
+                blocking_legs = {6},
+                ground_position = {-3.375, -3.75},
+                leg = "spidertronmk3-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {-0.46875 * 1.4, -0.6875 * 1.4},
+            },
+            -- 8PM
+            {
+                blocking_legs = {5, 7},
+                ground_position = {-5, -1.5},
+                leg = "spidertronmk3-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {-0.71875 * 1.4, -0.3125 * 1.4},
+            },
+            -- 10PM
+            {
+                blocking_legs = {6, 8},
+                ground_position = {-5, 1.5},
+                leg = "spidertronmk3-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {-0.78125 * 1.4, 0.125 * 1.4},
+            },
+            -- 11PM
+            {
+                blocking_legs = {7},
+                ground_position = {-3.375, 3.75},
+                leg = "spidertronmk3-leg",
+                leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
+                mount_position = {-0.46875 * 1.4, 0.53125 * 1.4},
+            }
         },
-        -- 4PM
-        {
-            blocking_legs = {1, 3},
-            ground_position = {5, -1.5},
-            leg = "spidertronmk3-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {0.71875 * 1.4, -0.3125 * 1.4},
-        },
-        -- 2PM
-        {
-            blocking_legs = {2, 4},
-            ground_position = {5, 1.5},
-            leg = "spidertronmk3-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {0.78125 * 1.4, 0.125 * 1.4},
-        },
-        -- 1PM
-        {
-            blocking_legs = {3},
-            ground_position = {3.375, 3.75},
-            leg = "spidertronmk3-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {0.46875 * 1.4, 0.53125 * 1.4},
-        },
-        -- 7PM
-        {
-            blocking_legs = {6},
-            ground_position = {-3.375, -3.75},
-            leg = "spidertronmk3-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {-0.46875 * 1.4, -0.6875 * 1.4},
-        },
-        -- 8PM
-        {
-            blocking_legs = {5, 7},
-            ground_position = {-5, -1.5},
-            leg = "spidertronmk3-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {-0.71875 * 1.4, -0.3125 * 1.4},
-        },
-        -- 10PM
-        {
-            blocking_legs = {6, 8},
-            ground_position = {-5, 1.5},
-            leg = "spidertronmk3-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {-0.78125 * 1.4, 0.125 * 1.4},
-        },
-        -- 11PM
-        {
-            blocking_legs = {7},
-            ground_position = {-3.375, 3.75},
-            leg = "spidertronmk3-leg",
-            leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-            mount_position = {-0.46875 * 1.4, 0.53125 * 1.4},
-        }
-    },
-    military_target = 'spidertron-military-target',
-    resistances = {
-        {
-            type = "acid",
-            decrease = 0,
-            percent = 80
-        },
-        {
-            type = "electric",
-            decrease = 0,
-            percent = 80
-        },
-        {
-            type = "explosion",
-            decrease = 100,
-            percent = 85
-        },
-        {
-            type = "fire",
-            decrease = 25,
-            percent = 70
-        },
-        {
-            type = "impact",
-            decrease = 50,
-            percent = 80
-        },
-        {
-            type = "laser",
-            decrease = 0,
-            percent = 70
-        },
-        {
-            type = "physical",
-            decrease = 25,
-            percent = 70
+        military_target = 'spidertron-military-target',
+        resistances = {
+            {
+                type = "acid",
+                decrease = 0,
+                percent = 80
+            },
+            {
+                type = "electric",
+                decrease = 0,
+                percent = 80
+            },
+            {
+                type = "explosion",
+                decrease = 100,
+                percent = 85
+            },
+            {
+                type = "fire",
+                decrease = 25,
+                percent = 70
+            },
+            {
+                type = "impact",
+                decrease = 50,
+                percent = 80
+            },
+            {
+                type = "laser",
+                decrease = 0,
+                percent = 70
+            },
+            {
+                type = "physical",
+                decrease = 25,
+                percent = 70
+            }
         }
     }
-}
--- modify the main body size
-spidertronmk3_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
-spidertronmk3_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
+    -- modify the main body size
+    spidertronmk3_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
+    spidertronmk3_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
 
-spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
-spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
+    spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
+    spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
 
-spidertronmk3_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
-spidertronmk3_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
+    spidertronmk3_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
+    spidertronmk3_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
 
-spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
-spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
+    spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
+    spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
+end
 
 -- still 300+ lines, i might split this
 data:extend{
