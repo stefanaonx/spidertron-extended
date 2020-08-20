@@ -4,3 +4,4 @@
 0.1.3 - Increased size for the mk2 and mk3 respectively, added different icons on the minimap for each version, slightly increased stride distance, further reduced the materials required for mk2 and mk3
 0.1.4 - Some refactoring, fixed a bug where the craft timer was at 0.5 seconds instead of 10 (bug noticed by hankthesnake), new thumbnail, added Krastorio2 compatibility, added flavor text
 0.1.5 - Added a mod setting to use vanilla spidertron sizes for all
+0.1.6 - Added health regen to SpidertronMK3, added mod settings to change grid size

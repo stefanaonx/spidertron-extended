@@ -275,8 +275,17 @@ spidertronmk3_entity.guns = {
     "spidertronmk3-rocket-launcher-4"
 }
 spidertronmk3_entity.chain_shooting_cooldown_modifier = 0.3
-spidertronmk3_entity.healing_per_tick = 0.5
 spidertronmk3_entity.braking_force = 4
+-- spidertronmk3_entity.healing_per_tick = 0.5
+
+-- table.insert(data.raw["technology"]["military-2"]["effects"], {type = "unlock-recipe", recipe = "basic-grenade-2"})
+-- trying to add health_regen setting to spidertronmk3
+-- local health_regen = 15
+-- table.insert(spidertronmk3_entity, health_regen)
+-- -- spidertronmk3_entity.health_regen = 15
+-- if settings.startup["disable-health-regenmk3"].value then
+    -- spidertronmk3_entity.health_regen = 0
+-- end
 -- modifies the mimimap icon
 spidertronmk3_entity.minimap_representation = {
     filename = "__spidertron-extended__/icons/spidertron_extended_mk3_map.png",
