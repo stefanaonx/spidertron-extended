@@ -8,8 +8,8 @@
  - flamethrower quad legged > very small size 0.5 or .4 the normal size, faster, 4 legs with a flamethrower, rocket launcher and a gun without auto cyclying
  - add self-repair to Spidertron MK3
 
- - DONE: increase the individual size of Spidertron MK2 and Spidertron MK3 (50% done) 
- - DONE: increase stride distance for maximum stickbugness (added for next release)
+ - DONE: increase the individual size of Spidertron MK2 and Spidertron MK3
+ - DONE: increase stride distance for maximum stickbugness
  - DONE: increase rocket launcher maximum range for Spidertron MK2 and Spidertron MK3
  - DONE: changed Spidertron MK2 and Spidertron MK3 base color on placement so they look different from the vanilla one
  - DONE: Added Krastorio 2 Compatibility
