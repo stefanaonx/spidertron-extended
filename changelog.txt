@@ -5,3 +5,4 @@
 0.1.4 - Some refactoring, fixed a bug where the craft timer was at 0.5 seconds instead of 10 (bug noticed by hankthesnake), new thumbnail, added Krastorio2 compatibility, added flavor text
 0.1.5 - Added a mod setting to use vanilla spidertron sizes for all
 0.1.6 - Added health regen to SpidertronMK3, added mod settings to change grid size
+0.1.7 - Added mod setting to disable burner requirement for all spidertrons if using krastorio2, added an UPS improvement for the spidertronmk3 health regen script ( from Xorimuth via GitHub, thank you)

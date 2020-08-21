@@ -9,12 +9,19 @@ function(event)
     elseif event.created_entity.name == "spidertronmk3" then
         local spidertronmk3 = event.created_entity
         spidertronmk3.color = {0.5, 0, 0.5, 0.5}
+        -- when spidertronmk3 is created add it to the table
         table.insert(global.spidertronmk3, spidertronmk3)
     end
 end)
 
+
 script.on_nth_tick(60, function(event)
     -- 60 ticks = 1 second
+    -- compromising for version fixing
+    -- i doubt this would have such a large impact on ups
+    if global.spidertronmk3 == nil then
+        global.spidertronmk3 = {}
+    end
     for key, spidertronmk3 in pairs(global.spidertronmk3) do
         if spidertronmk3.valid then
             -- i want to try add this in a setting
@@ -25,6 +32,8 @@ script.on_nth_tick(60, function(event)
     end
 end)
 
+
 script.on_init(function()
+    -- declare global spidertronmk3 on init
     global.spidertronmk3 = {}
 end)
