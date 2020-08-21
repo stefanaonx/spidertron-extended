@@ -1,41 +1,44 @@
 require "util"
 
 local table_deepcopy = util.table.deepcopy
+-- i tried to see if i can remove the vanilla spidertron burner
+-- requirement in krastorio2 but i didn't work
+if not settings.startup["disable-krastorio-spidertron-burner"].value then
+    -- mk3 changes for krastorio2
+    data.raw["spider-vehicle"]["spidertronmk2"].energy_source = {
+        type = "burner",
+        emissions_per_minute = 0,
+        effectivity = 1,
+        render_no_power_icon = true,
+        render_no_network_icon = false,
+        fuel_inventory_size = 1,
+        burnt_inventory_size = 1,
+        fuel_category = "fusion-fuel"
+    }
+    -- mk3 changes for krastorio2
+    data.raw["spider-vehicle"]["spidertronmk3"].energy_source = {
+        type = "burner",
+        emissions_per_minute = 0,
+        effectivity = 1,
+        render_no_power_icon = true,
+        render_no_network_icon = false,
+        fuel_inventory_size = 1,
+        burnt_inventory_size = 1,
+        fuel_category = "fusion-fuel"
+    }
+    
+    -- This is the energy movement_energy_consumption in K2:
+    data.raw["spider-vehicle"]["spidertronmk2"].movement_energy_consumption = "3MW"
+    data.raw["spider-vehicle"]["spidertronmk3"].movement_energy_consumption = "3MW"
+end
 
--- mk3 changes for krastorio2
-data.raw["spider-vehicle"]["spidertronmk2"].energy_source =
-{
-    type = "burner",
-    emissions_per_minute = 0,
-    effectivity = 1,
-    render_no_power_icon = true,
-    render_no_network_icon = false,
-    fuel_inventory_size = 1,
-    burnt_inventory_size = 1,
-    fuel_category = "fusion-fuel"
-}
--- mk3 changes for krastorio2
-data.raw["spider-vehicle"]["spidertronmk3"].energy_source =
-{
-    type = "burner",
-    emissions_per_minute = 0,
-    effectivity = 1,
-    render_no_power_icon = true,
-    render_no_network_icon = false,
-    fuel_inventory_size = 1,
-    burnt_inventory_size = 1,
-    fuel_category = "fusion-fuel"
-}
+-- mk3 new guns
 data.raw["spider-vehicle"]["spidertronmk3"].guns = {
     "spidertron-heavy-rocket-launcher", 
     "spidertron-heavy-rocket-launcher2", 
     "spidertron-heavy-rocket-launcher3", 
     "spidertron-heavy-rocket-launcher4"
 }
-
--- This is the energy movement_energy_consumption in K2:
-data.raw["spider-vehicle"]["spidertronmk2"].movement_energy_consumption = "3MW"
-data.raw["spider-vehicle"]["spidertronmk3"].movement_energy_consumption = "3MW"
 
 -- equipment grid changes
 data.raw["equipment-grid"]["spidertronmk2-grid"].equipment_categories = {

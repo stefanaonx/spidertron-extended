@@ -49,4 +49,11 @@ data:extend({
 		-- default_value = false,
 		-- order = "a6"
 	-- }
+    {
+		type = "bool-setting",
+		name = "disable-krastorio-spidertron-burner",
+		setting_type = "startup",
+		default_value = false,
+		order = "a7"
+	}
 })
