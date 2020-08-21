@@ -13,21 +13,18 @@ function(event)
     end
 end)
 
-
-script.on_event(defines.events.on_tick, function(event)
-
-    if global.spidertronmk3 == nil then
-        global.spidertronmk3 = {}
-    end
+script.on_nth_tick(60, function(event)
     -- 60 ticks = 1 second
-    if (game.tick % 60) == 0 then
-        for key,spidertronmk3 in pairs(global.spidertronmk3) do
-            if spidertronmk3.valid then
-                -- i want to try add this in a setting
-                spidertronmk3.health = spidertronmk3.health + 15
-            else
-                table.remove(global.spidertronmk3, key)
-            end
+    for key, spidertronmk3 in pairs(global.spidertronmk3) do
+        if spidertronmk3.valid then
+            -- i want to try add this in a setting
+            spidertronmk3.health = spidertronmk3.health + 15
+        else
+            table.remove(global.spidertronmk3, key)
         end
-	end
+    end
+end)
+
+script.on_init(function()
+    global.spidertronmk3 = {}
 end)
