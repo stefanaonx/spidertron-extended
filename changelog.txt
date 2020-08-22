@@ -6,3 +6,6 @@
 0.1.5 - Added a mod setting to use vanilla spidertron sizes for all
 0.1.6 - Added health regen to SpidertronMK3, added mod settings to change grid size
 0.1.7 - Added mod setting to disable burner requirement for all spidertrons if using krastorio2, added an UPS improvement for the spidertronmk3 health regen script ( from Xorimuth via GitHub, thank you)
+0.1.8 - Reverting back to old code for health-regen untill i figure out the non-recoverable error
+0.1.9 - Fixed the non-recoverable error, did some slight changes to the regen script before the revert, should still use less UPS. The MK3 will need to be picked up and placed back down to gain the health regen if using loading from older version <=0.1.5.
+0.1.10 - Added mod setting to disable Spidertron MK3 self-repair feature. That doesn't crash the game hopefully.

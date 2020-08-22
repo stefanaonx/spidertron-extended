@@ -42,13 +42,13 @@ data:extend({
 		order = "a5"
 	},
     -- disable-health-regen mk3, don't know how to make it yet
-    -- {
-		-- type = "bool-setting",
-		-- name = "disable-health-regenmk3",
-		-- setting_type = "startup",
-		-- default_value = false,
-		-- order = "a6"
-	-- }
+    {
+		type = "bool-setting",
+		name = "disable-health-regenmk3",
+		setting_type = "startup",
+		default_value = false,
+		order = "a6"
+	},
     {
 		type = "bool-setting",
 		name = "disable-krastorio-spidertron-burner",
