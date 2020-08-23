@@ -4,6 +4,8 @@ local smk2w = settings.startup["spidertronmk2-width"].value
 local smk2h = settings.startup["spidertronmk2-height"].value
 local smk3w = settings.startup["spidertronmk3-width"].value
 local smk3h = settings.startup["spidertronmk3-height"].value
+local sbuildw = settings.startup["spidertron-builder-width"].value
+local sbuildh = settings.startup["spidertron-builder-height"].value
 
 local spidertronmk2_grid = {
     type = "equipment-grid",
@@ -21,7 +23,17 @@ local spidertronmk3_grid = {
     equipment_categories = {"armor"}
 }
 
+local spidertron_builder_grid = {
+    type = "equipment-grid",
+    name = "spidertron-builder-grid",
+    width = sbuildw,
+    height = sbuildh,
+    equipment_categories = {"armor"}
+}
+
+
 data:extend{
     spidertronmk2_grid,
-    spidertronmk3_grid
+    spidertronmk3_grid,
+	spidertron_builder_grid
 }

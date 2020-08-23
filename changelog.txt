@@ -1,13 +1,84 @@
-0.1.0 - Initial Release
-0.1.1 - Added increased rocket launchers range for mk2 and mk3, slightly reduced the recipe materials
-0.1.2 - Changed the base color on placement
-0.1.3 - Increased size for the mk2 and mk3 respectively, added different icons on the minimap for each version, slightly increased stride distance, further reduced the materials required for mk2 and mk3
-0.1.4 - Some refactoring, fixed a bug where the craft timer was at 0.5 seconds instead of 10 (bug noticed by hankthesnake), new thumbnail, added Krastorio2 compatibility, added flavor text
-0.1.5 - Added a mod setting to use vanilla spidertron sizes for all
-0.1.6 - Added health regen to SpidertronMK3, added mod settings to change grid size
-0.1.7 - Added mod setting to disable burner requirement for all spidertrons if using krastorio2, added an UPS improvement for the spidertronmk3 health regen script ( from Xorimuth via GitHub, thank you)
-0.1.8 - Reverting back to old code for health-regen untill i figure out the non-recoverable error
-0.1.9 - Fixed the non-recoverable error, did some slight changes to the regen script before the revert, should still use less UPS. The MK3 will need to be picked up and placed back down to gain the health regen if using loading from older version <=0.1.5.
-0.1.10 - Added mod setting to disable Spidertron MK3 self-repair feature. That doesn't crash the game hopefully.
-0.1.11 - Added compatibility for bobvehicleequipment, should be the same as normal spidertron, i might require more feedback on this.
-0.1.12 - Added compatibility with vintage-spidertron, that's one cool mod :D
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2020.08.15
+  Changes:
+    - Initial Release.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+Date: 2020.08.16
+  Changes:
+    - Added increased rocket launchers range for mk2 and mk3, slightly reduced the recipe materials.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+Date: 2020.08.16
+  Changes:
+    - Changed the base color on placement.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.3
+Date: 2020.08.17
+  Changes:
+    - Increased size for the mk2 and mk3 respectively.
+    - Added different icons on the minimap for each version.
+    - Slightly increased stride distance.
+    - Further reduced the materials required for mk2 and mk3.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.4
+Date: 2020.08.19
+  Changes:
+    - Some refactoring. 
+    - Fixed a bug where the craft timer was at 0.5 seconds instead of 10 (bug noticed by hankthesnake).
+    - New thumbnail.
+    - Added Krastorio2 compatibility. 
+    - Added flavor text to research.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.5
+Date: 2020.08.20
+  Changes:
+    - Added a mod setting to use vanilla spidertron sizes for all.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 2020.08.20
+  Changes:
+    - Added health regen to SpidertronMK3.
+    - Added mod settings to change grid size.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.7 
+Date: 2020.08.21
+  Changes:
+    - Added mod setting to disable burner requirement for all spidertrons if using krastorio2.
+    - Added an UPS improvement for the spidertronmk3 health regen script ( from Xorimuth via GitHub, thank you).
+---------------------------------------------------------------------------------------------------
+Version: 0.1.8
+Date: 2020.08.21
+  Changes:
+    - Reverting back to old code for health-regen until I figure out the non-recoverable error.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.9
+Date: 2020.08.21
+  Changes:
+    - Fixed the non-recoverable error, Did some slight changes to the regen script before the revert, should still use less UPS. 
+    - The MK3 will need to be picked up and placed back down to gain the health regen if using loading from older version <=0.1.5.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.10
+Date: 2020.08.23
+  Changes:
+    - Added mod setting to disable Spidertron MK3 self-repair feature (that doesn't crash the game hopefully).
+---------------------------------------------------------------------------------------------------
+Version: 0.1.11
+Date: 2020.08.23
+  Changes:
+    - Added compatibility for bobvehicleequipment, should be the same as normal spidertron, i might require more feedback on this.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.12
+Date: 2020.08.23
+  Changes:
+    - Added compatibility with vintage-spidertron, that's one cool mod :D .
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2020.08.23
+  Changes:
+    - Added spidertron-builder, a new spidertron focused on building without combat abilities, it can be disabled from the mod settings so it doesn't interrupt current gameplays.
+    - Added options to disable MK2 and MK3 spidertrons.
+    - Small refactoring.
+    - Still working on customizable MK4 (wanted to add it to 0.2 but there's a lot of things I still need to modify).
+    - Changed the changelog to show the changelog (sorry, i tried making a tongue twister)

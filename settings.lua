@@ -14,7 +14,7 @@ data:extend({
 		setting_type = "startup",
         minimum_value = 10,
         default_value = 20,
-		order = "a2"
+		order = "a3"
 	},
     {
 		type = "int-setting",
@@ -22,7 +22,7 @@ data:extend({
 		setting_type = "startup",
         minimum_value = 6,
         default_value = 8,
-		order = "a3"
+		order = "a4"
 	},
     -- grid sizes for mk3
     {
@@ -31,7 +31,7 @@ data:extend({
 		setting_type = "startup",
         minimum_value = 10,
         default_value = 30,
-		order = "a4"
+		order = "a6"
 	},
     {
 		type = "int-setting",
@@ -39,21 +39,69 @@ data:extend({
 		setting_type = "startup",
         minimum_value = 6,
         default_value = 10,
-		order = "a5"
+		order = "a7"
 	},
-    -- disable-health-regen mk3, don't know how to make it yet
     {
 		type = "bool-setting",
 		name = "disable-health-regenmk3",
 		setting_type = "startup",
 		default_value = false,
-		order = "a6"
+		order = "a8"
 	},
     {
 		type = "bool-setting",
 		name = "disable-krastorio-spidertron-burner",
 		setting_type = "startup",
 		default_value = false,
-		order = "a7"
+		order = "c5"
+	},
+    -- to disable spidertron builder
+    {
+		type = "bool-setting",
+		name = "disable-spidertron-builder",
+		setting_type = "startup",
+		default_value = false,
+		order = "b1"
+	},
+    -- to disable spidertronmk2
+    {
+		type = "bool-setting",
+		name = "disable-spidertronmk2",
+		setting_type = "startup",
+		default_value = false,
+		order = "a2"
+	},
+    -- to disable spidertronmk3
+    {
+		type = "bool-setting",
+		name = "disable-spidertronmk3",
+		setting_type = "startup",
+		default_value = false,
+		order = "a5"
+	},
+    -- to disable spidertronmk4
+    {
+		type = "bool-setting",
+		name = "disable-spidertronmk4",
+		setting_type = "startup",
+		default_value = false,
+		order = "c6"
+	},
+	-- grid sizes for spider-builder
+    {
+		type = "int-setting",
+		name = "spidertron-builder-width",
+		setting_type = "startup",
+        minimum_value = 10,
+        default_value = 16,
+		order = "b2"
+	},
+    {
+		type = "int-setting",
+		name = "spidertron-builder-height",
+		setting_type = "startup",
+        minimum_value = 6,
+        default_value = 8,
+		order = "b3"
 	}
 })

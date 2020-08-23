@@ -15,7 +15,13 @@ spidertronmk3_leg.movement_based_position_selection_distance = 6
 -- what happens if i change the scale? // 0.5 default, doesn't seem to affect
 spidertronmk3_leg.scale = 1.0
 
+-- leg for spider builder
+local spidertron_builder_leg = table_deepcopy(data.raw['spider-leg']['spidertron-leg-1'])
+spidertron_builder_leg.name = "spidertron-builder-leg"
+spidertron_builder_leg.part_length = 3
+
 data:extend{
     spidertronmk2_leg,
-    spidertronmk3_leg
+    spidertronmk3_leg,
+	spidertron_builder_leg
 }

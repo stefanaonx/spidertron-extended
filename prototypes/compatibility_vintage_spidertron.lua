@@ -71,5 +71,14 @@ local function change_leg(leg_index)
 end
 
 -- i only have 1 leg instead of 8 when creating mk2 and mk3
+if not settings.startup["disable-spidertronmk2"].value then
 change_leg("mk2")
+end
+
+if not settings.startup["disable-spidertronmk3"].value then
 change_leg("mk3")
+end
+
+if not settings.startup["disable-spidertron-builder"].value then
+change_leg("-builder")
+end

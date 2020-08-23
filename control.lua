@@ -11,6 +11,9 @@ function(event)
         spidertronmk3.color = {0.5, 0, 0.5, 0.5}
         -- when spidertronmk3 is created add it to the table
         table.insert(global.spidertronmk3, spidertronmk3)
+    elseif event.created_entity.name == "spidertron-builder" then
+        local spidertron_builder = event.created_entity
+        spidertron_builder.color = {1, 1, 1, 0.5}
     end
 end)
 
