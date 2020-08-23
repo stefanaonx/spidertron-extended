@@ -9,3 +9,5 @@
 0.1.8 - Reverting back to old code for health-regen untill i figure out the non-recoverable error
 0.1.9 - Fixed the non-recoverable error, did some slight changes to the regen script before the revert, should still use less UPS. The MK3 will need to be picked up and placed back down to gain the health regen if using loading from older version <=0.1.5.
 0.1.10 - Added mod setting to disable Spidertron MK3 self-repair feature. That doesn't crash the game hopefully.
+0.1.11 - Added compatibility for bobvehicleequipment, should be the same as normal spidertron, i might require more feedback on this.
+0.1.12 - Added compatibility with vintage-spidertron, that's one cool mod :D

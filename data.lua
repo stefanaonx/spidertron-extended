@@ -12,3 +12,13 @@ if mods["Krastorio2"] then
     -- compatible with version 1.0.3 of krastorio2
     require("prototypes.compatibility_krastorio2")
 end
+
+if mods["bobvehicleequipment"] then
+    -- compatibility with bobs vehicle equipment
+    require("prototypes.compatibility_bobvehicleequipment")
+end
+
+if mods["vintage-spidertron"] then
+    -- compatibility with bobs vehicle equipment
+    require("prototypes.compatibility_vintage_spidertron")
+end
