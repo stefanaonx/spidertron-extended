@@ -61,7 +61,9 @@ spidertron_builder_entity.resistances = {
     }
 }
 spidertron_builder_entity.chunk_exploration_radius = 7
-spidertron_builder_entity.guns = {}
+spidertron_builder_entity.guns = {
+    "spidertron-experimental-laser"
+}
 spidertron_builder_entity.minimap_representation = {
     filename = "__spidertron-extended__/icons/spidertron_extended_builder_map.png",
     flags = {"icon"},

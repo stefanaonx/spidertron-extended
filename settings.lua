@@ -103,5 +103,12 @@ data:extend({
         minimum_value = 6,
         default_value = 8,
 		order = "b3"
+	},
+    {
+		type = "bool-setting",
+		name = "disable-bobs-equipment",
+		setting_type = "startup",
+		default_value = false,
+		order = "c7"
 	}
 })

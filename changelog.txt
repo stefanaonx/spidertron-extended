@@ -79,6 +79,19 @@ Date: 2020.08.23
   Changes:
     - Added spidertron-builder, a new spidertron focused on building without combat abilities, it can be disabled from the mod settings so it doesn't interrupt current gameplays.
     - Added options to disable MK2 and MK3 spidertrons.
+    - Please note that disabling Spidertron and playing on a save that already has them will remove them from the game without refunding the material cost.
     - Small refactoring.
     - Still working on customizable MK4 (wanted to add it to 0.2 but there's a lot of things I still need to modify).
     - Changed the changelog to show the changelog (sorry, i tried making a tongue twister)
+---------------------------------------------------------------------------------------------------
+Version: 0.2.1
+Date: 2020.08.24
+  Changes:
+    - Fixed a crash occurring when using the spidertron-builder with bobs vehicles equipment(thanks for the heads up aerospacesmith).
+    - Added mod setting to disable bobs vehicle equipment on spidertron-extended spidertrons.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.2
+Date: 2020.08.24
+  Changes:
+    - Fixed a crash occurring when using the spidertron-builder with a remote targeted to it in the inventory, to fix this issue an un-usable weapon has been added to it (we might further work on this to add functionality later on)
+    - Modified the minimap icon for spidertron-buider.

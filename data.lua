@@ -30,7 +30,9 @@ end
 
 if mods["bobvehicleequipment"] then
     -- compatibility with bobs vehicle equipment
-    require("prototypes.compatibility_bobvehicleequipment")
+    if not settings.startup["disable-bobs-equipment"].value then
+        require("prototypes.compatibility_bobvehicleequipment")
+    end
 end
 
 if mods["vintage-spidertron"] then
