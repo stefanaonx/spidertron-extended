@@ -95,3 +95,8 @@ Date: 2020.08.24
   Changes:
     - Fixed a crash occurring when using the spidertron-builder with a remote targeted to it in the inventory, to fix this issue an un-usable weapon has been added to it (we might further work on this to add functionality later on)
     - Modified the minimap icon for spidertron-buider.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.3
+Date: 2020.08.26
+  Changes:
+    - Added compatibility with Krastorio2_Spiderleg mod.

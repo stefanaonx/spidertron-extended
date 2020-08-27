@@ -39,3 +39,8 @@ if mods["vintage-spidertron"] then
     -- compatibility with bobs vehicle equipment
     require("prototypes.compatibility_vintage_spidertron")
 end
+
+if mods["Krastorio2_Spiderleg"] then
+    -- compatibility with bobs vehicle equipment
+    require("prototypes.compatibility_krastorio2_spiderleg")
+end
