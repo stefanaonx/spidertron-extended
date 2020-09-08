@@ -1,8 +1,8 @@
 {
     "name": "spidertron-extended",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "title": "Spidertron Extended",
-    "author": "charleans",
+    "author": "charleans, resarium",
     "factorio_version": "1.0",
     "dependencies": ["base >= 1.0"],
     "description": "Adds additional more powerful versions of the Spidertron that can be upgraded from the original."

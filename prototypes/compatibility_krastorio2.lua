@@ -48,28 +48,8 @@ if not settings.startup["disable-krastorio-spidertron-burner"].value then
     end
 end
 
--- equipment grid changes
-data.raw["equipment-grid"]["spidertronmk2-grid"].equipment_categories = {
-    "universal-equipment", 
-    "robot-interaction-equipment", 
-    "vehicle-robot-interaction-equipment", 
-    "vehicle-equipment", 
-    "vehicle-motor"
-}
-data.raw["equipment-grid"]["spidertronmk3-grid"].equipment_categories = {
-    "universal-equipment", 
-    "robot-interaction-equipment", 
-    "vehicle-robot-interaction-equipment", 
-    "vehicle-equipment", 
-    "vehicle-motor"
-}
-data.raw["equipment-grid"]["spidertron-builder-grid"].equipment_categories = {
-    "universal-equipment", 
-    "robot-interaction-equipment", 
-    "vehicle-robot-interaction-equipment", 
-    "vehicle-equipment", 
-    "vehicle-motor"
-}
+-- -- equipment grid changes
+-- going to copy the grid equipment in final-fixes
 
 -- tech changes
 -- mk2 K2 tech

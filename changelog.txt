@@ -100,3 +100,9 @@ Version: 0.2.3
 Date: 2020.08.26
   Changes:
     - Added compatibility with Krastorio2_Spiderleg mod.
+---------------------------------------------------------------------------------------------------
+Version: 0.2.4
+Date: 2020.09.08
+  Changes:
+    - Added compatibility with deal-with-it mod.
+    - Added a small change for krastorio2 settings compatibility.
