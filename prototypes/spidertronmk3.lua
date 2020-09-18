@@ -92,11 +92,11 @@ spidertronmk3_entity.minimap_representation = {
     scale = 0.7
 }
 
----- this changes the spidertron_mk3 body texture
 -- trying to change size
 -- spidertronmk3_entity.selection_box = {{-2, -2}, {2, 2}}
 -- spidertronmk3_entity.collision_box = {{-2, -2}, {2, 2}}
 
+-- changes the eye texture	
 spidertronmk3_entity.graphics_set.animation.layers[3] = {
 	filename = "__spidertron-extended__/graphics/spidertron_mk3_eye.png",
 	width = 66,
@@ -116,7 +116,6 @@ spidertronmk3_entity.graphics_set.animation.layers[3] = {
 }
 
 -- trying to move copy the spidertron legs
-
 if not settings.startup["vanilla-spidertron-size"].value then
     spidertronmk3_entity.height = 2.0
     spidertronmk3_entity.spider_engine = {
@@ -225,21 +224,28 @@ if not settings.startup["vanilla-spidertron-size"].value then
             }
         }
     }
---    modify the main body size
-    spidertronmk3_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
-    spidertronmk3_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
-
-    spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
-    spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
-
-    spidertronmk3_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
-    spidertronmk3_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
-
-    spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
-    spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
 	
+--	modify the main body size
+    spidertronmk3_entity.graphics_set.animation.layers[1].scale = 0.70
+	spidertronmk3_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
+	
+    spidertronmk3_entity.graphics_set.animation.layers[2].scale = 0.70
+	spidertronmk3_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
+	
+	spidertronmk3_entity.graphics_set.animation.layers[3].scale = 0.70
 	spidertronmk3_entity.graphics_set.animation.layers[3].hr_version.scale = 0.70
 
+	spidertronmk3_entity.graphics_set.base_animation.layers[1].scale = 0.70
+	spidertronmk3_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
+	
+	spidertronmk3_entity.graphics_set.base_animation.layers[2].scale = 0.70
+    spidertronmk3_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
+
+	spidertronmk3_entity.graphics_set.shadow_animation.scale = 0.70
+    spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
+
+	spidertronmk3_entity.graphics_set.shadow_base_animation.scale = 0.70
+    spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
 end
 
 data:extend{

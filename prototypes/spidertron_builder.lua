@@ -71,25 +71,23 @@ spidertron_builder_entity.minimap_representation = {
     scale = 0.5
 }
 
--- this changes the spidertron_builder body texture
-spidertron_builder_entity.graphics_set.animation = {
-	layers = {{
-		direction_count = 64,
-		filename = "__spidertron-extended__/graphics/spidertron_builder_body.png",
-		height = 70,
-		hr_version = {
-			direction_count = 64,
-			filename = "__spidertron-extended__/graphics/spidertron_builder_body_HD.png",
-			height = 138,
-			line_length = 8,
-			scale = 0.5,
-			shift = {0, -0.59375},
-			width = 132
-		},
+-- changes the eye texture	
+spidertron_builder_entity.graphics_set.animation.layers[3] = {
+	filename = "__spidertron-extended__/graphics/spidertron_builder_eye.png",
+	width = 66,
+	height = 70,
+	line_length = 8,
+	direction_count = 64,
+	shift = util.by_pixel(0, -19),
+	hr_version = {
+		filename = "__spidertron-extended__/graphics/spidertron_builder_eye_HD.png",
+		width = 132,
+		height = 138,
 		line_length = 8,
-		shift = {0, -0.59375},
-		width = 66
-    }}
+		direction_count = 64,
+		scale = 0.5,
+		shift = util.by_pixel(0, -19)
+	}
 }
 
 if not settings.startup["vanilla-spidertron-size"].value then
@@ -200,6 +198,28 @@ if not settings.startup["vanilla-spidertron-size"].value then
             }
         }
     }
+	
+--	modify the main body size
+    spidertron_builder_entity.graphics_set.animation.layers[1].scale = 0.70
+	spidertron_builder_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
+	
+    spidertron_builder_entity.graphics_set.animation.layers[2].scale = 0.70
+	spidertron_builder_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
+	
+	spidertron_builder_entity.graphics_set.animation.layers[3].scale = 0.70
+	spidertron_builder_entity.graphics_set.animation.layers[3].hr_version.scale = 0.70
+
+	spidertron_builder_entity.graphics_set.base_animation.layers[1].scale = 0.70
+	spidertron_builder_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
+	
+	spidertron_builder_entity.graphics_set.base_animation.layers[2].scale = 0.70
+    spidertron_builder_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
+
+	spidertron_builder_entity.graphics_set.shadow_animation.scale = 0.70
+    spidertron_builder_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
+
+	spidertron_builder_entity.graphics_set.shadow_base_animation.scale = 0.70
+    spidertron_builder_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
 end
 
 data:extend{
