@@ -71,7 +71,7 @@ spidertron_builder_entity.minimap_representation = {
     scale = 0.5
 }
 
--- testing textures for ghost weaver
+-- this changes the spidertron_builder body texture
 spidertron_builder_entity.graphics_set.animation = {
 	layers = {{
 		direction_count = 64,

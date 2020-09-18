@@ -91,6 +91,27 @@ spidertronmk3_entity.minimap_representation = {
     size = {128, 128},
     scale = 0.7
 }
+
+-- this changes the spidertron_mk3 body texture
+spidertronmk3_entity.graphics_set.animation = {
+	layers = {{
+		direction_count = 64,
+		filename = "__spidertron-extended__/graphics/spidertron_mk3_body.png",
+		height = 70,
+		hr_version = {
+			direction_count = 64,
+			filename = "__spidertron-extended__/graphics/spidertron_mk3_body_HD.png",
+			height = 138,
+			line_length = 8,
+			scale = 0.5,
+			shift = {0, -0.59375},
+			width = 132
+		},
+		line_length = 8,
+		shift = {0, -0.59375},
+		width = 66
+    }}
+}
 -- trying to change size
 -- spidertronmk3_entity.selection_box = {{-2, -2}, {2, 2}}
 -- spidertronmk3_entity.collision_box = {{-2, -2}, {2, 2}}
@@ -205,16 +226,16 @@ if not settings.startup["vanilla-spidertron-size"].value then
         }
     }
     -- modify the main body size
+    spidertronmk3_entity.graphics_set.animation.layers[1].scale = 0.70
     spidertronmk3_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
-    spidertronmk3_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
 
-    spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
+    spidertronmk3_entity.graphics_set.shadow_animation.scale = 0.70
     spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
 
+    spidertronmk3_entity.graphics_set.base_animation.layers[1].scale = 0.70
     spidertronmk3_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
-    spidertronmk3_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
 
-    spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
+    spidertronmk3_entity.graphics_set.shadow_base_animation.scale = 0.70
     spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
 end
 
