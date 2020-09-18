@@ -225,7 +225,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
         }
     }
 	
---	modify the main body size
+-- modify the main body size
     spidertronmk3_entity.graphics_set.animation.layers[1].scale = 0.70
 	spidertronmk3_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
 	

@@ -79,21 +79,7 @@ spidertronmk2_entity.minimap_representation = {
 
 if not settings.startup["vanilla-spidertron-size"].value then
     spidertronmk2_entity.height = 1.75
-
-    -- modify the main body size
-    spidertronmk2_entity.graphics_set.animation.layers[1].hr_version.scale = 0.60
-    spidertronmk2_entity.graphics_set.animation.layers[2].hr_version.scale = 0.60
-
-    spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
-    spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
-
-    spidertronmk2_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.60
-    spidertronmk2_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.60
-
-    spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
-    spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
-
-    spidertronmk2_entity.spider_engine = {
+	spidertronmk2_entity.spider_engine = {
         legs = {
             -- 5PM ordering them on the analog clock
             {
@@ -199,6 +185,25 @@ if not settings.startup["vanilla-spidertron-size"].value then
             }
         }
     }
+	
+-- modify the main body size
+	spidertronmk2_entity.graphics_set.animation.layers[1].scale = 0.60
+	spidertronmk2_entity.graphics_set.animation.layers[1].hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.animation.layers[2].scale = 0.60
+	spidertronmk2_entity.graphics_set.animation.layers[2].hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.base_animation.layers[1].scale = 0.60
+	spidertronmk2_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.base_animation.layers[2].scale = 0.60
+	spidertronmk2_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.shadow_animation.scale = 0.60
+	spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.shadow_base_animation.scale = 0.60
+	spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
 end
 
 data:extend{

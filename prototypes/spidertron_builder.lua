@@ -199,27 +199,27 @@ if not settings.startup["vanilla-spidertron-size"].value then
         }
     }
 	
---	modify the main body size
-    spidertron_builder_entity.graphics_set.animation.layers[1].scale = 0.70
+-- modify the main body size
+	spidertron_builder_entity.graphics_set.animation.layers[1].scale = 0.70
 	spidertron_builder_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
-	
-    spidertron_builder_entity.graphics_set.animation.layers[2].scale = 0.70
+
+	spidertron_builder_entity.graphics_set.animation.layers[2].scale = 0.70
 	spidertron_builder_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
-	
+
 	spidertron_builder_entity.graphics_set.animation.layers[3].scale = 0.70
 	spidertron_builder_entity.graphics_set.animation.layers[3].hr_version.scale = 0.70
 
 	spidertron_builder_entity.graphics_set.base_animation.layers[1].scale = 0.70
 	spidertron_builder_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
-	
+
 	spidertron_builder_entity.graphics_set.base_animation.layers[2].scale = 0.70
-    spidertron_builder_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
+	spidertron_builder_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
 
 	spidertron_builder_entity.graphics_set.shadow_animation.scale = 0.70
-    spidertron_builder_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
+	spidertron_builder_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
 
 	spidertron_builder_entity.graphics_set.shadow_base_animation.scale = 0.70
-    spidertron_builder_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
+	spidertron_builder_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
 end
 
 data:extend{
