@@ -1,7 +1,25 @@
-require "util"
-require("prototypes.leg_smoke")
+-- disabling spidertronmk3 if required
+if settings.startup["disable-spidertronmk3"].value then
+    return
+end
 
+require "util"
 local table_deepcopy = util.table.deepcopy
+
+local mk3_inv_size = settings.startup["spidertronmk3-invsize"].value
+local mk3_hp = settings.startup["spidertronmk3-hp"].value
+
+local leg_hit_the_ground_trigger = {
+    {
+        offset_deviation = {{-0.2, -0.2}, {0.2, 0.2}},
+        repeat_count = 4,
+        smoke_name = "smoke-building",
+        speed_from_center = 0.03,
+        starting_frame_deviation = 5,
+        starting_frame_speed_deviation = 5,
+        type = "create-trivial-smoke"
+    }
+}
 
 local iconsmk3 = {
     {
@@ -20,8 +38,8 @@ spidertronmk3_entity.icon_mipmaps = nil
 spidertronmk3_entity.icons = iconsmk3
 spidertronmk3_entity.minable.result = "spidertronmk3"
 -- extra
-spidertronmk3_entity.max_health = 8000
-spidertronmk3_entity.inventory_size = 120
+spidertronmk3_entity.max_health = mk3_hp
+spidertronmk3_entity.inventory_size = mk3_inv_size
 spidertronmk3_entity.equipment_grid = "spidertronmk3-grid"
 spidertronmk3_entity.resistances = {
     {

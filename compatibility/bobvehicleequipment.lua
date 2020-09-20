@@ -1,3 +1,14 @@
+-- checking if mod doesn't exists
+if not mods["bobvehicleequipment"] then
+    return
+end
+
+-- gotta love sync coding
+-- exiting if disable-bobs equipment is active
+if settings.startup["disable-bobs-equipment"].value then
+    return
+end
+
 -- maybe i should copy the entire spidertron grid so i don't
 -- have any compatibility issues with any other mods directly
 
