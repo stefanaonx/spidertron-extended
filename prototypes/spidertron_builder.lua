@@ -1,7 +1,26 @@
-require "util"
-require("prototypes.leg_smoke")
+-- disabling spidertron-builder if required
+if settings.startup["disable-spidertron-builder"].value then
+    return
+end
 
+require "util"
 local table_deepcopy = util.table.deepcopy
+
+local builder_inv_size = settings.startup["spidertron-builder-invsize"].value
+local builder_hp = settings.startup["spidertron-builder-hp"].value
+
+local leg_hit_the_ground_trigger = {
+    {
+        offset_deviation = {{-0.2, -0.2}, {0.2, 0.2}},
+        repeat_count = 4,
+        smoke_name = "smoke-building",
+        speed_from_center = 0.03,
+        starting_frame_deviation = 5,
+        starting_frame_speed_deviation = 5,
+        type = "create-trivial-smoke"
+    }
+}
+
 
 local icon_sp_builder = {
     {
@@ -20,8 +39,8 @@ spidertron_builder_entity.icon_mipmaps = nil
 spidertron_builder_entity.icons = icon_sp_builder
 spidertron_builder_entity.minable.result = "spidertron-builder"
 -- extra
-spidertron_builder_entity.max_health = 3000
-spidertron_builder_entity.inventory_size = 240
+spidertron_builder_entity.max_health = builder_hp
+spidertron_builder_entity.inventory_size = builder_inv_size
 spidertron_builder_entity.equipment_grid = "spidertron-builder-grid"
 spidertron_builder_entity.resistances = {
     {
@@ -61,9 +80,17 @@ spidertron_builder_entity.resistances = {
     }
 }
 spidertron_builder_entity.chunk_exploration_radius = 7
+spidertron_builder_entity.automatic_weapon_cycling = false
+
 spidertron_builder_entity.guns = {
-    "spidertron-experimental-laser"
+    "spidertron-experimental-laser",
+    "spidertron-experimental-laser2"
 }
+if settings.startup["disable-spidertron-builder-reaper-beam"].value then
+    spidertron_builder_entity.guns = {
+        "spidertron-experimental-laser"
+    }
+end
 spidertron_builder_entity.minimap_representation = {
     filename = "__spidertron-extended__/icons/spidertron_extended_builder_map.png",
     flags = {"icon"},
@@ -71,25 +98,40 @@ spidertron_builder_entity.minimap_representation = {
     scale = 0.5
 }
 
--- testing textures for ghost weaver
-spidertron_builder_entity.graphics_set.animation = {
-	layers = {{
-		direction_count = 64,
-		filename = "__spidertron-extended__/graphics/spidertron_builder_body.png",
-		height = 70,
-		hr_version = {
-			direction_count = 64,
-			filename = "__spidertron-extended__/graphics/spidertron_builder_body_HD.png",
-			height = 138,
-			line_length = 8,
-			scale = 0.5,
-			shift = {0, -0.59375},
-			width = 132
-		},
+-- changes the eye texture	
+spidertron_builder_entity.graphics_set.animation.layers[3] = {
+	filename = "__spidertron-extended__/graphics/spidertron_builder_eye.png",
+	width = 66,
+	height = 70,
+	line_length = 8,
+	direction_count = 64,
+	shift = util.by_pixel(0, -19),
+	hr_version = {
+		filename = "__spidertron-extended__/graphics/spidertron_builder_eye_HD.png",
+		width = 132,
+		height = 138,
 		line_length = 8,
-		shift = {0, -0.59375},
-		width = 66
-    }}
+		direction_count = 64,
+		scale = 0.5,
+		shift = util.by_pixel(0, -19)
+	}
+}
+spidertron_builder_entity.graphics_set.animation.layers[4] = {
+	filename = "__spidertron-extended__/graphics/spidertron_builder_laser_turret_overlay.png",
+	width = 66,
+	height = 70,
+	line_length = 8,
+	direction_count = 64,
+	shift = util.by_pixel(0, -19),
+	hr_version = {
+		filename = "__spidertron-extended__/graphics/spidertron_builder_laser_turret_overlay.png",
+		width = 132,
+		height = 138,
+		line_length = 8,
+		direction_count = 64,
+		scale = 0.5,
+		shift = util.by_pixel(0, -19)
+	}
 }
 
 if not settings.startup["vanilla-spidertron-size"].value then

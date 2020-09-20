@@ -70,7 +70,8 @@ if not settings.startup["disable-spidertron-builder"].value then
             {"productivity-module-3",10},
             {"steel-chest",10},
             {"construction-robot",50},
-            {"radar",50}
+            {"radar",50},
+            {"laser-turret",2}
         },
         energy_required = 10,
         result = "spidertron-builder"

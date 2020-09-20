@@ -1,7 +1,25 @@
-require "util"
-require("prototypes.leg_smoke")
+-- disabling spidertronmk3 if required
+if settings.startup["disable-spidertronmk3"].value then
+    return
+end
 
+require "util"
 local table_deepcopy = util.table.deepcopy
+
+local mk3_inv_size = settings.startup["spidertronmk3-invsize"].value
+local mk3_hp = settings.startup["spidertronmk3-hp"].value
+
+local leg_hit_the_ground_trigger = {
+    {
+        offset_deviation = {{-0.2, -0.2}, {0.2, 0.2}},
+        repeat_count = 4,
+        smoke_name = "smoke-building",
+        speed_from_center = 0.03,
+        starting_frame_deviation = 5,
+        starting_frame_speed_deviation = 5,
+        type = "create-trivial-smoke"
+    }
+}
 
 local iconsmk3 = {
     {
@@ -20,8 +38,8 @@ spidertronmk3_entity.icon_mipmaps = nil
 spidertronmk3_entity.icons = iconsmk3
 spidertronmk3_entity.minable.result = "spidertronmk3"
 -- extra
-spidertronmk3_entity.max_health = 8000
-spidertronmk3_entity.inventory_size = 120
+spidertronmk3_entity.max_health = mk3_hp
+spidertronmk3_entity.inventory_size = mk3_inv_size
 spidertronmk3_entity.equipment_grid = "spidertronmk3-grid"
 spidertronmk3_entity.resistances = {
     {
@@ -91,9 +109,29 @@ spidertronmk3_entity.minimap_representation = {
     size = {128, 128},
     scale = 0.7
 }
+
 -- trying to change size
 -- spidertronmk3_entity.selection_box = {{-2, -2}, {2, 2}}
 -- spidertronmk3_entity.collision_box = {{-2, -2}, {2, 2}}
+
+-- changes the eye texture	
+spidertronmk3_entity.graphics_set.animation.layers[3] = {
+	filename = "__spidertron-extended__/graphics/spidertron_mk3_eye.png",
+	width = 66,
+	height = 70,
+	line_length = 8,
+	direction_count = 64,
+	shift = util.by_pixel(0, -19),
+	hr_version = {
+		filename = "__spidertron-extended__/graphics/spidertron_mk3_eye_HD.png",
+		width = 132,
+		height = 138,
+		line_length = 8,
+		direction_count = 64,
+		scale = 0.5, --0.5 default
+		shift = util.by_pixel(0, -19)
+	}
+}
 
 -- trying to move copy the spidertron legs
 if not settings.startup["vanilla-spidertron-size"].value then
@@ -204,20 +242,29 @@ if not settings.startup["vanilla-spidertron-size"].value then
             }
         }
     }
-    -- modify the main body size
-    spidertronmk3_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
-    spidertronmk3_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
+	
+-- modify the main body size
+    spidertronmk3_entity.graphics_set.animation.layers[1].scale = 0.70
+	spidertronmk3_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
+	
+    spidertronmk3_entity.graphics_set.animation.layers[2].scale = 0.70
+	spidertronmk3_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
+	
+	spidertronmk3_entity.graphics_set.animation.layers[3].scale = 0.70
+	spidertronmk3_entity.graphics_set.animation.layers[3].hr_version.scale = 0.70
 
-    spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
-    spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
-
-    spidertronmk3_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
+	spidertronmk3_entity.graphics_set.base_animation.layers[1].scale = 0.70
+	spidertronmk3_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
+	
+	spidertronmk3_entity.graphics_set.base_animation.layers[2].scale = 0.70
     spidertronmk3_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
 
-    spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
+	spidertronmk3_entity.graphics_set.shadow_animation.scale = 0.70
+    spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
+
+	spidertronmk3_entity.graphics_set.shadow_base_animation.scale = 0.70
     spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
 end
-
 
 data:extend{
     spidertronmk3_entity

@@ -1,3 +1,8 @@
+-- checking if mod doesn't exists
+if not mods["Krastorio2"] then
+    return
+end
+
 require "util"
 
 local table_deepcopy = util.table.deepcopy

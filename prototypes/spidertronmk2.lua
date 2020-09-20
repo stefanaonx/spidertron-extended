@@ -1,7 +1,25 @@
-require "util"
-require("prototypes.leg_smoke")
+-- disabling spidertronmk2 if required
+if settings.startup["disable-spidertronmk2"].value then
+    return
+end
 
+require "util"
 local table_deepcopy = util.table.deepcopy
+
+local mk2_inv_size = settings.startup["spidertronmk2-invsize"].value
+local mk2_hp = settings.startup["spidertronmk2-hp"].value
+
+local leg_hit_the_ground_trigger = {
+    {
+        offset_deviation = {{-0.2, -0.2}, {0.2, 0.2}},
+        repeat_count = 4,
+        smoke_name = "smoke-building",
+        speed_from_center = 0.03,
+        starting_frame_deviation = 5,
+        starting_frame_speed_deviation = 5,
+        type = "create-trivial-smoke"
+    }
+}
 
 local iconsmk2 = {
     {
@@ -20,8 +38,8 @@ spidertronmk2_entity.icon_mipmaps = nil
 spidertronmk2_entity.icons = iconsmk2
 spidertronmk2_entity.minable.result = "spidertronmk2"
 -- extra
-spidertronmk2_entity.max_health = 5000
-spidertronmk2_entity.inventory_size = 100
+spidertronmk2_entity.max_health = mk2_hp
+spidertronmk2_entity.inventory_size = mk2_inv_size
 spidertronmk2_entity.equipment_grid = "spidertronmk2-grid"
 spidertronmk2_entity.resistances = {
     {
@@ -79,21 +97,7 @@ spidertronmk2_entity.minimap_representation = {
 
 if not settings.startup["vanilla-spidertron-size"].value then
     spidertronmk2_entity.height = 1.75
-
-    -- modify the main body size
-    spidertronmk2_entity.graphics_set.animation.layers[1].hr_version.scale = 0.60
-    spidertronmk2_entity.graphics_set.animation.layers[2].hr_version.scale = 0.60
-
-    spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
-    spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
-
-    spidertronmk2_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.60
-    spidertronmk2_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.60
-
-    spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
-    spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
-
-    spidertronmk2_entity.spider_engine = {
+	spidertronmk2_entity.spider_engine = {
         legs = {
             -- 5PM ordering them on the analog clock
             {
@@ -199,6 +203,25 @@ if not settings.startup["vanilla-spidertron-size"].value then
             }
         }
     }
+	
+-- modify the main body size
+	spidertronmk2_entity.graphics_set.animation.layers[1].scale = 0.60
+	spidertronmk2_entity.graphics_set.animation.layers[1].hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.animation.layers[2].scale = 0.60
+	spidertronmk2_entity.graphics_set.animation.layers[2].hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.base_animation.layers[1].scale = 0.60
+	spidertronmk2_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.base_animation.layers[2].scale = 0.60
+	spidertronmk2_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.shadow_animation.scale = 0.60
+	spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
+
+	spidertronmk2_entity.graphics_set.shadow_base_animation.scale = 0.60
+	spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
 end
 
 data:extend{

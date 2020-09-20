@@ -106,3 +106,16 @@ Date: 2020.09.08
   Changes:
     - Added compatibility with deal-with-it mod.
     - Added a small change for krastorio2 settings compatibility.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 2020.09.20
+  Changes:
+    - Added proper layering for the eye color changing.
+    - Fixed a bug where there weren't any dust when moving the legs.
+    - Some refactoring for the compatibility files.
+    - Some fixes with dealt with it mod not really working properly when settings vanilla spidertron sizes.
+    - Tried to make the code more MP safe as suggested by billbo99.
+    - Added configurable health and inventory size for MK2, MK3 and ghost weaver, change-able from the mod settings.
+    - Added Healing-ray for the Ghost Weaver with mod setting to change heal value.
+    - Added Reaping-ray to the Ghost Weaver, with mod setting to disable it.
+    - Ghost Weaver got a new turret on his head, sorry about the laser offset, got no idea how to move it around with the head movement.

@@ -1,3 +1,8 @@
+-- checking if mod doesn't exit
+if not mods["vintage-spidertron"] then
+    return
+end
+
 -- copied code directly from the mod itself
 
 local util = require("util")
