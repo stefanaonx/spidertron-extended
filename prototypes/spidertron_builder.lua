@@ -116,6 +116,23 @@ spidertron_builder_entity.graphics_set.animation.layers[3] = {
 		shift = util.by_pixel(0, -19)
 	}
 }
+spidertron_builder_entity.graphics_set.animation.layers[4] = {
+	filename = "__spidertron-extended__/graphics/spidertron_builder_laser_turret_overlay.png",
+	width = 66,
+	height = 70,
+	line_length = 8,
+	direction_count = 64,
+	shift = util.by_pixel(0, -19),
+	hr_version = {
+		filename = "__spidertron-extended__/graphics/spidertron_builder_laser_turret_overlay.png",
+		width = 132,
+		height = 138,
+		line_length = 8,
+		direction_count = 64,
+		scale = 0.5,
+		shift = util.by_pixel(0, -19)
+	}
+}
 
 if not settings.startup["vanilla-spidertron-size"].value then
     spidertron_builder_entity.height = 2.25

@@ -1,5 +1,4 @@
  - add a logistics tab (devs confirmed planning to add a logistics tab in the future)
- - TBD: consider adding a weaponless Spidertron with a large inventory for use in construction
  - TBD: consider adding an early game Spidertron with limited functionality (maybe between car and tank tech ?) that requires fuel to move > similar to insectitron // to be honest i would like to add one after the car with guns and another one after the tank with cannons both with cycle on for maximum firing output
  - TBD: overall balancing
  - add impalement/damage on contact with enemies
@@ -8,7 +7,7 @@
  - flamethrower quad legged > very small size 0.5 or .4 the normal size, faster, 4 legs with a flamethrower, rocket launcher and a gun without auto cyclying
  
 
- 
+ - DONE: consider adding a weaponless Spidertron with a large inventory for use in construction // Ghost Weaver is having fun now
  - DONE: add self-repair to Spidertron MK3, also added setting for it
  - DONE: increase the individual size of Spidertron MK2 and Spidertron MK3
  - DONE: increase stride distance for maximum stickbugness

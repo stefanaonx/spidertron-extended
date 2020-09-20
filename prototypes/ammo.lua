@@ -88,7 +88,7 @@ data:extend{
                     beam = "repair-beam",
                     max_length = 24,
                     duration = 20,
-                    source_offset = {0, -0.9}  --{0, -1.31439 }
+                    source_offset = {0, -0.9}  --{0, -1.31439 } //{0, -0.9} default right now
                 }
             }
         },
