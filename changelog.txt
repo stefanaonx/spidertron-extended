@@ -126,5 +126,5 @@ Date: 2020.09.23
     - Fixed the textures not scaling properly on lower resolution.
     - Tried increasing the leg smoke slightly, not sure if it worked or not.
     - Added prototypes for a new spidertron, you can enable it, BUT be warned this one is a mayhem for both enemies and allies alike also it has a passive and active skill alt+D for active, going to make the player select the bindings for it at some point.
-    - Added setting to enable bobsvehicleequipment on vanilla spidertron.
+    - Added setting to disable bobsvehicleequipment on vanilla spidertron.
     - Added setting to enable bobsequipment + bobsvehicleequipment on spidertrons.
