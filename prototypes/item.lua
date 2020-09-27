@@ -68,3 +68,18 @@ if not settings.startup["disable-spidertron-builder"].value then
         spidertron_builder_item
     }
 end
+
+-- immolator item
+if not settings.startup["disable-immolator"].value then
+    local immolator_item = table_deepcopy(data.raw["item-with-entity-data"]["spidertron"])
+    immolator_item.name = "immolator"
+    immolator_item.icon = nil
+    immolator_item.icon_size = nil
+    immolator_item.icon_mipmaps = nil
+    immolator_item.icons = iconsmk2
+    immolator_item.order = "b[personal-transport]-c[spidertron]-ab[immolator]"
+    immolator_item.place_result = "immolator"
+    data:extend{
+        immolator_item
+    }
+end

@@ -9,7 +9,7 @@ local table_deepcopy = util.table.deepcopy
 -- i tried to see if i can remove the vanilla spidertron burner
 -- requirement in krastorio2 but i didn't work
 if not settings.startup["disable-krastorio-spidertron-burner"].value then
-    -- mk3 changes for krastorio2
+    -- mk2 changes for krastorio2
     if not settings.startup["disable-spidertronmk2"].value then
         data.raw["spider-vehicle"]["spidertronmk2"].energy_source = {
             type = "burner",
@@ -22,6 +22,20 @@ if not settings.startup["disable-krastorio-spidertron-burner"].value then
             fuel_category = "fusion-fuel"
         }
         data.raw["spider-vehicle"]["spidertronmk2"].movement_energy_consumption = "3MW"
+    end
+    -- immolator changes for krastorio2
+    if not settings.startup["disable-immolator"].value then
+        data.raw["spider-vehicle"]["immolator"].energy_source = {
+            type = "burner",
+            emissions_per_minute = 0,
+            effectivity = 1,
+            render_no_power_icon = true,
+            render_no_network_icon = false,
+            fuel_inventory_size = 1,
+            burnt_inventory_size = 1,
+            fuel_category = "fusion-fuel"
+        }
+        data.raw["spider-vehicle"]["immolator"].movement_energy_consumption = "3MW"
     end
     -- mk3 changes for krastorio2
     if not settings.startup["disable-spidertronmk3"].value then
@@ -75,6 +89,25 @@ if not settings.startup["disable-spidertronmk2"].value then
         time = 30
     }
 end
+-- immolator
+if not settings.startup["disable-immolator"].value then
+    data.raw["technology"]["immolator-tech"].prerequisites = {
+        "spidertron",
+        "kr-energy-control-unit",
+        "space-science-pack",
+        "kr-advanced-tech-card"
+    }
+    data.raw["technology"]["immolator-tech"].unit = {
+        count = 2500,
+        ingredients = {
+            {"utility-science-pack", 1},
+            {"space-science-pack", 1},
+            {"advanced-tech-card", 1}
+        },
+        time = 30
+    }
+end
+
 -- mk3 K2 tech
 if not settings.startup["disable-spidertronmk3"].value then
     data.raw["technology"]["spidertronmk3-tech"].prerequisites = {
@@ -173,6 +206,17 @@ end
 -- recipe changes
 if not settings.startup["disable-spidertronmk2"].value then
     data.raw["recipe"]["spidertronmk2"].ingredients = {
+        {"spidertron", 1},
+        {"energy-control-unit", 50},
+        {"speed-module-3", 30},
+        {"effectivity-module-3", 30},
+        {"low-density-structure", 150},
+        {"fusion-reactor-equipment", 2}
+    }
+end
+
+if not settings.startup["disable-immolator"].value then
+    data.raw["recipe"]["immolator"].ingredients = {
         {"spidertron", 1},
         {"energy-control-unit", 50},
         {"speed-module-3", 30},

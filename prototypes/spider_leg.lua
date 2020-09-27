@@ -20,8 +20,15 @@ local spidertron_builder_leg = table_deepcopy(data.raw['spider-leg']['spidertron
 spidertron_builder_leg.name = "spidertron-builder-leg"
 spidertron_builder_leg.part_length = 3
 
+-- leg for the immolator
+local spidertron_immolator = table_deepcopy(data.raw['spider-leg']['spidertron-leg-1'])
+spidertron_immolator.name = "spidertron-immolator-leg"
+spidertron_immolator.part_length = 2
+spidertron_immolator.scale = 0.4
+
 data:extend{
     spidertronmk2_leg,
     spidertronmk3_leg,
-	spidertron_builder_leg
+	spidertron_builder_leg,
+    spidertron_immolator
 }

@@ -6,6 +6,7 @@ require("prototypes.item")
 require("prototypes.spider_leg")
 require("prototypes.recipe")
 require("prototypes.technology")
+require("prototypes.shortcuts")
 
 -- changes for vanilla
 require("prototypes.vanilla")
@@ -14,6 +15,7 @@ require("prototypes.vanilla")
 require("prototypes.spidertronmk2")
 require("prototypes.spidertronmk3")
 require("prototypes.spidertron_builder")
+require("prototypes.immolator")
 
 -- compatibility files
 require("compatibility.krastorio2")

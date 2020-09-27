@@ -159,12 +159,78 @@ data:extend({
         default_value = false,
 		order = "b16"
 	},
+    -- immolator settings
+    {
+		type = "bool-setting",
+		name = "disable-immolator",
+		setting_type = "startup",
+		default_value = false,
+		order = "c0"
+	},
+    {
+		type = "int-setting",
+		name = "immolator-width",
+        setting_type = "startup",
+        minimum_value = 1,
+        default_value = 10,
+		order = "c1"
+	},
+    {
+		type = "int-setting",
+		name = "immolator-height",
+        setting_type = "startup",
+        minimum_value = 1,
+        default_value = 10,
+		order = "c12"
+	},
+    {
+		type = "int-setting",
+		name = "immolator-invsize",
+        setting_type = "startup",
+        minimum_value = 1,
+        default_value = 80,
+		order = "c13"
+	},
+    {
+		type = "int-setting",
+		name = "immolator-hp",
+        setting_type = "startup",
+        minimum_value = 1,
+        default_value = 3000,
+		order = "c14"
+	},
+    {
+		type = "bool-setting",
+		name = "disable-immolator-fire",
+        setting_type = "startup",
+        default_value = true,
+		order = "c15"
+	},
+    -- bobs equipment
     {
 		type = "bool-setting",
 		name = "disable-bobs-equipment",
 		setting_type = "startup",
 		default_value = false,
-		order = "c7"
+		order = "m0"
+	},
+    -- disable bobs equipment on vanilla
+    {
+		type = "bool-setting",
+		name = "disable-bobs-vehicle-equipment-vanilla",
+		setting_type = "startup",
+		default_value = false,
+		order = "m01"
+	},
+    -- someday i'm gonna make this into some kind
+    -- of selector to select instead of several thingies
+    -- bobs equipment + vehicle equipment
+    {
+		type = "bool-setting",
+		name = "enable-bobs-all-equipment-spidertrons",
+		setting_type = "startup",
+		default_value = false,
+		order = "m02"
 	},
     -- to disable spidertronmk4
     {

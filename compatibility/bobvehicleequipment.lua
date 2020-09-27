@@ -36,3 +36,11 @@ if not settings.startup["disable-spidertron-builder"].value then
         "armoured-vehicle"
     }
 end
+
+if not settings.startup["disable-immolator"].value then
+    data.raw["equipment-grid"]["immolator-grid"].equipment_categories = {
+        "spidertron",
+        "vehicle",
+        "armoured-vehicle"
+    }
+end
