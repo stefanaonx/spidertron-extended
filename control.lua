@@ -15,6 +15,9 @@ function(event)
         local spidertron_builder = event.created_entity
         spidertron_builder.color = {1, 1, 1, 0.5}
     elseif event.created_entity.name == "immolator" then
+        if global.immolator == nil then
+            global.immolator = {}
+        end
         local immolator = event.created_entity
         immolator.color = {0, 0, 1, 0.5}
         table.insert(global.immolator, immolator)

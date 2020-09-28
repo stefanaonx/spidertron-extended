@@ -164,7 +164,7 @@ data:extend({
 		type = "bool-setting",
 		name = "disable-immolator",
 		setting_type = "startup",
-		default_value = false,
+		default_value = true,
 		order = "c0"
 	},
     {
@@ -203,7 +203,7 @@ data:extend({
 		type = "bool-setting",
 		name = "disable-immolator-fire",
         setting_type = "startup",
-        default_value = true,
+        default_value = false,
 		order = "c15"
 	},
     -- bobs equipment
