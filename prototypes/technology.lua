@@ -115,7 +115,7 @@ if not settings.startup["disable-immolator"].value then
     local immolator_technology = {
         type = "technology",
         name = "immolator-tech",
-        icon = "__spidertron-extended__/icons/spidertron_mk2_reseach.png",
+        icon = "__spidertron-extended__/icons/spidertron_extended_immolator_research.png",
         icon_size = 128,
         order = "c",
         prerequisites = {"spidertron"},

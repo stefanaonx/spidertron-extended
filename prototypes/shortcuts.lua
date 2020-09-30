@@ -1,7 +1,7 @@
 local button={
     type = "custom-input",
-    name = "my-custom-input",
-    key_sequence = "ALT + G",
+    name = "immolator-active1",
+    key_sequence = "SHIFT + F",
     consuming = "none"
 }
 data:extend{button}

@@ -90,13 +90,13 @@ if not settings.startup["disable-immolator"].value then
         enabled = false,
         ingredients = {
             {"raw-fish",1},
-            {"rocket-control-unit",16},
+            {"refined-concrete",200},
             {"low-density-structure",150},
-            {"productivity-module-3",10},
-            {"steel-chest",10},
-            {"construction-robot",50},
-            {"radar",50},
-            {"laser-turret",2}
+            {"flamethrower",1},
+            {"storage-tank",1},
+            {"fusion-reactor-equipment",4},
+            {"exoskeleton-equipment",8},
+            {"radar",2}
         },
         energy_required = 10,
         result = "immolator"

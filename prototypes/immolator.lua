@@ -32,7 +32,7 @@ end
 
 local immicon = {
     {
-        icon = "__spidertron-extended__/icons/spidertron_extended_mk2_item.png",
+        icon = "__spidertron-extended__/icons/spidertron_extended_immolator_item.png",
         icon_size = 64, 
         icon_mipmaps = 4
     }
@@ -54,17 +54,17 @@ immolator_entity.resistances = {
     {
         type = "acid",
         decrease = 0,
-        percent = 75
+        percent = 90
     },
     {
         type = "electric",
         decrease = 0,
-        percent = 75
+        percent = 70
     },
     {
         type = "explosion",
-        decrease = 60,
-        percent = 80
+        decrease = 15,
+        percent = 70
     },
     {
         type = "fire",
@@ -83,15 +83,17 @@ immolator_entity.resistances = {
     },
     {
         type = "physical",
-        decrease = 20,
-        percent = 65
+        decrease = 10,
+        percent = 50
     }
 }
 immolator_entity.chunk_exploration_radius = 5
-immolator_entity.automatic_weapon_cycling = false
+immolator_entity.automatic_weapon_cycling = true
 immolator_entity.guns = {
     "spidertron-immolator-flamethrower",
-    "spidertronmk2-rocket-launcher-1"
+    "spidertron-immolator-flamethrower",
+    "spidertron-immolator-flamethrower",
+    "spidertron-immolator-flamethrower"
 }
 immolator_entity.chain_shooting_cooldown_modifier = 0.4
 immolator_entity.braking_force = 2
@@ -102,7 +104,26 @@ immolator_entity.minimap_representation = {
     scale = 0.5
 }
 
+-- changes the eye texture	
 immolator_entity.graphics_set.animation.layers[3] = {
+	filename = "__spidertron-extended__/graphics/spidertron_immolator_eye.png",
+	width = 66,
+	height = 70,
+	line_length = 8,
+	direction_count = 64,
+	shift = util.by_pixel(0, -19),
+	hr_version = {
+		filename = "__spidertron-extended__/graphics/spidertron_immolator_eye_HD.png",
+		width = 132,
+		height = 138,
+		line_length = 8,
+		direction_count = 64,
+		scale = 0.4,
+		shift = util.by_pixel(0, -19)
+	}
+}
+-- head turret
+immolator_entity.graphics_set.animation.layers[4] = {
 	filename = "__spidertron-extended__/graphics/spidertron_immolator_flamethrower_turret_overlay.png",
 	width = 132,
 	height = 138,
@@ -199,22 +220,22 @@ if not settings.startup["vanilla-spidertron-size"].value then
             {
                 type = "acid",
                 decrease = 0,
-                percent = 75
+                percent = 90
             },
             {
                 type = "electric",
                 decrease = 0,
-                percent = 75
+                percent = 70
             },
             {
                 type = "explosion",
-                decrease = 60,
-                percent = 80
+                decrease = 15,
+                percent = 70
             },
             {
                 type = "fire",
-                decrease = 20,
-                percent = 65
+                decrease = 0,
+                percent = 100
             },
             {
                 type = "impact",
@@ -228,8 +249,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
             },
             {
                 type = "physical",
-                decrease = 20,
-                percent = 65
+                decrease = 10,
+                percent = 50
             }
         }
     }

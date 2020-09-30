@@ -134,3 +134,8 @@ Date: 2020.09.29
   Changes:
     - Trying to fix a traceback when the global.immolator table is nil.
     - Set the immolator to be disabled by default. Won't affect the ppl that already have it on i believe. Reminder that this is just an experimental spider that we were working on.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.3
+Date: 2020.10.1
+  Changes:
+    - Several fixes and completions for immolator.

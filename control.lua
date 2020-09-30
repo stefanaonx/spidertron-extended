@@ -19,7 +19,7 @@ function(event)
             global.immolator = {}
         end
         local immolator = event.created_entity
-        immolator.color = {0, 0, 1, 0.5}
+        immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
         table.insert(global.immolator, immolator)
         -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}     
     end
@@ -65,24 +65,47 @@ end)
     -- end
 -- end)
 
-script.on_event("my-custom-input", function(event)
-    for key, immolator in pairs(global.immolator) do
-        if immolator.valid then
+
+script.on_event("immolator-active1", function(event)
+    player = game.get_player(event.player_index)
+    vehicle = player.vehicle
+    -- if global.immolator == nil then
+        -- global.immolator = {}
+    -- end
+    -- for key, immolator in pairs(global.immolator) do
+    if not (vehicle == nil) then
+        if vehicle.name == "immolator" then
+                -- local ceva = immolator.get_driver()
+                -- if ceva == nil then
+                    -- game.print("driver nil")
+                -- else
+                    -- game.print("driver is: ")
+                    -- game.print(ceva.name)
+                -- end
+                -- local ceva2 = ceva.player
+                -- if ceva2 == nil then
+                    -- game.print("player doesn't work")
+                -- else
+                    -- game.print("driving player name is: ")
+                    -- game.print(ceva2.name)
+                -- end
             local x, y, r = 0, 0, 1
             for i = 1, 360 do
                 local angle = i * math.pi / 180
                 local ptx, pty = x + r * math.cos(angle), y + r * math.sin(angle)
                 local newptx = ptx * 15
                 local newpty = pty * 15
-                immolator.surface.create_entity{
+                vehicle.surface.create_entity{
                     name="fire-flame", 
                     position={
-                        x = newptx + immolator.position.x, 
-                        y = newpty + immolator.position.y
+                        x = newptx + vehicle.position.x, 
+                        y = newpty + vehicle.position.y
                     }, 
                     force="neutral"
                 }
             end
+        end
+    end
         
             -----------------------------------------------------this shit works
             -- i want to try add this in a setting
@@ -133,10 +156,9 @@ script.on_event("my-custom-input", function(event)
             -- immolator.spider_engine.legs[5].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
             -- immolator.spider_engine.legs[6].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
             -- immolator.spider_engine.legs[7].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
-        else
-            table.remove(global.immolator, key)
-        end
-    end
+        -- else
+            -- table.remove(global.immolator, key)
+        -- end
 end)
 
 
@@ -178,6 +200,9 @@ end)
 
 script.on_init(function()
     -- declare global immolator on init
+    global.smarttoggle = {}
+    global.smarttoggle["immolator-active1"] = false
+    global.smarttoggle["immolator-easter"] = 0
     global.immolator = {}
     global.player = {}
     -- declare global spidertronmk3 on init
