@@ -11,7 +11,7 @@ local immolator_hp = settings.startup["immolator-hp"].value
 
 local leg_hit_the_ground_trigger = {
     {
-        entity_name = "fire-flame",
+        entity_name = "purifier-flame",
         type = "create-fire"
     }
 }

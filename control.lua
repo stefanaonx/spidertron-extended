@@ -96,7 +96,7 @@ script.on_event("immolator-active1", function(event)
                 local newptx = ptx * 15
                 local newpty = pty * 15
                 vehicle.surface.create_entity{
-                    name="fire-flame", 
+                    name="purifier-flame", 
                     position={
                         x = newptx + vehicle.position.x, 
                         y = newpty + vehicle.position.y

@@ -1,5 +1,6 @@
 -- spidertron extended prototypes stuff
 require("prototypes.gun")
+require("prototypes.fire")
 require("prototypes.ammo")
 require("prototypes.equipment_grid")
 require("prototypes.item")
