@@ -4,14 +4,14 @@ local table_deepcopy = util.table.deepcopy
 
 local iconsmk2 = {
     {
-        icon = "__spidertron-extended__/icons/spidertron_mk2.png", 
+        icon = "__spidertron-extended__/icons/spidertron_extended_mk2_item.png", 
         icon_size = 64, 
         icon_mipmaps = 4
     }
 }
 local iconsmk3 = {
     {
-        icon = "__spidertron-extended__/icons/spidertron_mk3.png", 
+        icon = "__spidertron-extended__/icons/spidertron_extended_mk3_item.png", 
         icon_size = 64, 
         icon_mipmaps = 4
     }
@@ -19,6 +19,13 @@ local iconsmk3 = {
 local icon_sp_builder = {
     {
         icon = "__spidertron-extended__/icons/spidertron_extended_builder_item.png",
+        icon_size = 64, 
+        icon_mipmaps = 4
+    }
+}
+local immolator = {
+    {
+        icon = "__spidertron-extended__/icons/spidertron_extended_immolator_item.png", 
         icon_size = 64, 
         icon_mipmaps = 4
     }
@@ -66,5 +73,20 @@ if not settings.startup["disable-spidertron-builder"].value then
     spidertron_builder_item.place_result = "spidertron-builder"
     data:extend{
         spidertron_builder_item
+    }
+end
+
+-- immolator item
+if not settings.startup["disable-immolator"].value then
+    local immolator_item = table_deepcopy(data.raw["item-with-entity-data"]["spidertron"])
+    immolator_item.name = "immolator"
+    immolator_item.icon = nil
+    immolator_item.icon_size = nil
+    immolator_item.icon_mipmaps = nil
+    immolator_item.icons = immolator
+    immolator_item.order = "b[personal-transport]-c[spidertron]-ab[immolator]"
+    immolator_item.place_result = "immolator"
+    data:extend{
+        immolator_item
     }
 end

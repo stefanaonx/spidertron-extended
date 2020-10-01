@@ -17,7 +17,9 @@ local leg_hit_the_ground_trigger = {
         speed_from_center = 0.03,
         starting_frame_deviation = 5,
         starting_frame_speed_deviation = 5,
-        type = "create-trivial-smoke"
+        type = "create-trivial-smoke",
+        start_scale = 1.2,
+        end_scale = 1.2
     }
 }
 
@@ -205,22 +207,22 @@ if not settings.startup["vanilla-spidertron-size"].value then
     }
 	
 -- modify the main body size
-	spidertronmk2_entity.graphics_set.animation.layers[1].scale = 0.60
+	spidertronmk2_entity.graphics_set.animation.layers[1].scale = 1.20
 	spidertronmk2_entity.graphics_set.animation.layers[1].hr_version.scale = 0.60
 
-	spidertronmk2_entity.graphics_set.animation.layers[2].scale = 0.60
+	spidertronmk2_entity.graphics_set.animation.layers[2].scale = 1.20
 	spidertronmk2_entity.graphics_set.animation.layers[2].hr_version.scale = 0.60
 
-	spidertronmk2_entity.graphics_set.base_animation.layers[1].scale = 0.60
+	spidertronmk2_entity.graphics_set.base_animation.layers[1].scale = 1.20
 	spidertronmk2_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.60
 
-	spidertronmk2_entity.graphics_set.base_animation.layers[2].scale = 0.60
+	spidertronmk2_entity.graphics_set.base_animation.layers[2].scale = 1.20
 	spidertronmk2_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.60
 
-	spidertronmk2_entity.graphics_set.shadow_animation.scale = 0.60
+	spidertronmk2_entity.graphics_set.shadow_animation.scale = 1.20
 	spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
 
-	spidertronmk2_entity.graphics_set.shadow_base_animation.scale = 0.60
+	spidertronmk2_entity.graphics_set.shadow_base_animation.scale = 1.20
 	spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
 end
 

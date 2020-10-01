@@ -119,3 +119,23 @@ Date: 2020.09.20
     - Added Healing-ray for the Ghost Weaver with mod setting to change heal value.
     - Added Reaping-ray to the Ghost Weaver, with mod setting to disable it.
     - Ghost Weaver got a new turret on his head, sorry about the laser offset, got no idea how to move it around with the head movement.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.1
+Date: 2020.09.23
+  Changes:
+    - Fixed the textures not scaling properly on lower resolution.
+    - Tried increasing the leg smoke slightly, not sure if it worked or not.
+    - Added prototypes for a new spidertron, you can enable it, BUT be warned this one is a mayhem for both enemies and allies alike also it has a passive and active skill alt+D for active, going to make the player select the bindings for it at some point.
+    - Added setting to disable bobsvehicleequipment on vanilla spidertron.
+    - Added setting to enable bobsequipment + bobsvehicleequipment on spidertrons.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.2
+Date: 2020.09.29
+  Changes:
+    - Trying to fix a traceback when the global.immolator table is nil.
+    - Set the immolator to be disabled by default. Won't affect the ppl that already have it on i believe. Reminder that this is just an experimental spider that we were working on.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.3
+Date: 2020.10.1
+  Changes:
+    - Several fixes and completions for immolator.

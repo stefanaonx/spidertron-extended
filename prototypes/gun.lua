@@ -83,6 +83,25 @@ local spidertron_builder_laser2 = {
 -- spidertron_builder_laser.attack_parameters.ammo_consumption_modifier = 0
 -- spidertron_builder_laser.ammo_type.energy_consumption = 0
 
+local immolator_flame_parameters = table_deepcopy(data.raw["gun"]["tank-flamethrower"].attack_parameters)
+immolator_flame_parameters.range = 30
+immolator_flame_parameters.ammo_consumption_modifier = 1
+immolator_flame_parameters.cooldown = 1
+-- no idea if this will work
+-- immolator_flame_parameters.ammo_category = "flamethrower"
+-- immolator_flame_parameters.ammo_type.result.actions = table_deepcopy(data.raw["fluid-turret"]["flamethrower-turret"].attack_parameters.ammo_type.result.actions)
+
+local immolator_flamethrower = {
+    name = "spidertron-immolator-flamethrower",
+    type = "gun",
+    subgroup = "gun",
+    icon = "__spidertron-extended__/graphics/spidertron_immolator_gun_icon_2.png",
+    icon_size = 64,
+    stack_size = 5,
+    attack_parameters = immolator_flame_parameters
+}
+
+-- keeping this for future reference on gun details
 -- local new_gun = {
     -- type = "gun",
     -- name = "Schall-recharging-laser-machine-gun",
@@ -128,5 +147,6 @@ data:extend{
     spidertronmk3_rocket_launcher_3_item,
     spidertronmk3_rocket_launcher_4_item,
     spidertron_builder_laser,
-    spidertron_builder_laser2
+    spidertron_builder_laser2,
+    immolator_flamethrower
 }

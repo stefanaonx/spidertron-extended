@@ -81,3 +81,28 @@ if not settings.startup["disable-spidertron-builder"].value then
         spidertron_builder_recipe
     }
 end
+
+-- immolator spider
+if not settings.startup["disable-immolator"].value then
+    local immolator = {
+        type = "recipe",
+        name = "immolator",
+        enabled = false,
+        ingredients = {
+            {"raw-fish",1},
+            {"refined-concrete",200},
+            {"low-density-structure",150},
+            {"flamethrower",1},
+            {"storage-tank",1},
+            {"fusion-reactor-equipment",4},
+            {"exoskeleton-equipment",8},
+            {"radar",2}
+        },
+        energy_required = 10,
+        result = "immolator"
+    }
+
+    data:extend{
+        immolator
+    }
+end
