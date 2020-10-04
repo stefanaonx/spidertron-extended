@@ -164,7 +164,7 @@ data:extend({
 		type = "bool-setting",
 		name = "disable-immolator",
 		setting_type = "startup",
-		default_value = true,
+		default_value = false,
 		order = "c0"
 	},
     {

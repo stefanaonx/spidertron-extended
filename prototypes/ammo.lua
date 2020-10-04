@@ -5,7 +5,7 @@ local table_deepcopy = util.table.deepcopy
 local beam_heal_ammount = settings.startup["spidertron-builder-healing-beam-ammount"].value
 
 local repair_beam = table_deepcopy(data.raw['beam']['laser-beam'])
-repair_beam.name = "repair-beam"
+repair_beam.name = "weaver-repair-beam"
 repair_beam.head = {
     filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png",
     tint = {r = 0.8, g = 0.8, b = 0.8},
@@ -85,7 +85,7 @@ data:extend{
                 type = "direct",
                 action_delivery = {
                     type = "beam",
-                    beam = "repair-beam",
+                    beam = "weaver-repair-beam",
                     max_length = 24,
                     duration = 20,
                     source_offset = {0, -0.9}  --{0, -1.31439 } //{0, -0.9} default right now

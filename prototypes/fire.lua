@@ -17,7 +17,7 @@ purifier_flame.name = "purifier-flame"
     -- purifier_flame.pictures[x].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_"..tostring(x)..".png"
     -- --purifier_flame.pictures[x].tint = {r = 0, g = 0, b = 1, a = 1}
 -- end
-
+-- gonna put a proper for in this at some point
 purifier_flame.pictures[1].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_13.png"
 purifier_flame.pictures[2].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_12.png"
 purifier_flame.pictures[3].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_11.png"
