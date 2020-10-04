@@ -145,3 +145,8 @@ Date: 2020.10.4
   Changes:
     - Added purifier flames to the immolator.
     - Fixed an issue where the ghost weaver repair beam would affect the repair turret mod, it seems we were both using the same naming /shrug.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.5
+Date: 2020.10.4
+  Changes:
+    - Changed the flamethrower turret texture overlay for the Immolator to better reflect its color palette
