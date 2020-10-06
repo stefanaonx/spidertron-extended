@@ -26,139 +26,76 @@ function(event)
 end)
 
 
--- immolator fire trail // copied from the fire-armor
-
--- script.on_event(defines.event.on_built_entity, function(event)
-    -- local immolator = event.created_entity.name
-    -- if immolator.name == "immolator" then
-        -- immolator.surface.create_entity{name="fire-flame", position=player.position, force="neutral"} 
-    -- end
--- end)
-
--- script.on_event(defines.events.on_player_changed_position, function(event)
-    -- local player = game.get_player(event.player_index) -- get the player that moved            
-    -- -- if they're wearing our armor
-    -- if player.character and player.get_inventory(defines.inventory.character_armor).get_item_count("fire-armor") >= 1 then
-        -- -- create the fire where they're standing
-        -- player.surface.create_entity{name="fire-flame", position=player.position, force="neutral"} 
-    -- end
--- end)
-
--- script.on_event(defines.events.on_player_driving_changed_state, function(event)
-    -- local player = game.get_player(event.player_index) -- get the player that entered / exited a vehicle
-    -- game.print("exited or entered vehicle")
-    -- if next(global.player) == nil then
-        -- -- myTable is empty
-        -- table.insert(global.player, player)
-        -- game.print("global_variable is empty, adding new variable")
-    -- else
-        -- game.print("entered the first else")
-        -- for key, player in pairs(global.player) do
-            -- if player.valid then
-                -- table.remove(global.player, key)
-                -- game.print("exited vehicle")
-            -- else
-                -- table.insert(global.player, player)
-                -- game.print("entered vehicle")
-            -- end
-        -- end
-    -- end
--- end)
+function fire_wave(vehicle_ent, size)
+    if size == nil then
+        size = 15
+    end
+    local circle_size = 360 -- default 360, full circle
+    local dots_per_circle = 30 -- default 180
+    local x, y, r = 0, 0, 1
+    for i = 1, circle_size do
+        local angle = i * math.pi / dots_per_circle
+        local ptx, pty = x + r * math.cos(angle), y + r * math.sin(angle)
+        local newptx = ptx * size -- default 15
+        local newpty = pty * size -- default 15
+        vehicle_ent.surface.create_entity{
+            name="purifier-flame", 
+            position={
+                x = newptx + vehicle_ent.position.x, 
+                y = newpty + vehicle_ent.position.y
+            }, 
+            force="neutral"
+        }
+    end
+end
 
 
 script.on_event("immolator-active1", function(event)
+    -- define a basic variable to append with all the data
+    if global.smarttoggle.data == nil then
+        global.smarttoggle.data = {}
+    end
     player = game.get_player(event.player_index)
     vehicle = player.vehicle
-    -- if global.immolator == nil then
-        -- global.immolator = {}
-    -- end
-    -- for key, immolator in pairs(global.immolator) do
+    
     if not (vehicle == nil) then
         if vehicle.name == "immolator" then
-                -- local ceva = immolator.get_driver()
-                -- if ceva == nil then
-                    -- game.print("driver nil")
-                -- else
-                    -- game.print("driver is: ")
-                    -- game.print(ceva.name)
-                -- end
-                -- local ceva2 = ceva.player
-                -- if ceva2 == nil then
-                    -- game.print("player doesn't work")
-                -- else
-                    -- game.print("driving player name is: ")
-                    -- game.print(ceva2.name)
-                -- end
-            local x, y, r = 0, 0, 1
-            for i = 1, 360 do
-                local angle = i * math.pi / 180
-                local ptx, pty = x + r * math.cos(angle), y + r * math.sin(angle)
-                local newptx = ptx * 15
-                local newpty = pty * 15
-                vehicle.surface.create_entity{
-                    name="purifier-flame", 
-                    position={
-                        x = newptx + vehicle.position.x, 
-                        y = newpty + vehicle.position.y
-                    }, 
-                    force="neutral"
-                }
-            end
+            local something = {}
+            something.active_stage = 1
+            something.vehicle = vehicle
+            table.insert(global.smarttoggle.data, something)
+            -- game.print("added the table")
         end
     end
-        
-            -----------------------------------------------------this shit works
-            -- i want to try add this in a setting
-            -- local pathx = immolator.position.x - 50.0
-            -- local pathy = immolator.position.y - 50.0
-            -- for i=1,100 do 
-                -- immolator.surface.create_entity{
-                    -- name="fire-flame", 
-                    -- position={
-                        -- x=pathx,
-                        -- y=immolator.position.y - 50.0
-                    -- }, 
-                    -- force="neutral"
-                -- }
-                -- pathx = immolator.position.x
-                -- for q=1,100 do
-                    -- immolator.surface.create_entity{
-                        -- name="fire-flame", 
-                        -- position={
-                            -- x=pathx,
-                            -- y=pathy
-                        -- }, 
-                        -- force="neutral"
-                    -- }
-                    -- pathx = pathx + 1.0
-                -- end
-                
-                -- pathy = pathy + 1.0
+end)
+
+
+script.on_nth_tick(6, function(event)
+    -- script for fire_wave
+    -- this might kill ups, also i have no idea how multiplayer will handle
+    for x in pairs(global.smarttoggle.data) do
+        if global.smarttoggle.data[x].active_stage == 1 then
+            global.smarttoggle.data[x].active_stage = 2
+            fire_wave(global.smarttoggle.data[x].vehicle, 7)
+        elseif global.smarttoggle.data[x].active_stage == 2 then
+            global.smarttoggle.data[x].active_stage = 3
+            fire_wave(global.smarttoggle.data[x].vehicle, 9)
+        elseif global.smarttoggle.data[x].active_stage == 3 then
+            global.smarttoggle.data[x].active_stage = 4
+            fire_wave(global.smarttoggle.data[x].vehicle, 11)
+        elseif global.smarttoggle.data[x].active_stage == 4 then
+            global.smarttoggle.data[x].active_stage = 5
+            fire_wave(global.smarttoggle.data[x].vehicle, 13)
+        elseif global.smarttoggle.data[x].active_stage == 5 then
+            global.smarttoggle.data[x].active_stage = 99 --exit stage
+            fire_wave(global.smarttoggle.data[x].vehicle, 15)
+            -- remove the table here somehow
+            table.remove(global.smarttoggle.data, x)
+            -- for y in pairs(global.smarttoggle.data) do
+                -- game.print(y)
             -- end
-            --------------------------------------------------------
-            -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}
-            -- game.print(immolator.position)
-            -- local leg_hit_the_ground_trigger = {
-                -- {
-                    -- offset_deviation = {{-0.2, -0.2}, {0.2, 0.2}},
-                    -- repeat_count = 4,
-                    -- smoke_name = "smoke-building",
-                    -- speed_from_center = 0.03,
-                    -- starting_frame_deviation = 5,
-                    -- starting_frame_speed_deviation = 5,
-                    -- type = "create-trivial-smoke"
-                -- }
-            -- }
-            -- immolator.spider_engine.legs[1].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
-            -- immolator.spider_engine.legs[2].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
-            -- immolator.spider_engine.legs[3].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
-            -- immolator.spider_engine.legs[4].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
-            -- immolator.spider_engine.legs[5].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
-            -- immolator.spider_engine.legs[6].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
-            -- immolator.spider_engine.legs[7].leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
-        -- else
-            -- table.remove(global.immolator, key)
-        -- end
+        end
+    end
 end)
 
 
@@ -184,25 +121,13 @@ script.on_nth_tick(60, function(event)
             table.remove(global.spidertronmk3, key)
         end
     end
-    -- tried to use the leg entity but didn't quite work
-    -- but this does work, keeping it for future reference
-    -- going to create fire entity on leg_hit_the_ground_trigger
-    -- for key, immolator in pairs(global.immolator) do
-        -- if immolator.valid then
-            -- -- i want to try add this in a setting
-            -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"} 
-        -- else
-            -- table.remove(global.spidertronmk3, key)
-        -- end
-    -- end
 end)
 
 
 script.on_init(function()
     -- declare global immolator on init
     global.smarttoggle = {}
-    global.smarttoggle["immolator-active1"] = false
-    global.smarttoggle["immolator-easter"] = 0
+    global.smarttoggle.data = {}
     global.immolator = {}
     global.player = {}
     -- declare global spidertronmk3 on init

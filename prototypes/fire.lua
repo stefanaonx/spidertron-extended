@@ -32,12 +32,12 @@ purifier_flame.pictures[11].filename = "__spidertron-extended__/graphics/purifie
 purifier_flame.pictures[12].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_2.png"
 purifier_flame.pictures[13].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_1.png"
 
--- purifier_flame.initial_lifetime = 120 // default 120
--- purifier_flame.lifetime_increase_by = 150 // default 150
--- purifier_flame.damage_per_tick = {
-    -- amount = 0.2166666666666667,
-    -- type = "fire"
--- }
+purifier_flame.initial_lifetime = 120 -- default 120
+purifier_flame.lifetime_increase_by = 600 -- default 150
+purifier_flame.damage_per_tick = {
+    amount = 1, -- 0.2166666666666667 default
+    type = "fire"
+}
 purifier_flame.smoke[1].name = "purifier-fire-smoke"
 
 
