@@ -76,17 +76,23 @@ script.on_nth_tick(6, function(event)
     for x in pairs(global.smarttoggle.data) do
         if global.smarttoggle.data[x].active_stage == 1 then
             global.smarttoggle.data[x].active_stage = 2
-            fire_wave(global.smarttoggle.data[x].vehicle, 7)
+            fire_wave(global.smarttoggle.data[x].vehicle, 3)
         elseif global.smarttoggle.data[x].active_stage == 2 then
             global.smarttoggle.data[x].active_stage = 3
-            fire_wave(global.smarttoggle.data[x].vehicle, 9)
+            fire_wave(global.smarttoggle.data[x].vehicle, 5)
         elseif global.smarttoggle.data[x].active_stage == 3 then
             global.smarttoggle.data[x].active_stage = 4
-            fire_wave(global.smarttoggle.data[x].vehicle, 11)
+            fire_wave(global.smarttoggle.data[x].vehicle, 7)
         elseif global.smarttoggle.data[x].active_stage == 4 then
             global.smarttoggle.data[x].active_stage = 5
-            fire_wave(global.smarttoggle.data[x].vehicle, 13)
+            fire_wave(global.smarttoggle.data[x].vehicle, 9)
         elseif global.smarttoggle.data[x].active_stage == 5 then
+            global.smarttoggle.data[x].active_stage = 6
+            fire_wave(global.smarttoggle.data[x].vehicle, 11)
+        elseif global.smarttoggle.data[x].active_stage == 6 then
+            global.smarttoggle.data[x].active_stage = 7
+            fire_wave(global.smarttoggle.data[x].vehicle, 13)
+        elseif global.smarttoggle.data[x].active_stage == 7 then
             global.smarttoggle.data[x].active_stage = 99 --exit stage
             fire_wave(global.smarttoggle.data[x].vehicle, 15)
             -- remove the table here somehow

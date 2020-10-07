@@ -149,4 +149,7 @@ Date: 2020.10.4
 Version: 0.3.5
 Date: 2020.10.4
   Changes:
-    - Changed the flamethrower turret texture overlay for the Immolator to better reflect its color palette
+    - Changed the flamethrower turret texture overlay for the Immolator to better reflect its color palette.
+    - Fix for disabling the mk2 spidertron with krastorio.
+    - Added the immolator active skill to fire in a wave pattern originating from the vehicle and going outside.
+    - Removed unused code in the control.lua file.

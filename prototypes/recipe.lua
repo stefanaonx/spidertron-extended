@@ -25,17 +25,18 @@ end
 -- mk3 recipe
 if not settings.startup["disable-spidertronmk3"].value then
     local ingr = {
-            {"spidertron",1},
-            {"low-density-structure",150},
-            {"fusion-reactor-equipment",2},
-            {"beacon",10},
-            {"speed-module-3",10},
-            {"effectivity-module-3",10},
-            {"satellite",1}
-        }
-    if not settings.startup["disable-spidertronmk2"].value then
+        {"spidertronmk2",1},
+        {"low-density-structure",150},
+        {"fusion-reactor-equipment",2},
+        {"beacon",10},
+        {"speed-module-3",10},
+        {"effectivity-module-3",10},
+        {"satellite",1}
+    }
+    if settings.startup["disable-spidertronmk2"].value then
+        -- if spidertronmk2 disabled use this recipe
         ingr = {
-            {"spidertronmk2",1},
+            {"spidertron",1},
             {"low-density-structure",150},
             {"fusion-reactor-equipment",2},
             {"beacon",10},

@@ -110,10 +110,17 @@ end
 
 -- mk3 K2 tech
 if not settings.startup["disable-spidertronmk3"].value then
-    data.raw["technology"]["spidertronmk3-tech"].prerequisites = {
-        "spidertronmk2-tech", 
+    preqs = {
+        "spidertron", 
         "kr-singularity-tech-card"
     }
+    if not settings.startup["disable-spidertronmk2"].value then
+        preqs = {
+            "spidertronmk2-tech", 
+            "kr-singularity-tech-card"
+        }
+    end
+    data.raw["technology"]["spidertronmk3-tech"].prerequisites = preqs
     data.raw["technology"]["spidertronmk3-tech"].unit = {
         count = 2500,
         ingredients = {
@@ -228,8 +235,8 @@ end
 
 if not settings.startup["disable-spidertronmk3"].value then
     data.raw["recipe"]["spidertronmk3"].category = "crafting-with-fluid"
-    data.raw["recipe"]["spidertronmk3"].ingredients = {
-        {"spidertronmk2", 1},
+    local ingr = {
+        {"spidertron",1},
         {"ai-core", 50},
         {"imersite-crystal", 25},
         -- {"fluid-nitric-acid", 125},
@@ -243,6 +250,25 @@ if not settings.startup["disable-spidertronmk3"].value then
         {"imersium-plate", 100},
         {"fusion-reactor-equipment", 2}
     }
+    -- if spidertronmk2 not disabled use this recipe
+    if not settings.startup["disable-spidertronmk2"].value then
+        ingr = {
+            {"spidertronmk2", 1},
+            {"ai-core", 50},
+            {"imersite-crystal", 25},
+            -- {"fluid-nitric-acid", 125},
+            {
+                type="fluid", 
+                name="nitric-acid", 
+                amount=125, 
+                catalyst_amount = 125
+            },
+            {"heavy-rocket-launcher", 4},
+            {"imersium-plate", 100},
+            {"fusion-reactor-equipment", 2}
+        }
+    end
+    data.raw["recipe"]["spidertronmk3"].ingredients = ingr
 end
 
 if not settings.startup["disable-spidertron-builder"].value then
@@ -253,6 +279,6 @@ if not settings.startup["disable-spidertron-builder"].value then
         {"productivity-module-3", 2},
         {"kr-medium-container", 10},
         {"construction-robot", 50},
-        {"advanced-radar", 5}
+        {"radar", 5}
     }
 end
