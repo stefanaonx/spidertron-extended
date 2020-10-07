@@ -53,6 +53,9 @@ end
 
 
 function fire_wave(vehicle_ent, size)
+    if not vehicle_ent.valid then
+        return
+    end
     if size == nil then
         size = 15
     end
@@ -78,7 +81,11 @@ end
 
 script.on_event("immolator-active1", function(event)
     -- define a basic variable to append with all the data
-    if global.smarttoggle.data == nil then
+--cheap fix for the smart toggle, this will need refactoring later
+    if global.smarttoggle == nil then
+        global.smarttoggle = {}
+    end
+    if global.smarttoggle.data == nil then    
         global.smarttoggle.data = {}
     end
     player_id = event.player_index
@@ -124,6 +131,13 @@ end)
 
 
 script.on_nth_tick(6, function(event)
+    --cheap fix for the smart toggle, this will need refactoring later
+    if global.smarttoggle == nil then
+        global.smarttoggle = {}
+    end
+    if global.smarttoggle.data == nil then    
+        global.smarttoggle.data = {}
+    end
     -- script for fire_wave
     -- this might kill ups, also i have no idea how multiplayer will handle
     for x in pairs(global.smarttoggle.data) do
