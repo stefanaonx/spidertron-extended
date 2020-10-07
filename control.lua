@@ -1,5 +1,18 @@
 --control.lua
 
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
 -- script to modify the spidertronmk2 and spidertronmk3 color on placement
 script.on_event(defines.events.on_built_entity,
 function(event)
@@ -24,6 +37,19 @@ function(event)
         -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}     
     end
 end)
+
+
+function cooldown(seconds, cid)
+    if global.cooldown == nil then
+        global.cooldown = {}
+    end
+    something = {
+        cooldown = seconds,
+        cid = cid
+    }
+    -- basic id to know who's cooldown is it
+    table.insert(global.cooldown, something)
+end
 
 
 function fire_wave(vehicle_ent, size)
@@ -55,14 +81,41 @@ script.on_event("immolator-active1", function(event)
     if global.smarttoggle.data == nil then
         global.smarttoggle.data = {}
     end
+    player_id = event.player_index
     player = game.get_player(event.player_index)
     vehicle = player.vehicle
+    local is_it_pressed = false
+    for x in pairs(global.smarttoggle.data) do
+        if global.smarttoggle.data[x].player_id == player_id then
+            is_it_pressed = true
+        end
+    end
+    
+    if global.cooldown == nil then
+        global.cooldown = {}
+    end
+    
+    local cooldown_pl = false
+    for x in pairs(global.cooldown) do
+        if global.cooldown == {} then
+            cooldown_pl = false
+        elseif global.cooldown[x].cid == player_id then
+            cooldown_pl = true
+        end
+    end
     
     if not (vehicle == nil) then
-        if vehicle.name == "immolator" then
+        -- is it pressed is that ppl don't spam it
+        if (vehicle.name == "immolator") and (is_it_pressed == false) and
+            (cooldown_pl == false) then
             local something = {}
             something.active_stage = 1
             something.vehicle = vehicle
+            something.player_id = player_id
+            
+            -- add the cooldown
+            cooldown(3, player_id)
+            -- add the fire-wave starting
             table.insert(global.smarttoggle.data, something)
             -- game.print("added the table")
         end
@@ -127,11 +180,24 @@ script.on_nth_tick(60, function(event)
             table.remove(global.spidertronmk3, key)
         end
     end
+    
+    -- cooldown testing
+    if not (global.cooldown == nil) then
+        -- game.print(dump(global.cooldown))
+        for x in pairs(global.cooldown) do
+            if global.cooldown[x].cooldown > 0 then
+                global.cooldown[x].cooldown = global.cooldown[x].cooldown - 1
+            else
+                table.remove(global.cooldown, x)
+            end
+        end
+    end
 end)
 
 
 script.on_init(function()
     -- declare global immolator on init
+    global.cooldown = {}
     global.smarttoggle = {}
     global.smarttoggle.data = {}
     global.immolator = {}
