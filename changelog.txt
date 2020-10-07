@@ -153,3 +153,4 @@ Date: 2020.10.4
     - Fix for disabling the mk2 spidertron with krastorio.
     - Added the immolator active skill to fire in a wave pattern originating from the vehicle and going outside.
     - Removed unused code in the control.lua file.
+    - Added cooldown to the immolator active skill.
