@@ -154,3 +154,9 @@ Date: 2020.10.4
     - Added the immolator active skill to fire in a wave pattern originating from the vehicle and going outside.
     - Removed unused code in the control.lua file.
     - Added cooldown to the immolator active skill.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.6
+Date: 2020.11.25
+  Changes:
+    - Modified to use the new version of factorio 1.1.
+    - Commented some nil values that were affecting compatibility with factorio 1.1.

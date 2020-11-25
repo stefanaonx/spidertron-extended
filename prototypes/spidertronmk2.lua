@@ -34,9 +34,9 @@ local iconsmk2 = {
 -- MK2 spidertronmk2
 local spidertronmk2_entity = table_deepcopy(data.raw["spider-vehicle"]["spidertron"])
 spidertronmk2_entity.name = "spidertronmk2"
-spidertronmk2_entity.icon = nil
-spidertronmk2_entity.icon_size = nil
-spidertronmk2_entity.icon_mipmaps = nil
+-- spidertronmk2_entity.icon = nil
+-- spidertronmk2_entity.icon_size = nil
+-- spidertronmk2_entity.icon_mipmaps = nil
 spidertronmk2_entity.icons = iconsmk2
 spidertronmk2_entity.minable.result = "spidertronmk2"
 -- extra
