@@ -160,3 +160,8 @@ Date: 2020.11.25
   Changes:
     - Modified to use the new version of factorio 1.1.
     - Commented some nil values that were affecting compatibility with factorio 1.1.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.7
+Date: 2021.02.24
+  Changes:
+    - Added a check to see if spidertrons are using base colors, yes, you can colour them now (thank you Xorimuth for the hint).

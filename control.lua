@@ -13,26 +13,56 @@ function dump(o)
    end
 end
 
+
+-- was looking to make a general function for comparison arrays
+-- but was to lazy
+-- function checks if colors given are default for spider
+function check_spider_colors(colors)
+    if colors.r == 1 and 
+       colors.g == 0.5 and 
+       colors.b == 0 and 
+       colors.a == 0.5 then
+        return true
+    end
+    return false
+end
+
+
 -- script to modify the spidertronmk2 and spidertronmk3 color on placement
 script.on_event(defines.events.on_built_entity,
 function(event)
+    local default_color = {
+        ["r"] = 1,
+        ["g"] = 0.5,
+        ["b"] = 0,
+        ["a"] = 0.5
+    }
     if event.created_entity.name == "spidertronmk2" then
         local spidertronmk2 = event.created_entity
-        spidertronmk2.color = {1.0, 0, 0, 0.5}
+        if check_spider_colors(spidertronmk2.color) then
+            spidertronmk2.color = {1.0, 0, 0, 0.5}
+        end
     elseif event.created_entity.name == "spidertronmk3" then
         local spidertronmk3 = event.created_entity
-        spidertronmk3.color = {0.5, 0, 0.5, 0.5}
+        -- game.print(dump(spidertronmk3.color))
+        if check_spider_colors(spidertronmk3.color) then
+            spidertronmk3.color = {0.5, 0, 0.5, 0.5}
+        end
         -- when spidertronmk3 is created add it to the table
         table.insert(global.spidertronmk3, spidertronmk3)
     elseif event.created_entity.name == "spidertron-builder" then
         local spidertron_builder = event.created_entity
-        spidertron_builder.color = {1, 1, 1, 0.5}
+        if check_spider_colors(spidertron_builder.color) then
+            spidertron_builder.color = {1, 1, 1, 0.5}
+        end
     elseif event.created_entity.name == "immolator" then
         if global.immolator == nil then
             global.immolator = {}
         end
         local immolator = event.created_entity
-        immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
+        if check_spider_colors(immolator.color) then
+            immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
+        end
         table.insert(global.immolator, immolator)
         -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}     
     end
@@ -81,7 +111,7 @@ end
 
 script.on_event("immolator-active1", function(event)
     -- define a basic variable to append with all the data
---cheap fix for the smart toggle, this will need refactoring later
+    --cheap fix for the smart toggle, this will need refactoring later
     if global.smarttoggle == nil then
         global.smarttoggle = {}
     end
@@ -141,6 +171,7 @@ script.on_nth_tick(6, function(event)
     -- script for fire_wave
     -- this might kill ups, also i have no idea how multiplayer will handle
     for x in pairs(global.smarttoggle.data) do
+        -- writing whiles are so hard ... (sarcastic)
         if global.smarttoggle.data[x].active_stage == 1 then
             global.smarttoggle.data[x].active_stage = 2
             fire_wave(global.smarttoggle.data[x].vehicle, 3)
