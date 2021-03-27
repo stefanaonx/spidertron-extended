@@ -147,6 +147,7 @@ local retrofitted_battery2 = {
     result = "retrofitted-battery2"
 }
 
+
 data:extend{
     retrofitted_battery,
     retrofitted_battery2

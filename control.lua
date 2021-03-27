@@ -55,6 +55,10 @@ function(event)
         if check_spider_colors(spidertron_builder.color) then
             spidertron_builder.color = {1, 1, 1, 0.5}
         end
+        -- game.print(spidertron_builder.get_inventory)
+        -- adding the batteries automatically on placement
+        spidertron_builder.insert({name="retrofitted-battery"})
+        spidertron_builder.insert({name="retrofitted-battery2"})
     elseif event.created_entity.name == "immolator" then
         if global.immolator == nil then
             global.immolator = {}
@@ -68,6 +72,54 @@ function(event)
     end
 end)
 
+
+script.on_event(defines.events.on_pre_player_mined_item,
+function(event)
+    if event.entity.name == "spidertron-builder" then
+        local spidertron_builder = event.entity
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
+        spidertron_builder.remove_item({name="retrofitted-battery"})
+        spidertron_builder.remove_item({name="retrofitted-battery2"})
+    end
+end)
+
+
+-- this didn't work, i'll leave this code here for future reference
+--[[
+script.on_event(defines.events.on_player_mined_entity,
+function(event)
+    -- removing batteries when it's mined 
+    if event.entity.name == "spidertron-builder" then
+        --- i tried removing from buffer but in buffer is only the vehicle
+        local inv_buff = event.buffer
+        game.print(dump(inv_buff.get_contents()))
+        -- inv_buff.remove({name="retrofitted-battery"})
+        -- inv_buff.remove({name="retrofitted-battery2"})
+        
+        local spidertron_builder = event.entity
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo)))
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.editor_ammo).get_contents()))
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_trash).get_contents()))
+        game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_trunk).get_contents()))
+        
+        spidertron_builder.get_inventory(defines.inventory.editor_ammo).remove({name="retrofitted-battery"})
+        spidertron_builder.get_inventory(defines.inventory.editor_ammo).remove({name="retrofitted-battery2"})
+        -- inv_items = spidertron_builder.get_inventory()
+        -- game.print(dump(spidertron_builder.get_contents()))
+        -- spidertron_builder.remove_item({name="retrofitted-battery"})
+        -- spidertron_builder.remove_item({name="retrofitted-battery2"})
+        
+        -- tried removing from player but if he has full inv it bugs out
+        -- leaving this in case he still has it for some reason in his inventory
+        
+        --player_id = event.player_index
+        --player = game.get_player(event.player_index)
+        --player.remove_item({name="retrofitted-battery"})
+        --player.remove_item({name="retrofitted-battery2"})
+    end
+end)
+--]]
 
 function cooldown(seconds, cid)
     if global.cooldown == nil then

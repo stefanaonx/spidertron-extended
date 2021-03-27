@@ -82,14 +82,6 @@ if not settings.startup["disable-spidertron-builder"].value then
             {
                 type = "unlock-recipe", 
                 recipe = "spidertron-builder"
-            },
-            {
-                type = "unlock-recipe", 
-                recipe = "retrofitted-battery"
-            },
-            {
-                type = "unlock-recipe", 
-                recipe = "retrofitted-battery2"
             }
         },
         unit = {

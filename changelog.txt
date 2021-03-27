@@ -165,3 +165,9 @@ Version: 0.3.7
 Date: 2021.02.24
   Changes:
     - Added a check to see if spidertrons are using base colors, yes, you can colour them now (thank you Xorimuth for the hint).
+---------------------------------------------------------------------------------------------------
+Version: 0.3.8
+Date: 2021.03.27
+  Changes:
+    - Ghost Weaver will now have batteries / ammo on placement instead of needing to craft them from now on.
+    - Added compatibility with bob's warfare mod.

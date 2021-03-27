@@ -21,6 +21,7 @@ require("prototypes.immolator")
 -- compatibility files
 require("compatibility.krastorio2")
 require("compatibility.bobvehicleequipment")
+require("compatibility.bobwarfare")
 require("compatibility.vintage_spidertron")
 require("compatibility.krastorio2_spiderleg")
 require("compatibility.deal_with_it")
