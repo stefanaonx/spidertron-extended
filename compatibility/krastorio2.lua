@@ -271,14 +271,28 @@ if not settings.startup["disable-spidertronmk3"].value then
     data.raw["recipe"]["spidertronmk3"].ingredients = ingr
 end
 
+
+
 if not settings.startup["disable-spidertron-builder"].value then
-    data.raw["recipe"]["spidertron-builder"].ingredients = {
-        {"ai-core", 1},
-        {"rocket-control-unit", 16},
-        {"low-density-structure", 150},
-        {"productivity-module-3", 2},
-        {"kr-medium-container", 10},
-        {"construction-robot", 50},
-        {"radar", 5}
-    }
+    if settings.startup["kr-containers"].value then
+        data.raw["recipe"]["spidertron-builder"].ingredients = {
+            {"ai-core", 1},
+            {"rocket-control-unit", 16},
+            {"low-density-structure", 150},
+            {"productivity-module-3", 2},
+            {"kr-medium-container", 10},
+            {"construction-robot", 50},
+            {"radar", 5}
+        }
+    else
+        data.raw["recipe"]["spidertron-builder"].ingredients = {
+            {"ai-core", 1},
+            {"rocket-control-unit", 16},
+            {"low-density-structure", 150},
+            {"productivity-module-3", 2},
+            {"steel-chest",10},
+            {"construction-robot", 50},
+            {"radar", 5}
+        }
+    end
 end
