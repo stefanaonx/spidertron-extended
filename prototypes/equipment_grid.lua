@@ -1,5 +1,7 @@
 -- grids
 
+local table_deepcopy = util.table.deepcopy
+
 local smk2w = settings.startup["spidertronmk2-width"].value
 local smk2h = settings.startup["spidertronmk2-height"].value
 local smk3w = settings.startup["spidertronmk3-width"].value
@@ -9,12 +11,14 @@ local sbuildh = settings.startup["spidertron-builder-height"].value
 local immw = settings.startup["immolator-width"].value
 local immh = settings.startup["immolator-height"].value
 
+local basic_equipment_categories = data.raw["equipment-grid"]["spidertron-equipment-grid"].equipment_categories
+
 local spidertronmk2_grid = {
     type = "equipment-grid",
     name = "spidertronmk2-grid",
     width = smk2w,
     height = smk2h,
-    equipment_categories = {"armor"}
+    equipment_categories = basic_equipment_categories
 }
 
 local spidertronmk3_grid = {
@@ -22,7 +26,7 @@ local spidertronmk3_grid = {
     name = "spidertronmk3-grid",
     width = smk3w,
     height = smk3h,
-    equipment_categories = {"armor"}
+    equipment_categories = basic_equipment_categories
 }
 
 local spidertron_builder_grid = {
@@ -30,7 +34,7 @@ local spidertron_builder_grid = {
     name = "spidertron-builder-grid",
     width = sbuildw,
     height = sbuildh,
-    equipment_categories = {"armor"}
+    equipment_categories = basic_equipment_categories
 }
 
 local immolator_grid = {
@@ -38,7 +42,7 @@ local immolator_grid = {
     name = "immolator-grid",
     width = immw,
     height = immh,
-    equipment_categories = {"armor"}
+    equipment_categories = basic_equipment_categories
 }
 
 
