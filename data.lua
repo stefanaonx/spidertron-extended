@@ -19,6 +19,7 @@ require("prototypes.spidertron_builder")
 require("prototypes.immolator")
 
 -- compatibility files
+require("compatibility.space-exploration")
 require("compatibility.krastorio2")
 require("compatibility.bobvehicleequipment")
 require("compatibility.bobwarfare")
