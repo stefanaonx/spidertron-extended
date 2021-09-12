@@ -64,7 +64,7 @@ data:extend({
 		name = "spidertronmk3-width",
 		setting_type = "startup",
         minimum_value = 10,
-        default_value = 30,
+        default_value = 20,
 		order = "a32"
 	},
     {
@@ -72,7 +72,7 @@ data:extend({
 		name = "spidertronmk3-height",
 		setting_type = "startup",
         minimum_value = 6,
-        default_value = 10,
+        default_value = 12,
 		order = "a33"
 	},
     -- inventory size for mk3
