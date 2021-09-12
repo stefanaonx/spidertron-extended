@@ -3,7 +3,7 @@ if not settings.startup["disable-spidertronmk2"].value then
     local spidertronmk2_technology = {
         type = "technology",
         name = "spidertronmk2-tech",
-        icon = "__spidertron-extended__/icons/spidertron_mk2_reseach.png",
+        icon = "__spidertron-extended-se__/icons/spidertron_mk2_reseach.png",
         icon_size = 128,
         order = "c",
         prerequisites = {"spidertron"},
@@ -40,7 +40,7 @@ if not settings.startup["disable-spidertronmk3"].value then
     local spidertronmk3_technology = {
         type = "technology",
         name = "spidertronmk3-tech",
-        icon = "__spidertron-extended__/icons/spidertron_mk3_reseach.png",
+        icon = "__spidertron-extended-se__/icons/spidertron_mk3_reseach.png",
         icon_size = 128,
         order = "c",
         prerequisites = preqs,
@@ -74,7 +74,7 @@ if not settings.startup["disable-spidertron-builder"].value then
     local spidertron_builder_technology = {
         type = "technology",
         name = "spidertron-builder-tech",
-        icon = "__spidertron-extended__/icons/spidertron_extended_builder_research.png",
+        icon = "__spidertron-extended-se__/icons/spidertron_extended_builder_research.png",
         icon_size = 128,
         order = "c",
         prerequisites = {"spidertron","construction-robotics"},
@@ -107,7 +107,7 @@ if not settings.startup["disable-immolator"].value then
     local immolator_technology = {
         type = "technology",
         name = "immolator-tech",
-        icon = "__spidertron-extended__/icons/spidertron_extended_immolator_research.png",
+        icon = "__spidertron-extended-se__/icons/spidertron_extended_immolator_research.png",
         icon_size = 128,
         order = "c",
         prerequisites = {"spidertron"},

@@ -7,7 +7,7 @@ local beam_heal_ammount = settings.startup["spidertron-builder-healing-beam-ammo
 local repair_beam = table_deepcopy(data.raw['beam']['laser-beam'])
 repair_beam.name = "weaver-repair-beam"
 repair_beam.head = {
-    filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png",
+    filename = "__spidertron-extended-se__/graphics/spidertron_builder_laser_body_HD_1.png",
     tint = {r = 0.8, g = 0.8, b = 0.8},
     flags = {"mipmap"},
     line_length = 8,
@@ -19,7 +19,7 @@ repair_beam.head = {
     blend_mode = laser_beam_blend_mode
 }
 repair_beam.tail = {
-    filename = "__spidertron-extended__/graphics/spidertron_builder_laser_end_HD_1.png",
+    filename = "__spidertron-extended-se__/graphics/spidertron_builder_laser_end_HD_1.png",
     tint = {r = 0.8, g = 0.8, b = 0.8},
     flags = { "no-crop", "mipmap" },
     width = 110,
@@ -32,7 +32,7 @@ repair_beam.tail = {
 }
 repair_beam.body = {
     {
-        filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png",
+        filename = "__spidertron-extended-se__/graphics/spidertron_builder_laser_body_HD_1.png",
         tint = {r = 0.8, g = 0.8, b = 0.8},
         flags = {"mipmap"},
         line_length = 8,
@@ -76,7 +76,7 @@ data:extend{
     {
         type = "ammo",
         name = "retrofitted-battery",
-        icon = "__spidertron-extended__/graphics/spidertron_builder_energy_cell_repair_1.png",
+        icon = "__spidertron-extended-se__/graphics/spidertron_builder_energy_cell_repair_1.png",
         icon_size = 64,
         flags = {"hidden"},
         ammo_type = {
@@ -100,7 +100,7 @@ data:extend{
     {
         type = "ammo",
         name = "retrofitted-battery2",
-        icon = "__spidertron-extended__/graphics/spidertron_builder_energy_cell_repair_3.png",
+        icon = "__spidertron-extended-se__/graphics/spidertron_builder_energy_cell_repair_3.png",
         icon_size = 64,
         flags = {"hidden"},
         ammo_type = {

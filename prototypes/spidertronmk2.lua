@@ -25,7 +25,7 @@ local leg_hit_the_ground_trigger = {
 
 local iconsmk2 = {
     {
-        icon = "__spidertron-extended__/icons/spidertron_extended_mk2_item.png",
+        icon = "__spidertron-extended-se__/icons/spidertron_extended_mk2_item.png",
         icon_size = 64, 
         icon_mipmaps = 4
     }
@@ -91,7 +91,7 @@ spidertronmk2_entity.guns = {
 spidertronmk2_entity.chain_shooting_cooldown_modifier = 0.4
 spidertronmk2_entity.braking_force = 2
 spidertronmk2_entity.minimap_representation = {
-    filename = "__spidertron-extended__/icons/spidertron_extended_mk2_map.png",
+    filename = "__spidertron-extended-se__/icons/spidertron_extended_mk2_map.png",
     flags = {"icon"},
     size = {128, 128},
     scale = 0.6

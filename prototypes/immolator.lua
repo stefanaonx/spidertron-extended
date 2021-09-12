@@ -32,7 +32,7 @@ end
 
 local immicon = {
     {
-        icon = "__spidertron-extended__/icons/spidertron_extended_immolator_item.png",
+        icon = "__spidertron-extended-se__/icons/spidertron_extended_immolator_item.png",
         icon_size = 64, 
         icon_mipmaps = 4
     }
@@ -98,7 +98,7 @@ immolator_entity.guns = {
 immolator_entity.chain_shooting_cooldown_modifier = 0.4
 immolator_entity.braking_force = 2
 immolator_entity.minimap_representation = {
-    filename = "__spidertron-extended__/icons/spidertron_extended_immolator_map.png",
+    filename = "__spidertron-extended-se__/icons/spidertron_extended_immolator_map.png",
     flags = {"icon"},
     size = {128, 128},
     scale = 0.5
@@ -106,14 +106,14 @@ immolator_entity.minimap_representation = {
 
 -- changes the eye texture	
 immolator_entity.graphics_set.animation.layers[3] = {
-	filename = "__spidertron-extended__/graphics/spidertron_immolator_eye.png",
+	filename = "__spidertron-extended-se__/graphics/spidertron_immolator_eye.png",
 	width = 66,
 	height = 70,
 	line_length = 8,
 	direction_count = 64,
 	shift = util.by_pixel(0, -19),
 	hr_version = {
-		filename = "__spidertron-extended__/graphics/spidertron_immolator_eye_HD.png",
+		filename = "__spidertron-extended-se__/graphics/spidertron_immolator_eye_HD.png",
 		width = 132,
 		height = 138,
 		line_length = 8,
@@ -124,7 +124,7 @@ immolator_entity.graphics_set.animation.layers[3] = {
 }
 -- head turret
 immolator_entity.graphics_set.animation.layers[4] = {
-	filename = "__spidertron-extended__/graphics/spidertron_immolator_flamethrower_turret_overlay.png",
+	filename = "__spidertron-extended-se__/graphics/spidertron_immolator_flamethrower_turret_overlay.png",
 	width = 132,
 	height = 138,
 	line_length = 8,
@@ -132,7 +132,7 @@ immolator_entity.graphics_set.animation.layers[4] = {
 	shift = util.by_pixel(0, -19),
     scale = 0.4,
 	hr_version = {
-		filename = "__spidertron-extended__/graphics/spidertron_immolator_flamethrower_turret_overlay.png",
+		filename = "__spidertron-extended-se__/graphics/spidertron_immolator_flamethrower_turret_overlay.png",
 		width = 132,
 		height = 138,
 		line_length = 8,

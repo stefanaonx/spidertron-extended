@@ -25,7 +25,7 @@ local leg_hit_the_ground_trigger = {
 
 local iconsmk3 = {
     {
-        icon = "__spidertron-extended__/icons/spidertron_extended_mk3_item.png",
+        icon = "__spidertron-extended-se__/icons/spidertron_extended_mk3_item.png",
         icon_size = 64, 
         icon_mipmaps = 4
     }
@@ -106,7 +106,7 @@ spidertronmk3_entity.braking_force = 4
 
 -- modifies the icon displayed on the map
 spidertronmk3_entity.minimap_representation = {
-    filename = "__spidertron-extended__/icons/spidertron_extended_mk3_map.png",
+    filename = "__spidertron-extended-se__/icons/spidertron_extended_mk3_map.png",
     flags = {"icon"},
     size = {128, 128},
     scale = 0.7
@@ -118,14 +118,14 @@ spidertronmk3_entity.minimap_representation = {
 
 -- changes the eye texture	
 spidertronmk3_entity.graphics_set.animation.layers[3] = {
-	filename = "__spidertron-extended__/graphics/spidertron_mk3_eye.png",
+	filename = "__spidertron-extended-se__/graphics/spidertron_mk3_eye.png",
 	width = 66,
 	height = 70,
 	line_length = 8,
 	direction_count = 64,
 	shift = util.by_pixel(0, -19),
 	hr_version = {
-		filename = "__spidertron-extended__/graphics/spidertron_mk3_eye_HD.png",
+		filename = "__spidertron-extended-se__/graphics/spidertron_mk3_eye_HD.png",
 		width = 132,
 		height = 138,
 		line_length = 8,

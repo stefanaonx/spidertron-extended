@@ -24,7 +24,7 @@ local leg_hit_the_ground_trigger = {
 
 local icon_sp_builder = {
     {
-        icon = "__spidertron-extended__/icons/spidertron_extended_builder_item.png",
+        icon = "__spidertron-extended-se__/icons/spidertron_extended_builder_item.png",
         icon_size = 64, 
         icon_mipmaps = 4
     }
@@ -92,7 +92,7 @@ if settings.startup["disable-spidertron-builder-reaper-beam"].value then
     }
 end
 spidertron_builder_entity.minimap_representation = {
-    filename = "__spidertron-extended__/icons/spidertron_extended_builder_map.png",
+    filename = "__spidertron-extended-se__/icons/spidertron_extended_builder_map.png",
     flags = {"icon"},
     size = {128, 128},
     scale = 0.5
@@ -100,14 +100,14 @@ spidertron_builder_entity.minimap_representation = {
 
 -- changes the eye texture	
 spidertron_builder_entity.graphics_set.animation.layers[3] = {
-	filename = "__spidertron-extended__/graphics/spidertron_builder_eye.png",
+	filename = "__spidertron-extended-se__/graphics/spidertron_builder_eye.png",
 	width = 66,
 	height = 70,
 	line_length = 8,
 	direction_count = 64,
 	shift = util.by_pixel(0, -19),
 	hr_version = {
-		filename = "__spidertron-extended__/graphics/spidertron_builder_eye_HD.png",
+		filename = "__spidertron-extended-se__/graphics/spidertron_builder_eye_HD.png",
 		width = 132,
 		height = 138,
 		line_length = 8,
@@ -117,7 +117,7 @@ spidertron_builder_entity.graphics_set.animation.layers[3] = {
 	}
 }
 spidertron_builder_entity.graphics_set.animation.layers[4] = {
-	filename = "__spidertron-extended__/graphics/spidertron_builder_laser_turret_overlay.png",
+	filename = "__spidertron-extended-se__/graphics/spidertron_builder_laser_turret_overlay.png",
 	width = 132,
 	height = 138,
 	line_length = 8,
@@ -125,7 +125,7 @@ spidertron_builder_entity.graphics_set.animation.layers[4] = {
 	shift = util.by_pixel(0, -19),
     scale = 0.5,
 	hr_version = {
-		filename = "__spidertron-extended__/graphics/spidertron_builder_laser_turret_overlay.png",
+		filename = "__spidertron-extended-se__/graphics/spidertron_builder_laser_turret_overlay.png",
 		width = 132,
 		height = 138,
 		line_length = 8,
