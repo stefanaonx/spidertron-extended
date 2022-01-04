@@ -3,6 +3,14 @@ if not mods["Krastorio2"] then
     return
 end
 
+if not mods["Krastorio2Assets"] then
+    nok2assets_launcher_png = "__Krastorio2__/graphics/icons/guns/heavy-rocket-launcher.png"
+    nok2assets_launcher_ogg = "__Krastorio2__/sounds/weapons/rocket-launch.ogg"
+else
+    nok2assets_launcher_png = "__Krastorio2Assets__/icons/guns/heavy-rocket-launcher.png"
+    nok2assets_launcher_ogg = "__Krastorio2Assets__/sounds/weapons/rocket-launch.ogg"
+end
+
 require "util"
 
 local table_deepcopy = util.table.deepcopy
@@ -155,7 +163,9 @@ if not settings.startup["disable-spidertronmk3"].value then
     local spidertronmk3_heavy_rocket_launcher_item = {
         type = "gun",
         name = "spidertron-heavy-rocket-launcher",
-        icon = "__Krastorio2__/graphics/icons/guns/heavy-rocket-launcher.png",
+        -- TODO Check properly that krastorio2assets is available
+        -- since the assets are mandatory for k2 i will leave it like this
+        icon = nok2assets_launcher_png,
         icon_size = 64, icon_mipmaps = 4,
         subgroup = "gun",
         order = "d[spidertron-heavy-rocket-launcher]",
@@ -171,7 +181,8 @@ if not settings.startup["disable-spidertronmk3"].value then
             sound =
             {
                 {
-                    filename = "__Krastorio2__/sounds/weapons/rocket-launch.ogg",
+                    -- since the assets are mandatory for k2 i will leave it like this
+                    filename = nok2assets_launcher_ogg,
                     volume = 1
                 }
             }

@@ -177,3 +177,8 @@ Date: 2021.05.24
   Changes:
     - Made a fix for compatibility with krastorio2 when there are no k2 containers.
     - Small fix for Rampant Arsenal compatibility.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.10
+Date: 2022.01.04
+  Changes:
+    - Fixed a Krastorio2 compatibility issue since k2 (1.2.10) and k2assets (1.1.0) are splited now.
