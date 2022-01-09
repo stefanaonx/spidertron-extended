@@ -185,7 +185,5 @@ Date: 2022.01.04
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.11
 Date: 2022.01.09
-  by: GeneralTank
   Changes:
-    - Added some of the code from pdunham113 version for Space Exploration compatibility
----------------------------------------------------------------------------------------------------
+    - Added some of the code from pdunham113 version for Space Exploration compatibility. Added by: GeneralTank
