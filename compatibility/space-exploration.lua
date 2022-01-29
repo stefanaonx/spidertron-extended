@@ -23,6 +23,7 @@ data.raw["technology"]["spidertron"].unit = {
 -- Bump up spidertron equipment grid
 data.raw["equipment-grid"]["spidertron-equipment-grid"].width = 10
 data.raw["equipment-grid"]["spidertron-equipment-grid"].height = 8
+-- if Krastorio is enabled, also increase the Krastorio spidertron grid size in data-final-fixes
 
 
 if not settings.startup["disable-spidertronmk2"].value then

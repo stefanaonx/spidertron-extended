@@ -11,6 +11,11 @@ if mods["Krastorio2"] then
     data.raw["equipment-grid"]["spidertronmk3-grid"].equipment_categories = data.raw["equipment-grid"]["kr-spidertron-equipment-grid"].equipment_categories
     data.raw["equipment-grid"]["spidertron-builder-grid"].equipment_categories = data.raw["equipment-grid"]["kr-spidertron-equipment-grid"].equipment_categories
     data.raw["equipment-grid"]["immolator-grid"].equipment_categories = data.raw["equipment-grid"]["kr-spidertron-equipment-grid"].equipment_categories
+
+    if mods["space-exploration"] then
+        data.raw["equipment-grid"]["kr-spidertron-equipment-grid"].width = 10
+        data.raw["equipment-grid"]["kr-spidertron-equipment-grid"].height = 8
+    end
 end
 
 -- new setting to disable bobs vehicle equipment on vanilla spidertron
