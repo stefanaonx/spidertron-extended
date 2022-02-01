@@ -1,3 +1,12 @@
+-- vanilla grid size defaults
+local vanilla_grid_width, vanilla_grid_height = 0, 0
+
+-- use different defaults for SE
+if mods["space-exploration"] then
+    vanilla_grid_width = 10
+    vanilla_grid_height = 8
+end
+
 data:extend({
     -- vanilla sizes
 	{
@@ -5,7 +14,42 @@ data:extend({
 		name = "vanilla-spidertron-size",
 		setting_type = "startup",
 		default_value = false,
-		order = "a1"
+		order = "a10"
+	},
+    -- grid sizes for vanilla
+    {
+		type = "int-setting",
+		name = "vanilla-spidertron-width",
+		setting_type = "startup",
+        minimum_value = 0,
+        default_value = vanilla_grid_width,
+		order = "a11"
+	},
+    {
+		type = "int-setting",
+		name = "vanilla-spidertron-height",
+		setting_type = "startup",
+        minimum_value = 0,
+        default_value = vanilla_grid_height,
+		order = "a12"
+	},
+    -- inventory size for vanilla
+    {
+		type = "int-setting",
+		name = "vanilla-spidertron-invsize",
+		setting_type = "startup",
+        minimum_value = 0,
+        default_value = 0,
+		order = "a13"
+	},
+    -- hp for vanilla
+    {
+		type = "int-setting",
+		name = "vanilla-spidertron-hp",
+		setting_type = "startup",
+        minimum_value = 0,
+        default_value = 0,
+		order = "a14"
 	},
     -- to disable spidertronmk2
     {

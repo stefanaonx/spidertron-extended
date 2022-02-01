@@ -20,11 +20,6 @@ data.raw["technology"]["spidertron"].unit = {
     time = 30
 }
 
--- Bump up spidertron equipment grid
-data.raw["equipment-grid"]["spidertron-equipment-grid"].width = 10
-data.raw["equipment-grid"]["spidertron-equipment-grid"].height = 8
-
-
 if not settings.startup["disable-spidertronmk2"].value then
     -- Recipe changes
     data.raw["recipe"]["spidertronmk2"].ingredients = {
