@@ -187,3 +187,8 @@ Version: 0.3.11
 Date: 2022.01.09
   Changes:
     - Added some of the code from pdunham113 version for Space Exploration compatibility. Added by: GeneralTank
+---------------------------------------------------------------------------------------------------
+Version: 0.3.12
+Date: 2022.02.01
+  Changes:
+    - Adjustable grid size, hp, inventory for vanilla spidertron in mod settings even when using k2 with space exploration. Added by: pavlukivan
