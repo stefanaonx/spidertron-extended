@@ -85,9 +85,9 @@ spidertronmk3_entity.automatic_weapon_cycling = true
 -- wanted to try flamethrower, it works but with cycling it's not fun
 spidertronmk3_entity.guns = {
     "spidertronmk3-rocket-launcher-1", 
-    "spidertronmk3-rocket-launcher-2", 
-    "spidertronmk3-rocket-launcher-3", 
-    "spidertronmk3-rocket-launcher-4"
+    "spidertronmk3-rocket-launcher-1",
+    "spidertronmk3-rocket-launcher-1",
+    "spidertronmk3-rocket-launcher-1"
 }
 spidertronmk3_entity.chain_shooting_cooldown_modifier = 0.3
 spidertronmk3_entity.braking_force = 4

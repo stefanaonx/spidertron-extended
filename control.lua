@@ -37,12 +37,15 @@ function(event)
         ["b"] = 0,
         ["a"] = 0.5
     }
-    if event.created_entity.name == "spidertronmk2" then
+    if event.created_entity.name == "spidertronmk2" or
+        event.created_entity.name == "spidertronmk2-spidertronmk2-rocket-launcher-1" then
         local spidertronmk2 = event.created_entity
         if check_spider_colors(spidertronmk2.color) then
             spidertronmk2.color = {1.0, 0, 0, 0.5}
         end
-    elseif event.created_entity.name == "spidertronmk3" then
+    elseif event.created_entity.name == "spidertronmk3" or
+        event.created_entity.name == "spidertronmk3-spidertronmk3-rocket-launcher-1" then
+
         local spidertronmk3 = event.created_entity
         -- game.print(dump(spidertronmk3.color))
         if check_spider_colors(spidertronmk3.color) then
@@ -59,7 +62,24 @@ function(event)
         -- adding the batteries automatically on placement
         spidertron_builder.insert({name="retrofitted-battery"})
         spidertron_builder.insert({name="retrofitted-battery2"})
-    elseif event.created_entity.name == "immolator" then
+    elseif event.created_entity.name == "spidertron-builder-spidertron-experimental-laser" then
+        local spidertron_builder = event.created_entity
+        if check_spider_colors(spidertron_builder.color) then
+            spidertron_builder.color = {1, 1, 1, 0.5}
+        end
+        -- game.print(spidertron_builder.get_inventory)
+        -- adding the batteries automatically on placement
+        spidertron_builder.insert({name="retrofitted-battery"})
+    elseif event.created_entity.name == "spidertron-builder-spidertron-experimental-laser2" then
+        local spidertron_builder = event.created_entity
+        if check_spider_colors(spidertron_builder.color) then
+            spidertron_builder.color = {1, 1, 1, 0.5}
+        end
+        -- game.print(spidertron_builder.get_inventory)
+        -- adding the batteries automatically on placement
+        spidertron_builder.insert({name="retrofitted-battery2"})
+    elseif event.created_entity.name == "immolator" or
+        event.created_entity.name == "immolator-spidertron-immolator-flamethrower" then
         if global.immolator == nil then
             global.immolator = {}
         end
@@ -79,6 +99,16 @@ function(event)
         local spidertron_builder = event.entity
         -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
         spidertron_builder.remove_item({name="retrofitted-battery"})
+        spidertron_builder.remove_item({name="retrofitted-battery2"})
+    end
+    if event.entity.name == "spidertron-builder-spidertron-experimental-laser" then
+        local spidertron_builder = event.entity
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
+        spidertron_builder.remove_item({name="retrofitted-battery"})
+    end
+    if event.entity.name == "spidertron-builder-spidertron-experimental-laser2" then
+        local spidertron_builder = event.entity
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
         spidertron_builder.remove_item({name="retrofitted-battery2"})
     end
 end)

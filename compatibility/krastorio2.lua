@@ -214,9 +214,9 @@ if not settings.startup["disable-spidertronmk3"].value then
     -- mk3 new guns
     data.raw["spider-vehicle"]["spidertronmk3"].guns = {
         "spidertron-heavy-rocket-launcher", 
-        "spidertron-heavy-rocket-launcher2", 
-        "spidertron-heavy-rocket-launcher3", 
-        "spidertron-heavy-rocket-launcher4"
+        "spidertron-heavy-rocket-launcher",
+        "spidertron-heavy-rocket-launcher",
+        "spidertron-heavy-rocket-launcher"
     }
 end
 

@@ -84,9 +84,9 @@ spidertronmk2_entity.chunk_exploration_radius = 5
 spidertronmk2_entity.automatic_weapon_cycling = true
 spidertronmk2_entity.guns = {
     "spidertronmk2-rocket-launcher-1", 
-    "spidertronmk2-rocket-launcher-2", 
-    "spidertronmk2-rocket-launcher-3", 
-    "spidertronmk2-rocket-launcher-4"
+    "spidertronmk2-rocket-launcher-1",
+    "spidertronmk2-rocket-launcher-1",
+    "spidertronmk2-rocket-launcher-1"
 }
 spidertronmk2_entity.chain_shooting_cooldown_modifier = 0.4
 spidertronmk2_entity.braking_force = 2

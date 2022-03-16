@@ -192,3 +192,10 @@ Version: 0.3.12
 Date: 2022.02.01
   Changes:
     - Adjustable grid size, hp, inventory for vanilla spidertron in mod settings even when using k2 with space exploration. Added by: pavlukivan
+---------------------------------------------------------------------------------------------------
+Version: 0.3.13
+Date: 2022.03.16
+  Changes:
+    - Modified to be only 1 rocket launcher type for mk2 and mk3 which helps resolve the clutter when using aai-programmable vehicles.
+    - Fixed an issue where the aai-programmable ghost weaver does not have ammo.
+    - Fixed a small locale issue for the rocket launcher for mk2 and mk3.
