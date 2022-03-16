@@ -6,33 +6,20 @@ local beam_heal_ammount = settings.startup["spidertron-builder-healing-beam-ammo
 
 local repair_beam = table_deepcopy(data.raw['beam']['laser-beam'])
 repair_beam.name = "weaver-repair-beam"
-repair_beam.head = {
-    filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png",
-    tint = {r = 0.8, g = 0.8, b = 0.8},
-    flags = {"mipmap"},
-    line_length = 8,
-    width = 64,
-    height = 12,
-    frame_count = 8,
-    scale = 0.5,
-    animation_speed = 0.5,
-    blend_mode = laser_beam_blend_mode
-}
-repair_beam.tail = {
-    filename = "__spidertron-extended__/graphics/spidertron_builder_laser_end_HD_1.png",
-    tint = {r = 0.8, g = 0.8, b = 0.8},
-    flags = { "no-crop", "mipmap" },
-    width = 110,
-    height = 62,
-    frame_count = 8,
-    shift = util.by_pixel(11.5, 1),
-    scale = 0.5,
-    animation_speed = 0.5,
-    blend_mode = laser_beam_blend_mode
-}
+
+
+repair_beam.head.filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png"
+
+repair_beam.tail.filename = "__spidertron-extended__/graphics/spidertron_builder_laser_end_HD_1.png"
+repair_beam.tail.width = 110
+repair_beam.tail.height = 62
+repair_beam.tail.frame_count = 8
+
+-- tried replacing for the body how is it up but doesn't work
 repair_beam.body = {
     {
         filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png",
+        flags = beam_non_light_flags,
         tint = {r = 0.8, g = 0.8, b = 0.8},
         flags = {"mipmap"},
         line_length = 8,
@@ -45,6 +32,53 @@ repair_beam.body = {
     }
 }
 
+-- the values under here are the same as original laser beam
+-- this part can be cleaned up / removed if not used
+--[[
+repair_beam.head = {
+    filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png",
+    flags = beam_non_light_flags,
+    tint = {r = 0.8, g = 0.8, b = 0.8},
+    flags = {"mipmap"},
+    line_length = 8,
+    width = 64,
+    height = 12,
+    frame_count = 8,
+    scale = 0.5,
+    animation_speed = 0.5,
+    blend_mode = laser_beam_blend_mode
+}
+
+repair_beam.tail = {
+    filename = "__spidertron-extended__/graphics/spidertron_builder_laser_end_HD_1.png",
+    flags = beam_non_light_flags,
+    tint = {r = 0.8, g = 0.8, b = 0.8},
+    flags = { "no-crop", "mipmap" },
+    width = 110,
+    height = 62,
+    frame_count = 8,
+    shift = util.by_pixel(11.5, 1),
+    scale = 0.5,
+    animation_speed = 0.5,
+    blend_mode = laser_beam_blend_mode
+}
+
+repair_beam.body = {
+    {
+        filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png",
+        flags = beam_non_light_flags,
+        tint = {r = 0.8, g = 0.8, b = 0.8},
+        flags = {"mipmap"},
+        line_length = 8,
+        width = 64,
+        height = 12,
+        frame_count = 8,
+        scale = 0.5,
+        animation_speed = 0.5,
+        blend_mode = laser_beam_blend_mode
+    }
+}
+--]]
 repair_beam.action.action_delivery.target_effects = {
     {
         type = "damage",

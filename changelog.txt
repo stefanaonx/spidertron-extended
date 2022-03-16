@@ -199,3 +199,9 @@ Date: 2022.03.16
     - Modified to be only 1 rocket launcher type for mk2 and mk3 which helps resolve the clutter when using aai-programmable vehicles.
     - Fixed an issue where the aai-programmable ghost weaver does not have ammo.
     - Fixed a small locale issue for the rocket launcher for mk2 and mk3.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.14
+Date: 2022.03.16
+  Changes:
+    - Added compatibility with Industrial Revolution 2.
+    - Notice that the laser for the repair beam on the ghost weaver looks slightly glitchy when using industrial revolution, going to bother Resar to make new animations for it.
