@@ -1,111 +1,94 @@
----------------------------------------------------------------------------------------------------
-Version: 0.1.0
-Date: 2020.08.15
+Version: 0.3.15
+Date: 2022.09.18
   Changes:
-    - Initial Release.
+    - Fully removed compatibility with Industrial Revolution 2. I'm sorry but people keep blaming spidertron extended for not working properly or at all with Industrial Revolution so I decided to take the easier path and remove compatibility than to argue with people.
+    - Reversed changelog as per request.
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.1
-Date: 2020.08.16
+Version: 0.3.14
+Date: 2022.03.16
   Changes:
-    - Added increased rocket launchers range for mk2 and mk3, slightly reduced the recipe materials.
+    - Added compatibility with Industrial Revolution 2.
+    - Notice that the laser for the repair beam on the ghost weaver looks slightly glitchy when using industrial revolution, going to bother Resar to make new animations for it.
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.2
-Date: 2020.08.16
+Version: 0.3.13
+Date: 2022.03.16
   Changes:
-    - Changed the base color on placement.
+    - Modified to be only 1 rocket launcher type for mk2 and mk3 which helps resolve the clutter when using aai-programmable vehicles.
+    - Fixed an issue where the aai-programmable ghost weaver does not have ammo.
+    - Fixed a small locale issue for the rocket launcher for mk2 and mk3.
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.3
-Date: 2020.08.17
+Version: 0.3.12
+Date: 2022.02.01
   Changes:
-    - Increased size for the mk2 and mk3 respectively.
-    - Added different icons on the minimap for each version.
-    - Slightly increased stride distance.
-    - Further reduced the materials required for mk2 and mk3.
+    - Adjustable grid size, hp, inventory for vanilla spidertron in mod settings even when using k2 with space exploration. Added by: pavlukivan
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.4
-Date: 2020.08.19
+Version: 0.3.11
+Date: 2022.01.09
   Changes:
-    - Some refactoring. 
-    - Fixed a bug where the craft timer was at 0.5 seconds instead of 10 (bug noticed by hankthesnake).
-    - New thumbnail.
-    - Added Krastorio2 compatibility. 
-    - Added flavor text to research.
+    - Added some of the code from pdunham113 version for Space Exploration compatibility. Added by: GeneralTank
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.5
-Date: 2020.08.20
+Version: 0.3.10
+Date: 2022.01.04
   Changes:
-    - Added a mod setting to use vanilla spidertron sizes for all.
+    - Fixed a Krastorio2 compatibility issue since k2 (1.2.10) and k2assets (1.1.0) are splited now.
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.6
-Date: 2020.08.20
+Version: 0.3.9
+Date: 2021.05.24
   Changes:
-    - Added health regen to SpidertronMK3.
-    - Added mod settings to change grid size.
+    - Made a fix for compatibility with krastorio2 when there are no k2 containers.
+    - Small fix for Rampant Arsenal compatibility.
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.7 
-Date: 2020.08.21
+Version: 0.3.8
+Date: 2021.03.27
   Changes:
-    - Added mod setting to disable burner requirement for all spidertrons if using krastorio2.
-    - Added an UPS improvement for the spidertronmk3 health regen script ( from Xorimuth via GitHub, thank you).
+    - Ghost Weaver will now have batteries / ammo on placement instead of needing to craft them from now on.
+    - Added compatibility with bob's warfare mod.
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.8
-Date: 2020.08.21
+Version: 0.3.7
+Date: 2021.02.24
   Changes:
-    - Reverting back to old code for health-regen until I figure out the non-recoverable error.
+    - Added a check to see if spidertrons are using base colors, yes, you can colour them now (thank you Xorimuth for the hint).
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.9
-Date: 2020.08.21
+Version: 0.3.6
+Date: 2020.11.25
   Changes:
-    - Fixed the non-recoverable error, Did some slight changes to the regen script before the revert, should still use less UPS. 
-    - The MK3 will need to be picked up and placed back down to gain the health regen if using loading from older version <=0.1.5.
+    - Modified to use the new version of factorio 1.1.
+    - Commented some nil values that were affecting compatibility with factorio 1.1.
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.10
-Date: 2020.08.23
+Version: 0.3.5
+Date: 2020.10.4
   Changes:
-    - Added mod setting to disable Spidertron MK3 self-repair feature (that doesn't crash the game hopefully).
+    - Changed the flamethrower turret texture overlay for the Immolator to better reflect its color palette.
+    - Fix for disabling the mk2 spidertron with krastorio.
+    - Added the immolator active skill to fire in a wave pattern originating from the vehicle and going outside.
+    - Removed unused code in the control.lua file.
+    - Added cooldown to the immolator active skill.
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.11
-Date: 2020.08.23
+Version: 0.3.4
+Date: 2020.10.4
   Changes:
-    - Added compatibility for bobvehicleequipment, should be the same as normal spidertron, i might require more feedback on this.
+    - Added purifier flames to the immolator.
+    - Fixed an issue where the ghost weaver repair beam would affect the repair turret mod, it seems we were both using the same naming /shrug.
 ---------------------------------------------------------------------------------------------------
-Version: 0.1.12
-Date: 2020.08.23
+Version: 0.3.3
+Date: 2020.10.1
   Changes:
-    - Added compatibility with vintage-spidertron, that's one cool mod :D .
+    - Several fixes and completions for immolator.
 ---------------------------------------------------------------------------------------------------
-Version: 0.2.0
-Date: 2020.08.23
+Version: 0.3.2
+Date: 2020.09.29
   Changes:
-    - Added spidertron-builder, a new spidertron focused on building without combat abilities, it can be disabled from the mod settings so it doesn't interrupt current gameplays.
-    - Added options to disable MK2 and MK3 spidertrons.
-    - Please note that disabling Spidertron and playing on a save that already has them will remove them from the game without refunding the material cost.
-    - Small refactoring.
-    - Still working on customizable MK4 (wanted to add it to 0.2 but there's a lot of things I still need to modify).
-    - Changed the changelog to show the changelog (sorry, i tried making a tongue twister)
+    - Trying to fix a traceback when the global.immolator table is nil.
+    - Set the immolator to be disabled by default. Won't affect the ppl that already have it on i believe. Reminder that this is just an experimental spider that we were working on.
 ---------------------------------------------------------------------------------------------------
-Version: 0.2.1
-Date: 2020.08.24
+Version: 0.3.1
+Date: 2020.09.23
   Changes:
-    - Fixed a crash occurring when using the spidertron-builder with bobs vehicles equipment(thanks for the heads up aerospacesmith).
-    - Added mod setting to disable bobs vehicle equipment on spidertron-extended spidertrons.
----------------------------------------------------------------------------------------------------
-Version: 0.2.2
-Date: 2020.08.24
-  Changes:
-    - Fixed a crash occurring when using the spidertron-builder with a remote targeted to it in the inventory, to fix this issue an un-usable weapon has been added to it (we might further work on this to add functionality later on)
-    - Modified the minimap icon for spidertron-buider.
----------------------------------------------------------------------------------------------------
-Version: 0.2.3
-Date: 2020.08.26
-  Changes:
-    - Added compatibility with Krastorio2_Spiderleg mod.
----------------------------------------------------------------------------------------------------
-Version: 0.2.4
-Date: 2020.09.08
-  Changes:
-    - Added compatibility with deal-with-it mod.
-    - Added a small change for krastorio2 settings compatibility.
+    - Fixed the textures not scaling properly on lower resolution.
+    - Tried increasing the leg smoke slightly, not sure if it worked or not.
+    - Added prototypes for a new spidertron, you can enable it, BUT be warned this one is a mayhem for both enemies and allies alike also it has a passive and active skill alt+D for active, going to make the player select the bindings for it at some point.
+    - Added setting to disable bobsvehicleequipment on vanilla spidertron.
+    - Added setting to enable bobsequipment + bobsvehicleequipment on spidertrons.
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
 Date: 2020.09.20
@@ -120,88 +103,111 @@ Date: 2020.09.20
     - Added Reaping-ray to the Ghost Weaver, with mod setting to disable it.
     - Ghost Weaver got a new turret on his head, sorry about the laser offset, got no idea how to move it around with the head movement.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.1
-Date: 2020.09.23
+Version: 0.2.4
+Date: 2020.09.08
   Changes:
-    - Fixed the textures not scaling properly on lower resolution.
-    - Tried increasing the leg smoke slightly, not sure if it worked or not.
-    - Added prototypes for a new spidertron, you can enable it, BUT be warned this one is a mayhem for both enemies and allies alike also it has a passive and active skill alt+D for active, going to make the player select the bindings for it at some point.
-    - Added setting to disable bobsvehicleequipment on vanilla spidertron.
-    - Added setting to enable bobsequipment + bobsvehicleequipment on spidertrons.
+    - Added compatibility with deal-with-it mod.
+    - Added a small change for krastorio2 settings compatibility.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.2
-Date: 2020.09.29
+Version: 0.2.3
+Date: 2020.08.26
   Changes:
-    - Trying to fix a traceback when the global.immolator table is nil.
-    - Set the immolator to be disabled by default. Won't affect the ppl that already have it on i believe. Reminder that this is just an experimental spider that we were working on.
+    - Added compatibility with Krastorio2_Spiderleg mod.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.3
-Date: 2020.10.1
+Version: 0.2.2
+Date: 2020.08.24
   Changes:
-    - Several fixes and completions for immolator.
+    - Fixed a crash occurring when using the spidertron-builder with a remote targeted to it in the inventory, to fix this issue an un-usable weapon has been added to it (we might further work on this to add functionality later on)
+    - Modified the minimap icon for spidertron-buider.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.4
-Date: 2020.10.4
+Version: 0.2.1
+Date: 2020.08.24
   Changes:
-    - Added purifier flames to the immolator.
-    - Fixed an issue where the ghost weaver repair beam would affect the repair turret mod, it seems we were both using the same naming /shrug.
+    - Fixed a crash occurring when using the spidertron-builder with bobs vehicles equipment(thanks for the heads up aerospacesmith).
+    - Added mod setting to disable bobs vehicle equipment on spidertron-extended spidertrons.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.5
-Date: 2020.10.4
+Version: 0.2.0
+Date: 2020.08.23
   Changes:
-    - Changed the flamethrower turret texture overlay for the Immolator to better reflect its color palette.
-    - Fix for disabling the mk2 spidertron with krastorio.
-    - Added the immolator active skill to fire in a wave pattern originating from the vehicle and going outside.
-    - Removed unused code in the control.lua file.
-    - Added cooldown to the immolator active skill.
+    - Added spidertron-builder, a new spidertron focused on building without combat abilities, it can be disabled from the mod settings so it doesn't interrupt current gameplays.
+    - Added options to disable MK2 and MK3 spidertrons.
+    - Please note that disabling Spidertron and playing on a save that already has them will remove them from the game without refunding the material cost.
+    - Small refactoring.
+    - Still working on customizable MK4 (wanted to add it to 0.2 but there's a lot of things I still need to modify).
+    - Changed the changelog to show the changelog (sorry, i tried making a tongue twister)
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.6
-Date: 2020.11.25
+Version: 0.1.12
+Date: 2020.08.23
   Changes:
-    - Modified to use the new version of factorio 1.1.
-    - Commented some nil values that were affecting compatibility with factorio 1.1.
+    - Added compatibility with vintage-spidertron, that's one cool mod :D .
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.7
-Date: 2021.02.24
+Version: 0.1.11
+Date: 2020.08.23
   Changes:
-    - Added a check to see if spidertrons are using base colors, yes, you can colour them now (thank you Xorimuth for the hint).
+    - Added compatibility for bobvehicleequipment, should be the same as normal spidertron, i might require more feedback on this.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.8
-Date: 2021.03.27
+Version: 0.1.10
+Date: 2020.08.23
   Changes:
-    - Ghost Weaver will now have batteries / ammo on placement instead of needing to craft them from now on.
-    - Added compatibility with bob's warfare mod.
+    - Added mod setting to disable Spidertron MK3 self-repair feature (that doesn't crash the game hopefully).
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.9
-Date: 2021.05.24
+Version: 0.1.9
+Date: 2020.08.21
   Changes:
-    - Made a fix for compatibility with krastorio2 when there are no k2 containers.
-    - Small fix for Rampant Arsenal compatibility.
+    - Fixed the non-recoverable error, Did some slight changes to the regen script before the revert, should still use less UPS. 
+    - The MK3 will need to be picked up and placed back down to gain the health regen if using loading from older version <=0.1.5.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.10
-Date: 2022.01.04
+Version: 0.1.8
+Date: 2020.08.21
   Changes:
-    - Fixed a Krastorio2 compatibility issue since k2 (1.2.10) and k2assets (1.1.0) are splited now.
+    - Reverting back to old code for health-regen until I figure out the non-recoverable error.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.11
-Date: 2022.01.09
+Version: 0.1.7 
+Date: 2020.08.21
   Changes:
-    - Added some of the code from pdunham113 version for Space Exploration compatibility. Added by: GeneralTank
+    - Added mod setting to disable burner requirement for all spidertrons if using krastorio2.
+    - Added an UPS improvement for the spidertronmk3 health regen script ( from Xorimuth via GitHub, thank you).
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.12
-Date: 2022.02.01
+Version: 0.1.6
+Date: 2020.08.20
   Changes:
-    - Adjustable grid size, hp, inventory for vanilla spidertron in mod settings even when using k2 with space exploration. Added by: pavlukivan
+    - Added health regen to SpidertronMK3.
+    - Added mod settings to change grid size.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.13
-Date: 2022.03.16
+Version: 0.1.5
+Date: 2020.08.20
   Changes:
-    - Modified to be only 1 rocket launcher type for mk2 and mk3 which helps resolve the clutter when using aai-programmable vehicles.
-    - Fixed an issue where the aai-programmable ghost weaver does not have ammo.
-    - Fixed a small locale issue for the rocket launcher for mk2 and mk3.
+    - Added a mod setting to use vanilla spidertron sizes for all.
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.14
-Date: 2022.03.16
+Version: 0.1.4
+Date: 2020.08.19
   Changes:
-    - Added compatibility with Industrial Revolution 2.
-    - Notice that the laser for the repair beam on the ghost weaver looks slightly glitchy when using industrial revolution, going to bother Resar to make new animations for it.
+    - Some refactoring. 
+    - Fixed a bug where the craft timer was at 0.5 seconds instead of 10 (bug noticed by hankthesnake).
+    - New thumbnail.
+    - Added Krastorio2 compatibility. 
+    - Added flavor text to research.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.3
+Date: 2020.08.17
+  Changes:
+    - Increased size for the mk2 and mk3 respectively.
+    - Added different icons on the minimap for each version.
+    - Slightly increased stride distance.
+    - Further reduced the materials required for mk2 and mk3.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+Date: 2020.08.16
+  Changes:
+    - Changed the base color on placement.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+Date: 2020.08.16
+  Changes:
+    - Added increased rocket launchers range for mk2 and mk3, slightly reduced the recipe materials.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2020.08.15
+  Changes:
+    - Initial Release.
+---------------------------------------------------------------------------------------------------
