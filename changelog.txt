@@ -1,3 +1,9 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.3.16
+Date: 2024.01.18
+  Changes:
+    - This is a compatibility patch with Exotic Industries made by Cornbread (thank you for patch), more information is available in the pull request at https://github.com/stefanaonx/spidertron-extended/pull/20.
+---------------------------------------------------------------------------------------------------
 Version: 0.3.15
 Date: 2022.09.18
   Changes:
