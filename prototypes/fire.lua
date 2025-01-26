@@ -18,19 +18,14 @@ purifier_flame.name = "purifier-flame"
     -- --purifier_flame.pictures[x].tint = {r = 0, g = 0, b = 1, a = 1}
 -- end
 -- gonna put a proper for in this at some point
-purifier_flame.pictures[1].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_13.png"
-purifier_flame.pictures[2].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_12.png"
-purifier_flame.pictures[3].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_11.png"
-purifier_flame.pictures[4].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_10.png"
-purifier_flame.pictures[5].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_9.png"
-purifier_flame.pictures[6].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_8.png"
-purifier_flame.pictures[7].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_7.png"
-purifier_flame.pictures[8].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_6.png"
-purifier_flame.pictures[9].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_5.png"
-purifier_flame.pictures[10].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_4.png"
-purifier_flame.pictures[11].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_3.png"
-purifier_flame.pictures[12].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_2.png"
-purifier_flame.pictures[13].filename = "__spidertron-extended__/graphics/purifier_flame/immolator_fire_flame_1.png"
+purifier_flame.pictures[1].filename = "__spidertron-extended__/graphics/purifier_flame/spex-fire-flame-01.png"
+purifier_flame.pictures[2].filename = "__spidertron-extended__/graphics/purifier_flame/spex-fire-flame-02.png"
+purifier_flame.pictures[3].filename = "__spidertron-extended__/graphics/purifier_flame/spex-fire-flame-03.png"
+purifier_flame.pictures[4].filename = "__spidertron-extended__/graphics/purifier_flame/spex-fire-flame-04.png"
+purifier_flame.pictures[5].filename = "__spidertron-extended__/graphics/purifier_flame/spex-fire-flame-01.png"
+purifier_flame.pictures[6].filename = "__spidertron-extended__/graphics/purifier_flame/spex-fire-flame-02.png"
+purifier_flame.pictures[7].filename = "__spidertron-extended__/graphics/purifier_flame/spex-fire-flame-03.png"
+purifier_flame.pictures[8].filename = "__spidertron-extended__/graphics/purifier_flame/spex-fire-flame-04.png"
 
 purifier_flame.initial_lifetime = 120 -- default 120
 purifier_flame.lifetime_increase_by = 600 -- default 150

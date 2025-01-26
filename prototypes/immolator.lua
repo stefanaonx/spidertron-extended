@@ -156,7 +156,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {2.8125 * ground_leg_position, -3.125 * ground_leg_position},
                 leg = "spidertron-immolator-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {0.46875 * leg_scale, -0.6875 * leg_scale},
+                walking_group = 1,
+                mount_position = {0.46875 * leg_scale, -0.6875 * leg_scale}
             },
             -- 4PM
             {
@@ -164,7 +165,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {4 * ground_leg_position, -1.25 * ground_leg_position},
                 leg = "spidertron-immolator-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {0.71875 * leg_scale, -0.3125 * leg_scale},
+                walking_group = 2,
+                mount_position = {0.71875 * leg_scale, -0.3125 * leg_scale}
             },
             -- 2PM
             {
@@ -172,7 +174,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {4 * ground_leg_position, 1.25 * ground_leg_position},
                 leg = "spidertron-immolator-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {0.78125 * leg_scale, 0.125 * leg_scale},
+                walking_group = 1,
+                mount_position = {0.78125 * leg_scale, 0.125 * leg_scale}
             },
             -- 1PM
             {
@@ -180,7 +183,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {2.8125 * ground_leg_position, 3.125 * ground_leg_position},
                 leg = "spidertron-immolator-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {0.46875 * leg_scale, 0.53125 * leg_scale},
+                walking_group = 2,
+                mount_position = {0.46875 * leg_scale, 0.53125 * leg_scale}
             },
             -- 7PM
             {
@@ -188,7 +192,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {-2.8125 * ground_leg_position, -3.125 * ground_leg_position},
                 leg = "spidertron-immolator-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {-0.46875 * leg_scale, -0.6875 * leg_scale},
+                walking_group = 2,
+                mount_position = {-0.46875 * leg_scale, -0.6875 * leg_scale}
             },
             -- 8PM
             {
@@ -196,7 +201,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {-4 * ground_leg_position, -1.25 * ground_leg_position},
                 leg = "spidertron-immolator-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {-0.71875 * leg_scale, -0.3125 * leg_scale},
+                walking_group = 1,
+                mount_position = {-0.71875 * leg_scale, -0.3125 * leg_scale}
             },
             -- 10PM
             {
@@ -204,7 +210,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {-4 * ground_leg_position, 1.25 * ground_leg_position},
                 leg = "spidertron-immolator-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {-0.78125 * leg_scale, 0.125 * leg_scale},
+                walking_group = 2,
+                mount_position = {-0.78125 * leg_scale, 0.125 * leg_scale}
             },
             -- 11PM
             {
@@ -212,7 +219,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {-2.8125 * ground_leg_position, 3.125 * ground_leg_position},
                 leg = "spidertron-immolator-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {-0.46875 * leg_scale, 0.53125 * leg_scale},
+                walking_group = 1,
+                mount_position = {-0.46875 * leg_scale, 0.53125 * leg_scale}
             }
         },
         military_target = 'spidertron-military-target',
@@ -257,22 +265,22 @@ if not settings.startup["vanilla-spidertron-size"].value then
 	
 -- modify the main body size
 	immolator_entity.graphics_set.animation.layers[1].scale = general_scale
-	immolator_entity.graphics_set.animation.layers[1].hr_version.scale = general_hr_scale
+	--immolator_entity.graphics_set.animation.layers[1].hr_version.scale = general_hr_scale
 
 	immolator_entity.graphics_set.animation.layers[2].scale = general_scale
-	immolator_entity.graphics_set.animation.layers[2].hr_version.scale = general_hr_scale
+	--immolator_entity.graphics_set.animation.layers[2].hr_version.scale = general_hr_scale
 
 	immolator_entity.graphics_set.base_animation.layers[1].scale = general_scale
-	immolator_entity.graphics_set.base_animation.layers[1].hr_version.scale = general_hr_scale
+	--immolator_entity.graphics_set.base_animation.layers[1].hr_version.scale = general_hr_scale
 
 	immolator_entity.graphics_set.base_animation.layers[2].scale = general_scale
-	immolator_entity.graphics_set.base_animation.layers[2].hr_version.scale = general_hr_scale
+	--immolator_entity.graphics_set.base_animation.layers[2].hr_version.scale = general_hr_scale
 
 	immolator_entity.graphics_set.shadow_animation.scale = general_scale
-	immolator_entity.graphics_set.shadow_animation.hr_version.scale = general_hr_scale
+	--immolator_entity.graphics_set.shadow_animation.hr_version.scale = general_hr_scale
 
 	immolator_entity.graphics_set.shadow_base_animation.scale = general_scale
-	immolator_entity.graphics_set.shadow_base_animation.hr_version.scale = general_hr_scale
+	--immolator_entity.graphics_set.shadow_base_animation.hr_version.scale = general_hr_scale
 end
 
 data:extend{

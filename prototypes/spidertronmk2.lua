@@ -108,6 +108,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 leg = "spidertronmk2-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
                 mount_position = {0.46875 * 1.2, -0.6875 * 1.2},
+                walking_group = 1
             },
             -- 4PM
             {
@@ -116,6 +117,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 leg = "spidertronmk2-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
                 mount_position = {0.71875 * 1.2, -0.3125 * 1.2},
+                walking_group = 2
             },
             -- 2PM
             {
@@ -124,6 +126,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 leg = "spidertronmk2-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
                 mount_position = {0.78125 * 1.2, 0.125 * 1.2},
+                walking_group = 1
             },
             -- 1PM
             {
@@ -132,6 +135,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 leg = "spidertronmk2-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
                 mount_position = {0.46875 * 1.2, 0.53125 * 1.2},
+                walking_group = 2
             },
             -- 7PM
             {
@@ -140,6 +144,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 leg = "spidertronmk2-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
                 mount_position = {-0.46875 * 1.2, -0.6875 * 1.2},
+                walking_group = 2
             },
             -- 8PM
             {
@@ -148,6 +153,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 leg = "spidertronmk2-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
                 mount_position = {-0.71875 * 1.2, -0.3125 * 1.2},
+                walking_group = 1
             },
             -- 10PM
             {
@@ -156,6 +162,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 leg = "spidertronmk2-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
                 mount_position = {-0.78125 * 1.2, 0.125 * 1.2},
+                walking_group = 2
             },
             -- 11PM
             {
@@ -164,6 +171,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 leg = "spidertronmk2-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
                 mount_position = {-0.46875 * 1.2, 0.53125 * 1.2},
+                walking_group = 1
             }
         },
         military_target = 'spidertron-military-target',
@@ -208,22 +216,22 @@ if not settings.startup["vanilla-spidertron-size"].value then
 	
 -- modify the main body size
 	spidertronmk2_entity.graphics_set.animation.layers[1].scale = 1.20
-	spidertronmk2_entity.graphics_set.animation.layers[1].hr_version.scale = 0.60
+	--spidertronmk2_entity.graphics_set.animation.layers[1].hr_version.scale = 0.60
 
 	spidertronmk2_entity.graphics_set.animation.layers[2].scale = 1.20
-	spidertronmk2_entity.graphics_set.animation.layers[2].hr_version.scale = 0.60
+	--spidertronmk2_entity.graphics_set.animation.layers[2].hr_version.scale = 0.60
 
 	spidertronmk2_entity.graphics_set.base_animation.layers[1].scale = 1.20
-	spidertronmk2_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.60
+	--spidertronmk2_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.60
 
 	spidertronmk2_entity.graphics_set.base_animation.layers[2].scale = 1.20
-	spidertronmk2_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.60
+	--spidertronmk2_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.60
 
 	spidertronmk2_entity.graphics_set.shadow_animation.scale = 1.20
-	spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
+	--spidertronmk2_entity.graphics_set.shadow_animation.hr_version.scale = 0.60
 
 	spidertronmk2_entity.graphics_set.shadow_base_animation.scale = 1.20
-	spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
+	--spidertronmk2_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.60
 end
 
 data:extend{

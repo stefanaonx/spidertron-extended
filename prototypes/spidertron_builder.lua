@@ -145,7 +145,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {2.8125, -3.125},
                 leg = "spidertron-builder-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {0.46875 * 1, -0.6875 * 1},
+                walking_group = 1,
+                mount_position = {0.46875 * 1, -0.6875 * 1}
             },
             -- 4PM
             {
@@ -153,7 +154,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {4, -1.25},
                 leg = "spidertron-builder-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {0.71875 * 1, -0.3125 * 1},
+                walking_group = 2,
+                mount_position = {0.71875 * 1, -0.3125 * 1}
             },
             -- 2PM
             {
@@ -161,7 +163,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {4, 1.25},
                 leg = "spidertron-builder-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {0.78125 * 1, 0.125 * 1},
+                walking_group = 1,
+                mount_position = {0.78125 * 1, 0.125 * 1}
             },
             -- 1PM
             {
@@ -169,7 +172,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {2.8125, 3.125},
                 leg = "spidertron-builder-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {0.46875 * 1, 0.53125 * 1},
+                walking_group = 2,
+                mount_position = {0.46875 * 1, 0.53125 * 1}
             },
             -- 7PM
             {
@@ -177,7 +181,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {-2.8125, -3.125},
                 leg = "spidertron-builder-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {-0.46875 * 1, -0.6875 * 1},
+                walking_group = 2,
+                mount_position = {-0.46875 * 1, -0.6875 * 1}
             },
             -- 8PM
             {
@@ -185,7 +190,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {-4, -1.25},
                 leg = "spidertron-builder-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {-0.71875 * 1, -0.3125 * 1},
+                walking_group = 1,
+                mount_position = {-0.71875 * 1, -0.3125 * 1}
             },
             -- 10PM
             {
@@ -193,7 +199,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {-4, 1.25},
                 leg = "spidertron-builder-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {-0.78125 * 1, 0.125 * 1},
+                walking_group = 2,
+                mount_position = {-0.78125 * 1, 0.125 * 1}
             },
             -- 11PM
             {
@@ -201,7 +208,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 ground_position = {-2.8125, 3.125},
                 leg = "spidertron-builder-leg",
                 leg_hit_the_ground_trigger = leg_hit_the_ground_trigger,
-                mount_position = {-0.46875 * 1, 0.53125 * 1},
+                walking_group = 1,
+                mount_position = {-0.46875 * 1, 0.53125 * 1}
             }
         },
         military_target = 'spidertron-military-target',

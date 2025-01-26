@@ -5,16 +5,13 @@ if not settings.startup["disable-spidertronmk2"].value then
         name = "spidertronmk2",
         enabled = false,
         ingredients = {
-            {"spidertron",1},
-            {"low-density-structure",150},
-            {"fusion-reactor-equipment",2},
-            {"rocket-control-unit",20},
-            {"beacon",5},
-            {"speed-module-3",5},
-            {"effectivity-module-3",5}
+            {type = "item", name = "spidertron", amount = 1},
+            {type = "item", name = "tungsten-plate", amount = 50},
+            {type = "item", name = "carbon-fiber", amount = 50},
+            {type = "item", name = "supercapacitor", amount = 50}
         },
         energy_required = 10,
-        result = "spidertronmk2"
+        results = {{type="item", name="spidertronmk2", amount=1}}
     }
     
     data:extend{
@@ -25,24 +22,18 @@ end
 -- mk3 recipe
 if not settings.startup["disable-spidertronmk3"].value then
     local ingr = {
-        {"spidertronmk2",1},
-        {"low-density-structure",150},
-        {"fusion-reactor-equipment",2},
-        {"beacon",10},
-        {"speed-module-3",10},
-        {"effectivity-module-3",10},
-        {"satellite",1}
+        {type = "item", name = "spidertronmk2", amount = 1},
+        {type = "item", name = "fluoroketone-cold", amount = 40},
+        {type = "item", name = "lithium-plate", amount = 40},
+        {type = "item", name = "quantum-processor", amount = 2}
     }
     if settings.startup["disable-spidertronmk2"].value then
         -- if spidertronmk2 disabled use this recipe
         ingr = {
-            {"spidertron",1},
-            {"low-density-structure",150},
-            {"fusion-reactor-equipment",2},
-            {"beacon",10},
-            {"speed-module-3",10},
-            {"effectivity-module-3",10},
-            {"satellite",1}
+            {type = "item", name = "spidertron", amount = 1},
+            {type = "item", name = "fluoroketone-cold", amount = 40},
+            {type = "item", name = "lithium-plate", amount = 40},
+            {type = "item", name = "quantum-processor", amount = 2}
         }
     end
     local spidertronmk3_recipe = {
@@ -51,7 +42,7 @@ if not settings.startup["disable-spidertronmk3"].value then
         enabled = false,
         ingredients = ingr,
         energy_required = 10,
-        result = "spidertronmk3"
+        results = {{type="item", name="spidertronmk3", amount=1}}
     }
     data:extend{
         spidertronmk3_recipe
@@ -65,17 +56,17 @@ if not settings.startup["disable-spidertron-builder"].value then
         name = "spidertron-builder",
         enabled = false,
         ingredients = {
-            {"raw-fish",1},
-            {"rocket-control-unit",16},
-            {"low-density-structure",150},
-            {"productivity-module-3",10},
-            {"steel-chest",10},
-            {"construction-robot",50},
-            {"radar",50},
-            {"laser-turret",2}
+            {type = "item", name = "raw-fish", amount = 1},
+            {type = "item", name = "rocket-control-unit", amount = 16},
+            {type = "item", name = "low-density-structure", amount = 150},
+            {type = "item", name = "productivity-module-3", amount = 10},
+            {type = "item", name = "steel-chest", amount = 10},
+            {type = "item", name = "construction-robot", amount = 50},
+            {type = "item", name = "radar", amount = 50},
+            {type = "item", name = "laser-turret", amount = 2}
         },
         energy_required = 10,
-        result = "spidertron-builder"
+        results = {{type="item", name="spidertron-builder", amount=1}}
     }
 
     data:extend{
@@ -90,17 +81,17 @@ if not settings.startup["disable-immolator"].value then
         name = "immolator",
         enabled = false,
         ingredients = {
-            {"raw-fish",1},
-            {"refined-concrete",200},
-            {"low-density-structure",150},
-            {"flamethrower",1},
-            {"storage-tank",1},
-            {"fusion-reactor-equipment",4},
-            {"exoskeleton-equipment",8},
-            {"radar",2}
+            {type = "item", name = "raw-fish", amount = 1},
+            {type = "item", name = "refined-concrete", amount = 200},
+            {type = "item", name = "low-density-structure", amount = 150},
+            {type = "item", name = "flamethrower", amount = 1},
+            {type = "item", name = "storage-tank", amount = 1},
+            {type = "item", name = "fusion-reactor-equipment", amount = 4},
+            {type = "item", name = "exoskeleton-equipment", amount = 8},
+            {type = "item", name = "radar", amount = 2}
         },
         energy_required = 10,
-        result = "immolator"
+        results = {{type="item", name="immolator", amount=1}}
     }
 
     data:extend{

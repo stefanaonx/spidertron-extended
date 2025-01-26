@@ -8,14 +8,17 @@ local repair_beam = table_deepcopy(data.raw['beam']['laser-beam'])
 repair_beam.name = "weaver-repair-beam"
 
 
-repair_beam.head.filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png"
+repair_beam.graphics_set.beam.head.layers[1].filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png"
 
-repair_beam.tail.filename = "__spidertron-extended__/graphics/spidertron_builder_laser_end_HD_1.png"
-repair_beam.tail.width = 110
-repair_beam.tail.height = 62
-repair_beam.tail.frame_count = 8
+repair_beam.graphics_set.beam.tail.layers[1].filename = "__spidertron-extended__/graphics/spidertron_builder_laser_end_HD_1.png"
+--repair_beam.tail.width = 110
+--repair_beam.tail.height = 62
+--repair_beam.tail.frame_count = 8
+
+repair_beam.graphics_set.beam.body[1].layers[1].filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png"
 
 -- tried replacing for the body how is it up but doesn't work
+--[[
 repair_beam.body = {
     {
         filename = "__spidertron-extended__/graphics/spidertron_builder_laser_body_HD_1.png",
@@ -31,6 +34,9 @@ repair_beam.body = {
         blend_mode = laser_beam_blend_mode
     }
 }
+--]]
+
+
 
 -- the values under here are the same as original laser beam
 -- this part can be cleaned up / removed if not used
@@ -112,9 +118,9 @@ data:extend{
         name = "retrofitted-battery",
         icon = "__spidertron-extended__/graphics/spidertron_builder_energy_cell_repair_1.png",
         icon_size = 64,
-        flags = {"hidden"},
+        hidden = true,
+        ammo_category = "retrofitted-battery",
         ammo_type = {
-            category = "retrofitted-battery",
             action = {
                 type = "direct",
                 action_delivery = {
@@ -129,16 +135,20 @@ data:extend{
         magazine_size = 1, --1
         subgroup = "ammo",
         order = "pe[energy-charges]-c[laser-rifle]",
-        stack_size = 1 --20
+        inventory_move_sound = item_sounds.mechanical_inventory_move,
+        pick_sound = item_sounds.mechanical_inventory_pickup,
+        drop_sound = item_sounds.mechanical_inventory_move,
+        stack_size = 1, --20
+        weight = 10*kg
     },
     {
         type = "ammo",
         name = "retrofitted-battery2",
         icon = "__spidertron-extended__/graphics/spidertron_builder_energy_cell_repair_3.png",
         icon_size = 64,
-        flags = {"hidden"},
+        hidden = true,
+        ammo_category = "retrofitted-battery2",
         ammo_type = {
-            category = "retrofitted-battery2",
             action = {
                 type = "direct",
                 action_delivery = {
@@ -153,7 +163,11 @@ data:extend{
         magazine_size = 1, --1
         subgroup = "ammo",
         order = "pe[energy-charges]-c[laser-rifle]",
-        stack_size = 1 --20
+        inventory_move_sound = item_sounds.mechanical_inventory_move,
+        pick_sound = item_sounds.mechanical_inventory_pickup,
+        drop_sound = item_sounds.mechanical_inventory_move,
+        stack_size = 1, --20
+        weight = 10*kg
     }
 }
 
@@ -163,22 +177,22 @@ local retrofitted_battery = {
     name = "retrofitted-battery",
     enabled = false,
     ingredients = {
-        {"fusion-reactor-equipment", 1},
-        {"rocket-control-unit", 5}
+        {type = "item", name = "fusion-reactor-equipment", amount = 1},
+        {type = "item", name = "productivity-module-2", amount = 5}
     },
     energy_required = 10,
-    result = "retrofitted-battery"
+    results = {{type="item", name="retrofitted-battery", amount=1}}
 }
 local retrofitted_battery2 = {
     type = "recipe",
     name = "retrofitted-battery2",
     enabled = false,
     ingredients = {
-        {"fusion-reactor-equipment", 1},
-        {"rocket-control-unit", 5}
+        {type = "item", name = "fusion-reactor-equipment", amount = 1},
+        {type = "item", name = "productivity-module-2", amount = 5}
     },
     energy_required = 10,
-    result = "retrofitted-battery2"
+    results = {{type="item", name="retrofitted-battery2", amount=1}}
 }
 
 
