@@ -23,7 +23,7 @@ end
 if not settings.startup["disable-spidertronmk3"].value then
     local ingr = {
         {type = "item", name = "spidertronmk2", amount = 1},
-        {type = "item", name = "fluoroketone-cold", amount = 40},
+        {type = "fluid", name = "fluoroketone-cold", amount = 40},
         {type = "item", name = "lithium-plate", amount = 40},
         {type = "item", name = "quantum-processor", amount = 2}
     }
@@ -31,7 +31,7 @@ if not settings.startup["disable-spidertronmk3"].value then
         -- if spidertronmk2 disabled use this recipe
         ingr = {
             {type = "item", name = "spidertron", amount = 1},
-            {type = "item", name = "fluoroketone-cold", amount = 40},
+            {type = "fluid", name = "fluoroketone-cold", amount = 40},
             {type = "item", name = "lithium-plate", amount = 40},
             {type = "item", name = "quantum-processor", amount = 2}
         }
@@ -39,6 +39,7 @@ if not settings.startup["disable-spidertronmk3"].value then
     local spidertronmk3_recipe = {
         type = "recipe",
         name = "spidertronmk3",
+        category = "crafting-with-fluid",
         enabled = false,
         ingredients = ingr,
         energy_required = 10,
@@ -56,14 +57,13 @@ if not settings.startup["disable-spidertron-builder"].value then
         name = "spidertron-builder",
         enabled = false,
         ingredients = {
-            {type = "item", name = "raw-fish", amount = 1},
-            {type = "item", name = "rocket-control-unit", amount = 16},
-            {type = "item", name = "low-density-structure", amount = 150},
+            {type = "item", name = "spidertron", amount = 1},
+            {type = "item", name = "tungsten-plate", amount = 50},
             {type = "item", name = "productivity-module-3", amount = 10},
             {type = "item", name = "steel-chest", amount = 10},
-            {type = "item", name = "construction-robot", amount = 50},
-            {type = "item", name = "radar", amount = 50},
-            {type = "item", name = "laser-turret", amount = 2}
+            {type = "item", name = "construction-robot", amount = 10},
+            {type = "item", name = "radar", amount = 5},
+            {type = "item", name = "laser-turret", amount = 2},
         },
         energy_required = 10,
         results = {{type="item", name="spidertron-builder", amount=1}}

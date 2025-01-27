@@ -4,6 +4,7 @@ if settings.startup["disable-spidertronmk2"].value then
 end
 
 require "util"
+require "__spidertron-extended__.resistance_data"
 local table_deepcopy = util.table.deepcopy
 
 local mk2_inv_size = settings.startup["spidertronmk2-invsize"].value
@@ -43,43 +44,7 @@ spidertronmk2_entity.minable.result = "spidertronmk2"
 spidertronmk2_entity.max_health = mk2_hp
 spidertronmk2_entity.inventory_size = mk2_inv_size
 spidertronmk2_entity.equipment_grid = "spidertronmk2-grid"
-spidertronmk2_entity.resistances = {
-    {
-        type = "acid",
-        decrease = 0,
-        percent = 75
-    },
-    {
-        type = "electric",
-        decrease = 0,
-        percent = 75
-    },
-    {
-        type = "explosion",
-        decrease = 60,
-        percent = 80
-    },
-    {
-        type = "fire",
-        decrease = 20,
-        percent = 65
-    },
-    {
-        type = "impact",
-        decrease = 50,
-        percent = 80
-    },
-    {
-        type = "laser",
-        decrease = 0,
-        percent = 70
-    },
-    {
-        type = "physical",
-        decrease = 20,
-        percent = 65
-    }
-}
+spidertronmk2_entity.resistances = table_deepcopy(spidertronmk2_resistances)
 spidertronmk2_entity.chunk_exploration_radius = 5
 spidertronmk2_entity.automatic_weapon_cycling = true
 spidertronmk2_entity.guns = {
@@ -175,43 +140,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
             }
         },
         military_target = 'spidertron-military-target',
-        resistances = {
-            {
-                type = "acid",
-                decrease = 0,
-                percent = 75
-            },
-            {
-                type = "electric",
-                decrease = 0,
-                percent = 75
-            },
-            {
-                type = "explosion",
-                decrease = 60,
-                percent = 80
-            },
-            {
-                type = "fire",
-                decrease = 20,
-                percent = 65
-            },
-            {
-                type = "impact",
-                decrease = 50,
-                percent = 80
-            },
-            {
-                type = "laser",
-                decrease = 0,
-                percent = 70
-            },
-            {
-                type = "physical",
-                decrease = 20,
-                percent = 65
-            }
-        }
+        resistances = table_deepcopy(spidertronmk2_resistances)
     }
 	
 -- modify the main body size

@@ -4,6 +4,7 @@ if settings.startup["disable-spidertron-builder"].value then
 end
 
 require "util"
+require "__spidertron-extended__.resistance_data"
 local table_deepcopy = util.table.deepcopy
 
 local builder_inv_size = settings.startup["spidertron-builder-invsize"].value
@@ -42,43 +43,7 @@ spidertron_builder_entity.minable.result = "spidertron-builder"
 spidertron_builder_entity.max_health = builder_hp
 spidertron_builder_entity.inventory_size = builder_inv_size
 spidertron_builder_entity.equipment_grid = "spidertron-builder-grid"
-spidertron_builder_entity.resistances = {
-    {
-        type = "acid",
-        decrease = 0,
-        percent = 95
-    },
-    {
-        type = "electric",
-        decrease = 0,
-        percent = 95
-    },
-    {
-        type = "explosion",
-        decrease = 20,
-        percent = 50
-    },
-    {
-        type = "fire",
-        decrease = 30,
-        percent = 80
-    },
-    {
-        type = "impact",
-        decrease = 50,
-        percent = 80
-    },
-    {
-        type = "laser",
-        decrease = 0,
-        percent = 70
-    },
-    {
-        type = "physical",
-        decrease = 15,
-        percent = 60
-    }
-}
+spidertron_builder_entity.resistances = table_deepcopy(spidertron_builder_resistances)
 spidertron_builder_entity.chunk_exploration_radius = 7
 spidertron_builder_entity.automatic_weapon_cycling = false
 
@@ -213,43 +178,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
             }
         },
         military_target = 'spidertron-military-target',
-        resistances = {
-            {
-                type = "acid",
-                decrease = 0,
-                percent = 95
-            },
-            {
-                type = "electric",
-                decrease = 0,
-                percent = 95
-            },
-            {
-                type = "explosion",
-                decrease = 20,
-                percent = 50
-            },
-            {
-                type = "fire",
-                decrease = 30,
-                percent = 80
-            },
-            {
-                type = "impact",
-                decrease = 50,
-                percent = 80
-            },
-            {
-                type = "laser",
-                decrease = 0,
-                percent = 70
-            },
-            {
-                type = "physical",
-                decrease = 15,
-                percent = 60
-            }
-        }
+        resistances = table_deepcopy(spidertron_builder_resistances)
     }
 end
 

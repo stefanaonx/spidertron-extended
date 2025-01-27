@@ -28,6 +28,16 @@ function check_spider_colors(colors)
 end
 
 
+script.on_event(defines.events.on_entity_damaged,
+function(event)
+    if event.entity.name == "immolator" then
+        if event.damage_type.name == "fire" then
+            -- event.entity.health = event.entity.health + event.final_damage_amount
+        end
+    end
+end)
+
+
 -- script to modify the spidertronmk2 and spidertronmk3 color on placement
 script.on_event(defines.events.on_built_entity,
 function(event)
@@ -37,24 +47,24 @@ function(event)
         ["b"] = 0,
         ["a"] = 0.5
     }
-    if event.created_entity.name == "spidertronmk2" or
-        event.created_entity.name == "spidertronmk2-spidertronmk2-rocket-launcher-1" then
-        local spidertronmk2 = event.created_entity
+    if event.entity.name == "spidertronmk2" or
+        event.entity.name == "spidertronmk2-spidertronmk2-rocket-launcher-1" then
+        local spidertronmk2 = event.entity
         if check_spider_colors(spidertronmk2.color) then
             spidertronmk2.color = {1.0, 0, 0, 0.5}
         end
-    elseif event.created_entity.name == "spidertronmk3" or
-        event.created_entity.name == "spidertronmk3-spidertronmk3-rocket-launcher-1" then
+    elseif event.entity.name == "spidertronmk3" or
+        event.entity.name == "spidertronmk3-spidertronmk3-rocket-launcher-1" then
 
-        local spidertronmk3 = event.created_entity
+        local new_spidertronmk3 = event.entity
         -- game.print(dump(spidertronmk3.color))
-        if check_spider_colors(spidertronmk3.color) then
-            spidertronmk3.color = {0.5, 0, 0.5, 0.5}
+        if check_spider_colors(new_spidertronmk3.color) then
+            new_spidertronmk3.color = {0.5, 0, 0.5, 0.5}
         end
         -- when spidertronmk3 is created add it to the table
-        table.insert(global.spidertronmk3, spidertronmk3)
-    elseif event.created_entity.name == "spidertron-builder" then
-        local spidertron_builder = event.created_entity
+        table.insert(spidertronmk3, new_spidertronmk3)
+    elseif event.entity.name == "spidertron-builder" then
+        local spidertron_builder = event.entity
         if check_spider_colors(spidertron_builder.color) then
             spidertron_builder.color = {1, 1, 1, 0.5}
         end
@@ -62,32 +72,32 @@ function(event)
         -- adding the batteries automatically on placement
         spidertron_builder.insert({name="retrofitted-battery"})
         spidertron_builder.insert({name="retrofitted-battery2"})
-    elseif event.created_entity.name == "spidertron-builder-spidertron-experimental-laser" then
-        local spidertron_builder = event.created_entity
+    elseif event.entity.name == "spidertron-builder-spidertron-experimental-laser" then
+        local spidertron_builder = event.entity
         if check_spider_colors(spidertron_builder.color) then
             spidertron_builder.color = {1, 1, 1, 0.5}
         end
         -- game.print(spidertron_builder.get_inventory)
         -- adding the batteries automatically on placement
         spidertron_builder.insert({name="retrofitted-battery"})
-    elseif event.created_entity.name == "spidertron-builder-spidertron-experimental-laser2" then
-        local spidertron_builder = event.created_entity
+    elseif event.entity.name == "spidertron-builder-spidertron-experimental-laser2" then
+        local spidertron_builder = event.entity
         if check_spider_colors(spidertron_builder.color) then
             spidertron_builder.color = {1, 1, 1, 0.5}
         end
         -- game.print(spidertron_builder.get_inventory)
         -- adding the batteries automatically on placement
         spidertron_builder.insert({name="retrofitted-battery2"})
-    elseif event.created_entity.name == "immolator" or
-        event.created_entity.name == "immolator-spidertron-immolator-flamethrower" then
-        if global.immolator == nil then
-            global.immolator = {}
+    elseif event.entity.name == "immolator" or
+        event.entity.name == "immolator-spidertron-immolator-flamethrower" then
+        if immolator == nil then
+            immolator = {}
         end
-        local immolator = event.created_entity
-        if check_spider_colors(immolator.color) then
-            immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
+        local new_immolator = event.entity
+        if check_spider_colors(new_immolator.color) then
+            new_immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
         end
-        table.insert(global.immolator, immolator)
+        table.insert(immolator, new_immolator)
         -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}     
     end
 end)
@@ -151,16 +161,16 @@ function(event)
 end)
 --]]
 
-function cooldown(seconds, cid)
-    if global.cooldown == nil then
-        global.cooldown = {}
+function player_cooldown(seconds, cid)
+    if cooldown == nil then
+        cooldown = {}
     end
     something = {
         cooldown = seconds,
         cid = cid
     }
     -- basic id to know who's cooldown is it
-    table.insert(global.cooldown, something)
+    table.insert(cooldown, something)
 end
 
 
@@ -194,31 +204,31 @@ end
 script.on_event("immolator-active1", function(event)
     -- define a basic variable to append with all the data
     --cheap fix for the smart toggle, this will need refactoring later
-    if global.smarttoggle == nil then
-        global.smarttoggle = {}
+    if smarttoggle == nil then
+        smarttoggle = {}
     end
-    if global.smarttoggle.data == nil then    
-        global.smarttoggle.data = {}
+    if smarttoggle.data == nil then    
+        smarttoggle.data = {}
     end
     player_id = event.player_index
     player = game.get_player(event.player_index)
     vehicle = player.vehicle
     local is_it_pressed = false
-    for x in pairs(global.smarttoggle.data) do
-        if global.smarttoggle.data[x].player_id == player_id then
+    for x in pairs(smarttoggle.data) do
+        if smarttoggle.data[x].player_id == player_id then
             is_it_pressed = true
         end
     end
     
-    if global.cooldown == nil then
-        global.cooldown = {}
+    if cooldown == nil then
+        cooldown = {}
     end
     
     local cooldown_pl = false
-    for x in pairs(global.cooldown) do
-        if global.cooldown == {} then
+    for x in pairs(cooldown) do
+        if cooldown == {} then
             cooldown_pl = false
-        elseif global.cooldown[x].cid == player_id then
+        elseif cooldown[x].cid == player_id then
             cooldown_pl = true
         end
     end
@@ -233,9 +243,9 @@ script.on_event("immolator-active1", function(event)
             something.player_id = player_id
             
             -- add the cooldown
-            cooldown(3, player_id)
+            player_cooldown(3, player_id)
             -- add the fire-wave starting
-            table.insert(global.smarttoggle.data, something)
+            table.insert(smarttoggle.data, something)
             -- game.print("added the table")
         end
     end
@@ -244,40 +254,40 @@ end)
 
 script.on_nth_tick(6, function(event)
     --cheap fix for the smart toggle, this will need refactoring later
-    if global.smarttoggle == nil then
-        global.smarttoggle = {}
+    if smarttoggle == nil then
+        smarttoggle = {}
     end
-    if global.smarttoggle.data == nil then    
-        global.smarttoggle.data = {}
+    if smarttoggle.data == nil then    
+        smarttoggle.data = {}
     end
     -- script for fire_wave
     -- this might kill ups, also i have no idea how multiplayer will handle
-    for x in pairs(global.smarttoggle.data) do
+    for x in pairs(smarttoggle.data) do
         -- writing whiles are so hard ... (sarcastic)
-        if global.smarttoggle.data[x].active_stage == 1 then
-            global.smarttoggle.data[x].active_stage = 2
-            fire_wave(global.smarttoggle.data[x].vehicle, 3)
-        elseif global.smarttoggle.data[x].active_stage == 2 then
-            global.smarttoggle.data[x].active_stage = 3
-            fire_wave(global.smarttoggle.data[x].vehicle, 5)
-        elseif global.smarttoggle.data[x].active_stage == 3 then
-            global.smarttoggle.data[x].active_stage = 4
-            fire_wave(global.smarttoggle.data[x].vehicle, 7)
-        elseif global.smarttoggle.data[x].active_stage == 4 then
-            global.smarttoggle.data[x].active_stage = 5
-            fire_wave(global.smarttoggle.data[x].vehicle, 9)
-        elseif global.smarttoggle.data[x].active_stage == 5 then
-            global.smarttoggle.data[x].active_stage = 6
-            fire_wave(global.smarttoggle.data[x].vehicle, 11)
-        elseif global.smarttoggle.data[x].active_stage == 6 then
-            global.smarttoggle.data[x].active_stage = 7
-            fire_wave(global.smarttoggle.data[x].vehicle, 13)
-        elseif global.smarttoggle.data[x].active_stage == 7 then
-            global.smarttoggle.data[x].active_stage = 99 --exit stage
-            fire_wave(global.smarttoggle.data[x].vehicle, 15)
+        if smarttoggle.data[x].active_stage == 1 then
+            smarttoggle.data[x].active_stage = 2
+            fire_wave(smarttoggle.data[x].vehicle, 3)
+        elseif smarttoggle.data[x].active_stage == 2 then
+            smarttoggle.data[x].active_stage = 3
+            fire_wave(smarttoggle.data[x].vehicle, 5)
+        elseif smarttoggle.data[x].active_stage == 3 then
+            smarttoggle.data[x].active_stage = 4
+            fire_wave(smarttoggle.data[x].vehicle, 7)
+        elseif smarttoggle.data[x].active_stage == 4 then
+            smarttoggle.data[x].active_stage = 5
+            fire_wave(smarttoggle.data[x].vehicle, 9)
+        elseif smarttoggle.data[x].active_stage == 5 then
+            smarttoggle.data[x].active_stage = 6
+            fire_wave(smarttoggle.data[x].vehicle, 11)
+        elseif smarttoggle.data[x].active_stage == 6 then
+            smarttoggle.data[x].active_stage = 7
+            fire_wave(smarttoggle.data[x].vehicle, 13)
+        elseif smarttoggle.data[x].active_stage == 7 then
+            smarttoggle.data[x].active_stage = 99 --exit stage
+            fire_wave(smarttoggle.data[x].vehicle, 15)
             -- remove the table here somehow
-            table.remove(global.smarttoggle.data, x)
-            -- for y in pairs(global.smarttoggle.data) do
+            table.remove(smarttoggle.data, x)
+            -- for y in pairs(smarttoggle.data) do
                 -- game.print(y)
             -- end
         end
@@ -289,33 +299,33 @@ script.on_nth_tick(60, function(event)
     -- 60 ticks = 1 second
     -- compromising for version fixing
     -- i doubt this would have such a large impact on ups
-    if global.spidertronmk3 == nil then
-        global.spidertronmk3 = {}
+    if spidertronmk3 == nil then
+        spidertronmk3 = {}
     end
     
     -- adding these lines for compatibility with older saves
-    global.spidertronmk3_health_regen = 15
+    spidertronmk3_health_regen = 15
     if settings.startup["disable-health-regenmk3"].value then
-        global.spidertronmk3_health_regen = 0
+        spidertronmk3_health_regen = 0
     end
     
-    for key, spidertronmk3 in pairs(global.spidertronmk3) do
+    for key, spidertronmk3 in pairs(spidertronmk3) do
         if spidertronmk3.valid then
             -- i want to try add this in a setting
-            spidertronmk3.health = spidertronmk3.health + global.spidertronmk3_health_regen
+            spidertronmk3.health = spidertronmk3.health + spidertronmk3_health_regen
         else
-            table.remove(global.spidertronmk3, key)
+            table.remove(spidertronmk3, key)
         end
     end
     
     -- cooldown testing
-    if not (global.cooldown == nil) then
-        -- game.print(dump(global.cooldown))
-        for x in pairs(global.cooldown) do
-            if global.cooldown[x].cooldown > 0 then
-                global.cooldown[x].cooldown = global.cooldown[x].cooldown - 1
+    if not (cooldown == nil) then
+        -- game.print(dump(cooldown))
+        for x in pairs(cooldown) do
+            if cooldown[x].cooldown > 0 then
+                cooldown[x].cooldown = cooldown[x].cooldown - 1
             else
-                table.remove(global.cooldown, x)
+                table.remove(cooldown, x)
             end
         end
     end
@@ -324,15 +334,15 @@ end)
 
 script.on_init(function()
     -- declare global immolator on init
-    global.cooldown = {}
-    global.smarttoggle = {}
-    global.smarttoggle.data = {}
-    global.immolator = {}
-    global.player = {}
+    cooldown = {}
+    smarttoggle = {}
+    smarttoggle.data = {}
+    immolator = {}
+    player = {}
     -- declare global spidertronmk3 on init
-    global.spidertronmk3 = {}
-    global.spidertronmk3_health_regen = 15
+    spidertronmk3 = {}
+    spidertronmk3_health_regen = 15
     if settings.startup["disable-health-regenmk3"].value then
-        global.spidertronmk3_health_regen = 0
+        spidertronmk3_health_regen = 0
     end
 end)

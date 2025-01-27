@@ -4,8 +4,9 @@ if settings.startup["disable-immolator"].value then
 end
 
 require "util"
+require "__spidertron-extended__.resistance_data"
 local table_deepcopy = util.table.deepcopy
-
+local imres = table_deepcopy(immolator_resistances)
 local immolator_inv_size = settings.startup["immolator-invsize"].value
 local immolator_hp = settings.startup["immolator-hp"].value
 
@@ -50,43 +51,7 @@ immolator_entity.minable.result = "immolator"
 immolator_entity.max_health = immolator_hp
 immolator_entity.inventory_size = immolator_inv_size
 immolator_entity.equipment_grid = "immolator-grid"
-immolator_entity.resistances = {
-    {
-        type = "acid",
-        decrease = 0,
-        percent = 90
-    },
-    {
-        type = "electric",
-        decrease = 0,
-        percent = 70
-    },
-    {
-        type = "explosion",
-        decrease = 15,
-        percent = 70
-    },
-    {
-        type = "fire",
-        decrease = 0,
-        percent = 100
-    },
-    {
-        type = "impact",
-        decrease = 50,
-        percent = 80
-    },
-    {
-        type = "laser",
-        decrease = 0,
-        percent = 70
-    },
-    {
-        type = "physical",
-        decrease = 10,
-        percent = 50
-    }
-}
+immolator_entity.resistances = table_deepcopy(immolator_resistances)
 immolator_entity.chunk_exploration_radius = 5
 immolator_entity.automatic_weapon_cycling = true
 immolator_entity.guns = {
@@ -224,43 +189,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
             }
         },
         military_target = 'spidertron-military-target',
-        resistances = {
-            {
-                type = "acid",
-                decrease = 0,
-                percent = 90
-            },
-            {
-                type = "electric",
-                decrease = 0,
-                percent = 70
-            },
-            {
-                type = "explosion",
-                decrease = 15,
-                percent = 70
-            },
-            {
-                type = "fire",
-                decrease = 0,
-                percent = 100
-            },
-            {
-                type = "impact",
-                decrease = 50,
-                percent = 80
-            },
-            {
-                type = "laser",
-                decrease = 0,
-                percent = 70
-            },
-            {
-                type = "physical",
-                decrease = 10,
-                percent = 50
-            }
-        }
+        resistances = table_deepcopy(immolator_resistances)
     }
 	
 -- modify the main body size
