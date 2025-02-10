@@ -35,9 +35,17 @@ spidertron_immolator_leg.scale = 0.4
 spidertron_immolator_leg.resistances = table_deepcopy(immolator_resistances)
 spidertron_immolator_leg.resistances[3].percent = 100
 
+-- leg for major spidertron
+local major_spidertron_leg = table_deepcopy(data.raw['spider-leg']['spidertron-leg-1'])
+major_spidertron_leg.name = "major-spidertron-leg"
+major_spidertron_leg.part_length = 4
+major_spidertron_leg.resistances = table_deepcopy(major_spidertron_resistances)
+major_spidertron_leg.resistances[3].percent = 100
+
 data:extend{
     spidertronmk2_leg,
     spidertronmk3_leg,
 	spidertron_builder_leg,
-    spidertron_immolator_leg
+    spidertron_immolator_leg,
+    major_spidertron_leg
 }

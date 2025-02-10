@@ -149,3 +149,41 @@ spidertron_builder_resistances = {
         percent = 60
     }
 }
+
+major_spidertron_resistances = {
+    {
+        type = "acid",
+        decrease = 0,
+        percent = 75
+    },
+    {
+        type = "electric",
+        decrease = 0,
+        percent = 75
+    },
+    {
+        type = "explosion",
+        decrease = 60,
+        percent = 80
+    },
+    {
+        type = "fire",
+        decrease = 20,
+        percent = 65
+    },
+    {
+        type = "impact",
+        decrease = 50,
+        percent = 80
+    },
+    {
+        type = "laser",
+        decrease = 0,
+        percent = 70
+    },
+    {
+        type = "physical",
+        decrease = 20,
+        percent = 65
+    }
+}

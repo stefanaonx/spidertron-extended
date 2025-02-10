@@ -17,6 +17,7 @@ require("prototypes.spidertronmk2")
 require("prototypes.spidertronmk3")
 require("prototypes.spidertron_builder")
 require("prototypes.immolator")
+require("prototypes.major_spidertron")
 
 -- compatibility files
 require("compatibility.krastorio2")

@@ -63,13 +63,34 @@ spidertron_builder_entity.minimap_representation = {
     scale = 0.5
 }
 
--- changes the eye texture	
+-- changes the eye texture
+--[[
 spidertron_builder_entity.graphics_set.animation.layers[3] = {
 	filename = "__spidertron-extended__/graphics/spidertron_builder_eye.png",
 	width = 66,
 	height = 70,
 	line_length = 8,
 	direction_count = 64,
+	shift = util.by_pixel(1, -19),
+	hr_version = {
+		filename = "__spidertron-extended__/graphics/spidertron_builder_eye_HD.png",
+		width = 132,
+		height = 138,
+		line_length = 8,
+		direction_count = 64,
+		scale = 0.5,
+		shift = util.by_pixel(1, -19)
+	}
+}
+]]
+-- force using high quality version regardless
+spidertron_builder_entity.graphics_set.animation.layers[3] = {
+	filename = "__spidertron-extended__/graphics/spidertron_builder_eye_HD.png",
+	width = 132,
+	height = 138,
+	line_length = 8,
+	direction_count = 64,
+	scale = 0.5,
 	shift = util.by_pixel(0, -19),
 	hr_version = {
 		filename = "__spidertron-extended__/graphics/spidertron_builder_eye_HD.png",
@@ -81,6 +102,8 @@ spidertron_builder_entity.graphics_set.animation.layers[3] = {
 		shift = util.by_pixel(0, -19)
 	}
 }
+
+
 spidertron_builder_entity.graphics_set.animation.layers[4] = {
 	filename = "__spidertron-extended__/graphics/spidertron_builder_laser_turret_overlay.png",
 	width = 132,

@@ -1,8 +1,16 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.3.17
-Date: 2024.10.13
+Version: 0.4.0
+Date: 2025.02.11
   Changes:
-    - Enabling compatibility with Factorio 2.x.x also called SpageAge
+    - Added Major Spidertron, a new military based spidertron (still requires balancing and work on skill +);
+    - Fixed booblehead issue;
+    - There is still an issue with unsyncronized eyes on the MK3, Immolator and Ghost Weaver;
+    - Compatibility fixes after spaceage have not been implemented yet, so the compatibility with other mods might not work properly (needs work);
+---------------------------------------------------------------------------------------------------
+Version: 0.3.17
+Date: 2025.01.27
+  Changes:
+    - Fixed compatibility with Factorio 2.x.x also called SpageAge (Big Thanks for Gravari who helped a lot with it). Version only available on github;
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.16
 Date: 2024.01.18

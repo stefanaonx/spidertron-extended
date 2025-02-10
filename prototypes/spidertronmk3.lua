@@ -81,22 +81,44 @@ spidertronmk3_entity.minimap_representation = {
 -- spidertronmk3_entity.selection_box = {{-2, -2}, {2, 2}}
 -- spidertronmk3_entity.collision_box = {{-2, -2}, {2, 2}}
 
--- changes the eye texture	
+-- changes the eye texture
+--[[
 spidertronmk3_entity.graphics_set.animation.layers[3] = {
 	filename = "__spidertron-extended__/graphics/spidertron_mk3_eye.png",
 	width = 66,
 	height = 70,
 	line_length = 8,
 	direction_count = 64,
-	shift = util.by_pixel(0, -19),
+	scale = 1.4, --0.5 default -- 0.5 before space age also none here before space age
+	shift = util.by_pixel(1, -19),
 	hr_version = {
 		filename = "__spidertron-extended__/graphics/spidertron_mk3_eye_HD.png",
 		width = 132,
 		height = 138,
 		line_length = 8,
 		direction_count = 64,
-		scale = 0.5, --0.5 default
-		shift = util.by_pixel(0, -19)
+		scale = 1.4, --0.5 default -- 0.5 before space age
+		shift = util.by_pixel(1, -19)
+	}
+}
+]]
+-- forcing high quality textures for eyes
+spidertronmk3_entity.graphics_set.animation.layers[3] = {
+	filename = "__spidertron-extended__/graphics/spidertron_mk3_eye_HD.png",
+    width = 132,
+    height = 138,
+    line_length = 8,
+    direction_count = 64,
+    scale = 0.7, --0.5 default -- 0.5 before space age
+	shift = util.by_pixel(1, -19),
+	hr_version = {
+		filename = "__spidertron-extended__/graphics/spidertron_mk3_eye_HD.png",
+		width = 132,
+		height = 138,
+		line_length = 8,
+		direction_count = 64,
+		scale = 0.7, --0.5 default -- 0.5 before space age
+		shift = util.by_pixel(1, -19)
 	}
 }
 
@@ -183,25 +205,25 @@ if not settings.startup["vanilla-spidertron-size"].value then
     }
 	
 -- modify the main body size
-    spidertronmk3_entity.graphics_set.animation.layers[1].scale = 1.40
+    spidertronmk3_entity.graphics_set.animation.layers[1].scale = 0.70 -- 1.40 before space age
 	--spidertronmk3_entity.graphics_set.animation.layers[1].hr_version.scale = 0.70
 	
-    spidertronmk3_entity.graphics_set.animation.layers[2].scale = 1.40
+    spidertronmk3_entity.graphics_set.animation.layers[2].scale = 0.70
 	--spidertronmk3_entity.graphics_set.animation.layers[2].hr_version.scale = 0.70
 	
-	spidertronmk3_entity.graphics_set.animation.layers[3].scale = 1.40
+	--spidertronmk3_entity.graphics_set.animation.layers[3].scale = 0.70  -- this is the eye layer that i'm already modifying before
 	--spidertronmk3_entity.graphics_set.animation.layers[3].hr_version.scale = 0.70
 
-	spidertronmk3_entity.graphics_set.base_animation.layers[1].scale = 1.40
+	spidertronmk3_entity.graphics_set.base_animation.layers[1].scale = 0.70
 	--spidertronmk3_entity.graphics_set.base_animation.layers[1].hr_version.scale = 0.70
 	
-	spidertronmk3_entity.graphics_set.base_animation.layers[2].scale = 1.40
+	spidertronmk3_entity.graphics_set.base_animation.layers[2].scale = 0.70
     --spidertronmk3_entity.graphics_set.base_animation.layers[2].hr_version.scale = 0.70
 
-	spidertronmk3_entity.graphics_set.shadow_animation.scale = 1.40
+	spidertronmk3_entity.graphics_set.shadow_animation.scale = 0.70
     --spidertronmk3_entity.graphics_set.shadow_animation.hr_version.scale = 0.70
 
-	spidertronmk3_entity.graphics_set.shadow_base_animation.scale = 1.40
+	spidertronmk3_entity.graphics_set.shadow_base_animation.scale = 0.70
     --spidertronmk3_entity.graphics_set.shadow_base_animation.hr_version.scale = 0.70
 end
 

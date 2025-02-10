@@ -69,14 +69,15 @@ immolator_entity.minimap_representation = {
     scale = 0.5
 }
 
--- changes the eye texture	
+-- changes the eye texture
+--[[
 immolator_entity.graphics_set.animation.layers[3] = {
 	filename = "__spidertron-extended__/graphics/spidertron_immolator_eye.png",
 	width = 66,
 	height = 70,
 	line_length = 8,
 	direction_count = 64,
-	shift = util.by_pixel(0, -19),
+	shift = util.by_pixel(1, -19), -- (0, -19) before space age
 	hr_version = {
 		filename = "__spidertron-extended__/graphics/spidertron_immolator_eye_HD.png",
 		width = 132,
@@ -84,9 +85,30 @@ immolator_entity.graphics_set.animation.layers[3] = {
 		line_length = 8,
 		direction_count = 64,
 		scale = 0.4,
-		shift = util.by_pixel(0, -19)
+		shift = util.by_pixel(1, -19) -- (0, -19) before space age
 	}
 }
+]]
+-- forcing high quality textures
+immolator_entity.graphics_set.animation.layers[3] = {
+	filename = "__spidertron-extended__/graphics/spidertron_immolator_eye_HD.png",
+    width = 132,
+    height = 138,
+    line_length = 8,
+    direction_count = 64,
+    scale = 0.4,
+	shift = util.by_pixel(1, -19), -- (0, -19) before space age
+	hr_version = {
+		filename = "__spidertron-extended__/graphics/spidertron_immolator_eye_HD.png",
+		width = 132,
+		height = 138,
+		line_length = 8,
+		direction_count = 64,
+		scale = 0.4,
+		shift = util.by_pixel(1, -19) -- (0, -19) before space age
+	}
+}
+
 -- head turret
 immolator_entity.graphics_set.animation.layers[4] = {
 	filename = "__spidertron-extended__/graphics/spidertron_immolator_flamethrower_turret_overlay.png",
@@ -111,8 +133,8 @@ if not settings.startup["vanilla-spidertron-size"].value then
     immolator_entity.height = 1.50
     local leg_scale = 0.7
     local ground_leg_position = leg_scale * 1.1
-    local general_hr_scale = 0.4
-    local general_scale = 0.8
+    local general_hr_scale = 0.4 -- 0.4 before space age
+    local general_scale = 0.4 -- 0.8 before space age
 	immolator_entity.spider_engine = {
         legs = {
             -- 5PM ordering them on the analog clock

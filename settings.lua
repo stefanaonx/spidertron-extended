@@ -250,6 +250,46 @@ data:extend({
         default_value = false,
         order = "c15"
     },
+    -- major-spidertron settings
+    {
+        type = "bool-setting",
+        name = "disable-major-spidertron",
+        setting_type = "startup",
+        default_value = false,
+        order = "d001"
+    },
+    {
+        type = "int-setting",
+        name = "major-spidertron-width",
+        setting_type = "startup",
+        minimum_value = 1,
+        default_value = 10,
+        order = "d002"
+    },
+    {
+        type = "int-setting",
+        name = "major-spidertron-height",
+        setting_type = "startup",
+        minimum_value = 1,
+        default_value = 10,
+        order = "d003"
+    },
+    {
+        type = "int-setting",
+        name = "major-spidertron-invsize",
+        setting_type = "startup",
+        minimum_value = 1,
+        default_value = 80,
+        order = "d004"
+    },
+    {
+        type = "int-setting",
+        name = "major-spidertron-hp",
+        setting_type = "startup",
+        minimum_value = 1,
+        default_value = 3000,
+        order = "d005"
+    },
     -- bobs equipment
     {
         type = "bool-setting",

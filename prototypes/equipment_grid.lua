@@ -10,6 +10,9 @@ local sbuildw = settings.startup["spidertron-builder-width"].value
 local sbuildh = settings.startup["spidertron-builder-height"].value
 local immw = settings.startup["immolator-width"].value
 local immh = settings.startup["immolator-height"].value
+local mjsw = settings.startup["major-spidertron-width"].value
+local mjsh = settings.startup["major-spidertron-height"].value
+
 
 local basic_equipment_categories = data.raw["equipment-grid"]["spidertron-equipment-grid"].equipment_categories
 
@@ -45,10 +48,19 @@ local immolator_grid = {
     equipment_categories = basic_equipment_categories
 }
 
+local major_spidertron_grid = {
+    type = "equipment-grid",
+    name = "major-spidertron-grid",
+    width = mjsw,
+    height = mjsh,
+    equipment_categories = basic_equipment_categories
+}
+
 
 data:extend{
     spidertronmk2_grid,
     spidertronmk3_grid,
 	spidertron_builder_grid,
-    immolator_grid
+    immolator_grid,
+    major_spidertron_grid
 }

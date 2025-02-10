@@ -3,7 +3,7 @@ if not settings.startup["disable-spidertronmk2"].value then
     local spidertronmk2_technology = {
         type = "technology",
         name = "spidertronmk2-tech",
-        icon = "__spidertron-extended__/icons/spidertron_mk2_reseach.png",
+        icon = "__spidertron-extended__/icons/spidertron_mk2_research.png",
         icon_size = 128,
         order = "c",
         prerequisites = {"spidertron"},
@@ -40,7 +40,7 @@ if not settings.startup["disable-spidertronmk3"].value then
     local spidertronmk3_technology = {
         type = "technology",
         name = "spidertronmk3-tech",
-        icon = "__spidertron-extended__/icons/spidertron_mk3_reseach.png",
+        icon = "__spidertron-extended__/icons/spidertron_mk3_research.png",
         icon_size = 128,
         order = "c",
         prerequisites = preqs,
@@ -132,5 +132,38 @@ if not settings.startup["disable-immolator"].value then
     }
     data:extend{
         immolator_technology
+    }
+end
+
+-- technology unlock major-spidertron
+if not settings.startup["disable-major-spidertron"].value then
+    local major_spidertron_technology = {
+        type = "technology",
+        name = "major-spidertron-tech",
+        icon = "__spidertron-extended__/icons/spidertron_mk2_research.png",
+        icon_size = 128,
+        order = "c",
+        prerequisites = {"spidertron"},
+        effects = {
+            {
+                type = "unlock-recipe",
+                recipe = "major-spidertron"
+            }
+        },
+        unit = {
+            count = 2500,
+            ingredients = {
+                {"automation-science-pack", 1},
+                {"logistic-science-pack", 1},
+                {"military-science-pack", 1},
+                {"chemical-science-pack", 1},
+                {"production-science-pack", 1},
+                {"utility-science-pack", 1}
+            },
+            time = 30
+        }
+    }
+    data:extend{
+        major_spidertron_technology
     }
 end

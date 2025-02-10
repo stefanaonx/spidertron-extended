@@ -98,7 +98,14 @@ function(event)
             new_immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
         end
         table.insert(immolator, new_immolator)
-        -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}     
+        -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}
+    elseif event.entity.name == "major-spidertron" then
+        local new_major_spidertron = event.entity
+        if check_spider_colors(new_major_spidertron.color) then
+            new_major_spidertron.color = {0.2941, 0.3255, 0.1255, 0.5}
+        end
+        -- when major spidertron is created add it to the table
+        table.insert(major_spidertron, new_major_spidertron)
     end
 end)
 
@@ -302,6 +309,10 @@ script.on_nth_tick(60, function(event)
     if spidertronmk3 == nil then
         spidertronmk3 = {}
     end
+
+    if major_spidertron == nil then
+        major_spidertron = {}
+    end
     
     -- adding these lines for compatibility with older saves
     spidertronmk3_health_regen = 15
@@ -345,4 +356,6 @@ script.on_init(function()
     if settings.startup["disable-health-regenmk3"].value then
         spidertronmk3_health_regen = 0
     end
+    -- declare global major spidertron on init
+    major_spidertron = {}
 end)

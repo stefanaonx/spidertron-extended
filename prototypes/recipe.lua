@@ -98,3 +98,24 @@ if not settings.startup["disable-immolator"].value then
         immolator
     }
 end
+
+-- mj-spidetron recipe
+if not settings.startup["disable-major-spidertron"].value then
+    local major_spidertron_recipe = {
+        type = "recipe",
+        name = "major-spidertron",
+        enabled = false,
+        ingredients = {
+            {type = "item", name = "spidertron", amount = 1},
+            {type = "item", name = "tungsten-plate", amount = 50},
+            {type = "item", name = "carbon-fiber", amount = 50},
+            {type = "item", name = "supercapacitor", amount = 50}
+        },
+        energy_required = 10,
+        results = {{type="item", name="spidertronmk2", amount=1}}
+    }
+
+    data:extend{
+        major_spidertron_recipe
+    }
+end

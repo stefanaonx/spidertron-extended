@@ -4,4 +4,13 @@ local button={
     key_sequence = "SHIFT + F",
     consuming = "none"
 }
-data:extend{button}
+local button2={
+    type = "custom-input",
+    name = "major-spidertron-active1",
+    key_sequence = "SHIFT + F",
+    consuming = "none"
+}
+data:extend{
+    button,
+    button2
+}
