@@ -1,8 +1,3 @@
--- disabling major spidertron if required
-if settings.startup["disable-major-spidertron"].value then
-    return
-end
-
 require "util"
 require "__spidertron-extended__.resistance_data"
 local table_deepcopy = util.table.deepcopy
@@ -27,7 +22,7 @@ local leg_hit_the_ground_trigger = {
 -- using mk2 untill get new one
 local iconsms = {
     {
-        icon = "__spidertron-extended__/icons/spidertron_extended_mk2_item.png",
+        icon = "__spidertron-extended__/icons/spidertron_extended_major_spidertron_item.png",
         icon_size = 64, 
         icon_mipmaps = 4
     }
@@ -81,7 +76,7 @@ major_spidertron_entity.guns = {
 major_spidertron_entity.chain_shooting_cooldown_modifier = 0.4
 major_spidertron_entity.braking_force = 2
 major_spidertron_entity.minimap_representation = {
-    filename = "__spidertron-extended__/icons/spidertron_extended_mk2_map.png",
+    filename = "__spidertron-extended__/icons/spidertron_extended_major_spidertron_map.png",
     flags = {"icon"},
     size = {128, 128},
     scale = 0.6

@@ -154,36 +154,36 @@ major_spidertron_resistances = {
     {
         type = "acid",
         decrease = 0,
-        percent = 75
+        percent = 50
     },
     {
         type = "electric",
         decrease = 0,
-        percent = 75
+        percent = 55
     },
     {
         type = "explosion",
-        decrease = 60,
-        percent = 80
+        decrease = 75,
+        percent = 85
     },
     {
         type = "fire",
-        decrease = 20,
+        decrease = 10,
         percent = 65
     },
     {
         type = "impact",
-        decrease = 50,
+        decrease = 70,
         percent = 80
     },
     {
         type = "laser",
         decrease = 0,
-        percent = 70
+        percent = 60
     },
     {
         type = "physical",
-        decrease = 20,
-        percent = 65
+        decrease = 75,
+        percent = 70
     }
 }

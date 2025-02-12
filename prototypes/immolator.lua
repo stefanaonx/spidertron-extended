@@ -1,8 +1,3 @@
--- disabling immolator if required
-if settings.startup["disable-immolator"].value then
-    return
-end
-
 require "util"
 require "__spidertron-extended__.resistance_data"
 local table_deepcopy = util.table.deepcopy

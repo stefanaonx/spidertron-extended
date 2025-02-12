@@ -70,6 +70,7 @@ function(event)
         end
         -- game.print(spidertron_builder.get_inventory)
         -- adding the batteries automatically on placement
+        -- TODO need to add higher quality batteries if higher quality spidertron is placed
         spidertron_builder.insert({name="retrofitted-battery"})
         spidertron_builder.insert({name="retrofitted-battery2"})
     elseif event.entity.name == "spidertron-builder-spidertron-experimental-laser" then

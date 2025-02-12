@@ -1,8 +1,3 @@
--- disabling spidertron-builder if required
-if settings.startup["disable-spidertron-builder"].value then
-    return
-end
-
 require "util"
 require "__spidertron-extended__.resistance_data"
 local table_deepcopy = util.table.deepcopy
