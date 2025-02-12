@@ -70,8 +70,9 @@ major_spidertron_entity.automatic_weapon_cycling = false
 
 -- make new guns for him
 major_spidertron_entity.guns = {
-    "spidertron-machine-gun",
-    "spidertron-cannon"
+    "major-spidertron-machine-gun",
+    "major-spidertron-cannon",
+    "artillery-wagon-cannon"
 }
 major_spidertron_entity.chain_shooting_cooldown_modifier = 0.4
 major_spidertron_entity.braking_force = 2

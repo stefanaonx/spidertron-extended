@@ -80,13 +80,14 @@ local major_spidertron_recipe = {
     name = "major-spidertron",
     enabled = false,
     ingredients = {
-        {type = "item", name = "spidertron", amount = 1},
-        {type = "item", name = "tungsten-plate", amount = 50},
-        {type = "item", name = "carbon-fiber", amount = 50},
-        {type = "item", name = "supercapacitor", amount = 50}
+        {type = "item", name = "raw-fish", amount = 1},
+        {type = "item", name = "engine-unit", amount = 40},
+        {type = "item", name = "steel-plate", amount = 60},
+        {type = "item", name = "concrete", amount = 60},
+        {type = "item", name = "processing-unit", amount = 80}
     },
     energy_required = 10,
-    results = {{type="item", name="spidertronmk2", amount=1}}
+    results = {{type="item", name="major-spidertron", amount=1}}
 }
 
 

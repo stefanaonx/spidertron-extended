@@ -54,9 +54,13 @@ data.raw["recipe"]["immolator"].ingredients = {
     {type = "item", name = "radar", amount = 2}
 }
 -- major spidertron
+--data.raw.recipe["major-spidertron"].ingredients = {  -- this way should also work
 data.raw["recipe"]["major-spidertron"].ingredients = {
-    {type = "item", name = "spidertron", amount = 1},
-    {type = "item", name = "tungsten-plate", amount = 50},
-    {type = "item", name = "carbon-fiber", amount = 50},
-    {type = "item", name = "supercapacitor", amount = 50}
+    {type = "item", name = "raw-fish", amount = 1},
+    {type = "item", name = "engine-unit", amount = 40},
+    {type = "item", name = "tungsten-plate", amount = 60},
+    {type = "item", name = "refined-concrete", amount = 60},
+    {type = "item", name = "processing-unit", amount = 80},
+    {type = "item", name = "fission-reactor-equipment", amount = 4},
+    {type = "item", name = "exoskeleton-equipment", amount = 8}
 }

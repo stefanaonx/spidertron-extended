@@ -108,12 +108,12 @@ data:extend{
 
 -- major spidertron machine gun and cannon
 local spidertron_machine_gun_item = table_deepcopy(data.raw["gun"]["tank-machine-gun"])
-spidertron_machine_gun_item.name = "spidertron-machine-gun"
+spidertron_machine_gun_item.name = "major-spidertron-machine-gun"
 spidertron_machine_gun_item.attack_parameters.cooldown = 2
 spidertron_machine_gun_item.attack_parameters.range = 30
 
 local spidertron_cannon_item = table_deepcopy(data.raw["gun"]["tank-cannon"])
-spidertron_cannon_item.name = "spidertron-cannon"
+spidertron_cannon_item.name = "major-spidertron-cannon"
 spidertron_cannon_item.attack_parameters.cooldown = 80
 spidertron_cannon_item.attack_parameters.range = 70
 

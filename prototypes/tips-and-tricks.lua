@@ -16,8 +16,8 @@ local spidertron_extended_tips = {
       vehicle = "spidertronmk2",
       match_type_only = true,
       count = 5
-    },
-    simulation = {} --simulations.spidertron_extended
+    }
+    --simulation = {} --simulations.spidertron_extended
 }
 
 data:extend{

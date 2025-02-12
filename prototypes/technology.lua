@@ -32,6 +32,7 @@ data:extend{
 -- technology unlock mk3
 -- i need to modify the prereq is mk2 is not available
 local preqs = {"spidertron", "space-science-pack"}
+--TODO FIX THIS
 if not settings.startup["disable-spidertronmk2"].value then
     preqs = {"spidertronmk2-tech", "space-science-pack"}
 end
@@ -135,7 +136,7 @@ local major_spidertron_technology = {
     icon = "__spidertron-extended__/icons/spidertron-major-technology.png",
     icon_size = 128,
     order = "c",
-    prerequisites = {"spidertron"},
+    prerequisites = {"spidertron", "artillery"},
     effects = {
         {
             type = "unlock-recipe",
