@@ -209,52 +209,122 @@ function fire_wave(vehicle_ent, size)
 end
 
 
+function launch_bubblegum(player_ev)
+    if not player.valid then
+        return
+    end
+    drone_creation = player_ev.vehicle.surface.create_entity({
+        name="defender-capsule",
+        amount=1,
+        -- forgot to set source, maybe this fixes owner
+        source=player_ev.vehicle,
+        -- yes the source fixed it
+        position={player_ev.position.x,player_ev.position.y},
+        target={player_ev.position.x+1,player_ev.position.y+1},
+        -- this forces the bot to be friendly / allied with the player
+        force=game.forces.player_ev,
+        -- trying to make the player the owner of the drone
+        player = player_ev,
+        -- doesn't work
+        render_player_index=player_ev
+        -- doesn't work
+    })
+end
+
+
 script.on_event("immolator-active1", function(event)
-    -- define a basic variable to append with all the data
-    --cheap fix for the smart toggle, this will need refactoring later
-    if smarttoggle == nil then
-        smarttoggle = {}
-    end
-    if smarttoggle.data == nil then    
-        smarttoggle.data = {}
-    end
     player_id = event.player_index
     player = game.get_player(event.player_index)
     vehicle = player.vehicle
-    local is_it_pressed = false
-    for x in pairs(smarttoggle.data) do
-        if smarttoggle.data[x].player_id == player_id then
-            is_it_pressed = true
-        end
-    end
-    
-    if cooldown == nil then
-        cooldown = {}
-    end
-    
-    local cooldown_pl = false
-    for x in pairs(cooldown) do
-        if cooldown == {} then
-            cooldown_pl = false
-        elseif cooldown[x].cid == player_id then
-            cooldown_pl = true
-        end
-    end
-    
+    --game.print(vehicle.name)
+    --game.print(vehicle.name == "immolator")
+    -- check if the trigger is for the immolator when same button combination is pressed
     if not (vehicle == nil) then
-        -- is it pressed is that ppl don't spam it
-        if (vehicle.name == "immolator") and (is_it_pressed == false) and
-            (cooldown_pl == false) then
-            local something = {}
-            something.active_stage = 1
-            something.vehicle = vehicle
-            something.player_id = player_id
-            
-            -- add the cooldown
-            player_cooldown(3, player_id)
-            -- add the fire-wave starting
-            table.insert(smarttoggle.data, something)
-            -- game.print("added the table")
+        if vehicle.name == "immolator" then
+            --return -- i tried exiting the function here directly, but never works
+
+            -- define a basic variable to append with all the data
+            --cheap fix for the smart toggle, this will need refactoring later
+            if smarttoggle == nil then
+                smarttoggle = {}
+            end
+            if smarttoggle.data == nil then
+                smarttoggle.data = {}
+            end
+
+            local is_it_pressed = false
+            for x in pairs(smarttoggle.data) do
+                if smarttoggle.data[x].player_id == player_id then
+                    is_it_pressed = true
+                end
+            end
+
+            if cooldown == nil then
+                cooldown = {}
+            end
+
+            local cooldown_pl = false
+            for x in pairs(cooldown) do
+                if cooldown == {} then
+                    cooldown_pl = false
+                elseif cooldown[x].cid == player_id then
+                    cooldown_pl = true
+                end
+            end
+
+            -- is it pressed is that ppl don't spam it
+            if (vehicle.name == "immolator") and (is_it_pressed == false) and
+                (cooldown_pl == false) then
+                local something = {}
+                something.active_stage = 1
+                something.vehicle = vehicle
+                something.player_id = player_id
+
+                -- add the cooldown
+                player_cooldown(3, player_id)
+                -- add the fire-wave starting
+                table.insert(smarttoggle.data, something)
+                -- game.print("added the table")
+            end
+        end
+    end
+end)
+
+
+script.on_event("major-spidertron-active1", function(event)
+    player_id = event.player_index
+    player = game.get_player(event.player_index)
+    vehicle = player.vehicle
+    -- check if the trigger is for the immolator when same button combination is pressed
+    --game.print(vehicle.name)
+    --game.print(vehicle.name == "major-spidertron")
+    -- i tried if return but it just doesn't work
+    if not (vehicle == nil) then
+        if vehicle.name == "major-spidertron" then
+            game.print("You are tring to spawn bubblegum but it didnt get implemented yet")
+            -- creating cooldown if it doesn't exist
+            if cooldown == nil then
+                cooldown = {}
+            end
+            -- checking cooldown
+            --game.print("added cooldown stage1")
+            local cooldown_pl = false
+            for x in pairs(cooldown) do
+                if cooldown == {} then
+                    cooldown_pl = false
+                elseif cooldown[x].cid == player_id then
+                    cooldown_pl = true
+                end
+            end
+            --game.print("verified cooldown stage 2")
+            if cooldown_pl == false then
+                --game.print("STARTING")
+                -- add the player cooldown
+                player_cooldown(10, player_id)
+                -- use the skill function
+                launch_bubblegum(player)
+            end
+            --game.print("finished and exiting now")
         end
     end
 end)
@@ -332,7 +402,7 @@ script.on_nth_tick(60, function(event)
     
     -- cooldown testing
     if not (cooldown == nil) then
-        -- game.print(dump(cooldown))
+        --game.print(dump(cooldown)) -- remove later
         for x in pairs(cooldown) do
             if cooldown[x].cooldown > 0 then
                 cooldown[x].cooldown = cooldown[x].cooldown - 1

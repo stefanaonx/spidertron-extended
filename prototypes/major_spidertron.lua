@@ -69,11 +69,19 @@ major_spidertron_entity.chunk_exploration_radius = 5
 major_spidertron_entity.automatic_weapon_cycling = false
 
 -- make new guns for him
-major_spidertron_entity.guns = {
-    "major-spidertron-machine-gun",
-    "major-spidertron-cannon",
-    "artillery-wagon-cannon"
-}
+-- user should be able to disable the artillery if he wants to
+if settings.startup["disable-artillery-major-spidertron"] == true then
+    major_spidertron_entity.guns = {
+        "major-spidertron-machine-gun",
+        "major-spidertron-cannon"
+    }
+else
+    major_spidertron_entity.guns = {
+        "major-spidertron-machine-gun",
+        "major-spidertron-cannon",
+        "artillery-wagon-cannon"
+    }
+end
 major_spidertron_entity.chain_shooting_cooldown_modifier = 0.4
 major_spidertron_entity.braking_force = 2
 major_spidertron_entity.minimap_representation = {

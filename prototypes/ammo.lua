@@ -178,7 +178,7 @@ local retrofitted_battery = {
     name = "retrofitted-battery",
     enabled = false,
     ingredients = {
-        {type = "item", name = "fusion-reactor-equipment", amount = 1},
+        {type = "item", name = "fission-reactor-equipment", amount = 1},
         {type = "item", name = "productivity-module-2", amount = 5}
     },
     energy_required = 10,
@@ -189,7 +189,7 @@ local retrofitted_battery2 = {
     name = "retrofitted-battery2",
     enabled = false,
     ingredients = {
-        {type = "item", name = "fusion-reactor-equipment", amount = 1},
+        {type = "item", name = "fission-reactor-equipment", amount = 1},
         {type = "item", name = "productivity-module-2", amount = 5}
     },
     energy_required = 10,

@@ -4,7 +4,7 @@ local spidertronmk2_technology = {
     name = "spidertronmk2-tech",
     icon = "__spidertron-extended__/icons/spidertron_mk2_research.png",
     icon_size = 128,
-    order = "c",
+    order = "s01",
     prerequisites = {"spidertron"},
     effects = {
         {
@@ -41,7 +41,7 @@ local spidertronmk3_technology = {
     name = "spidertronmk3-tech",
     icon = "__spidertron-extended__/icons/spidertron_mk3_research.png",
     icon_size = 128,
-    order = "c",
+    order = "s004",
     prerequisites = preqs,
     effects = {
         {
@@ -73,7 +73,7 @@ local spidertron_builder_technology = {
     name = "spidertron-builder-tech",
     icon = "__spidertron-extended__/icons/spidertron_extended_builder_research.png",
     icon_size = 128,
-    order = "c",
+    order = "s02",
     prerequisites = {"spidertron","construction-robotics"},
     effects = {
         {
@@ -104,7 +104,7 @@ local immolator_technology = {
     name = "immolator-tech",
     icon = "__spidertron-extended__/icons/spidertron_extended_immolator_research.png",
     icon_size = 128,
-    order = "c",
+    order = "s03",
     prerequisites = {"spidertron"},
     effects = {
         {
@@ -134,8 +134,8 @@ local major_spidertron_technology = {
     type = "technology",
     name = "major-spidertron-tech",
     icon = "__spidertron-extended__/icons/spidertron-major-technology.png",
-    icon_size = 128,
-    order = "c",
+    icon_size = 256,
+    order = "s04",
     prerequisites = {"spidertron", "artillery"},
     effects = {
         {
