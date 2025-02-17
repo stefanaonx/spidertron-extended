@@ -640,7 +640,7 @@ data:extend({
         type = "tips-and-tricks-item",
         name = "spidertron-extended",
         category = "spidertron-extended",
-        order = "s",
+        order = "a",
         trigger =
         {
             type = "unlock-recipe",
@@ -654,13 +654,16 @@ data:extend({
           count = 5
         },
         --simulation = {} --simulations.spidertron_extended
+        dependencies = {"spidertron-extended"},
         simulation = spidertron_extended
     },
     {
         type = "tips-and-tricks-item",
         name = "spidertronmk2",
+        tag = "[entity=spidertronmk2]",
         category = "spidertron-extended",
-        order = "s01",
+        order = "b",
+        indent = 1,
         trigger =
         {
             type = "unlock-recipe",
@@ -673,13 +676,16 @@ data:extend({
           match_type_only = true,
           count = 5
         },
+        dependencies = {"spidertron-extended"},
         simulation = spidertron_extended_mk2
     },
     {
         type = "tips-and-tricks-item",
         name = "spidertronmk3",
+        tag = "[entity=spidertronmk3]",
         category = "spidertron-extended",
-        order = "s02",
+        order = "c",
+        indent = 1,
         trigger =
         {
             type = "unlock-recipe",
@@ -692,13 +698,16 @@ data:extend({
           match_type_only = true,
           count = 5
         },
+        dependencies = {"spidertron-extended"},
         simulation = spidertron_extended_mk3
     },
     {
         type = "tips-and-tricks-item",
         name = "spidertron-builder",
+        tag = "[entity=spidertron-builder]",
         category = "spidertron-extended",
-        order = "s03",
+        order = "d",
+        indent = 1,
         trigger =
         {
             type = "unlock-recipe",
@@ -711,13 +720,16 @@ data:extend({
           match_type_only = true,
           count = 5
         },
+        dependencies = {"spidertron-extended"},
         simulation = spidertron_extended_builder
     },
     {
         type = "tips-and-tricks-item",
         name = "immolator",
+        tag = "[entity=immolator]",
         category = "spidertron-extended",
-        order = "s04",
+        order = "e",
+        indent = 1,
         trigger =
         {
             type = "unlock-recipe",
@@ -730,13 +742,16 @@ data:extend({
           match_type_only = true,
           count = 5
         },
+        dependencies = {"spidertron-extended"},
         simulation = spidertron_extended_immolator
     },
     {
         type = "tips-and-tricks-item",
         name = "major-spidertron",
+        tag = "[entity=major-spidertron]",
         category = "spidertron-extended",
-        order = "s05",
+        order = "f",
+        indent = 1,
         trigger =
         {
             type = "unlock-recipe",
@@ -749,6 +764,7 @@ data:extend({
           match_type_only = true,
           count = 5
         },
+        dependencies = {"spidertron-extended"},
         simulation = spidertron_extended_major
     }
 })
