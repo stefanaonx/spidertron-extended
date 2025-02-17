@@ -323,6 +323,7 @@ data:extend({
         default_value = false,
         order = "m02"
     },
+    --[[
     -- to disable spidertronmk4
     {
         type = "bool-setting",
@@ -331,6 +332,7 @@ data:extend({
         default_value = false,
         order = "x1"
     },
+    --]]
     {
         type = "bool-setting",
         name = "disable-krastorio-spidertron-burner",

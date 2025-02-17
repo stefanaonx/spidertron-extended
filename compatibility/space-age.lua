@@ -42,11 +42,11 @@ data.raw["recipe"]["spidertron-builder"].ingredients = {
 }
 -- batteries for ghost weaver
 data.raw["recipe"]["retrofitted-battery"].ingredients = {
-    {type = "item", name = "fusion-reactor-equipment", amount = 1},
+    {type = "item", name = "fission-reactor-equipment", amount = 1},
     {type = "item", name = "productivity-module-2", amount = 5}
 }
 data.raw["recipe"]["retrofitted-battery2"].ingredients = {
-    {type = "item", name = "fusion-reactor-equipment", amount = 1},
+    {type = "item", name = "fission-reactor-equipment", amount = 1},
     {type = "item", name = "productivity-module-2", amount = 5}
 }
 
@@ -57,8 +57,7 @@ data.raw["recipe"]["immolator"].ingredients = {
     {type = "item", name = "low-density-structure", amount = 150},
     {type = "item", name = "flamethrower", amount = 1},
     {type = "item", name = "storage-tank", amount = 1},
-    -- fusion reactor only available in space age
-    {type = "item", name = "fusion-reactor-equipment", amount = 4},
+    {type = "item", name = "fission-reactor-equipment", amount = 4},
     {type = "item", name = "exoskeleton-equipment", amount = 8},
     {type = "item", name = "radar", amount = 2}
 }
