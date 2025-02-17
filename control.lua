@@ -291,6 +291,21 @@ script.on_event("immolator-active1", function(event)
 end)
 
 
+script.on_event("immolator-passive1", function(event)
+    player_id = event.player_index
+    player = game.get_player(event.player_index)
+    vehicle = player.vehicle
+    --game.print("activating or disabling passive")
+    local spider_legs_copy = vehicle.get_spider_legs()
+    --game.print(dump(spider_legs_copy))
+    --game.print(spider_legs_copy["type"])
+    ---- spider leg does not help
+    --game.print(dump(spider_legs_copy[1]))
+    ---- need spider vehicle entity
+
+end)
+
+
 script.on_event("major-spidertron-active1", function(event)
     player_id = event.player_index
     player = game.get_player(event.player_index)
@@ -377,12 +392,36 @@ script.on_nth_tick(60, function(event)
     -- 60 ticks = 1 second
     -- compromising for version fixing
     -- i doubt this would have such a large impact on ups
+
+    -- verify that all types of spidertrons arrays exists and if they do not, create them
+    if spidertronmk2 == nil then
+        spidertronmk2 = {}
+    --elseif not spidertronmk2 == {} then -- comment later
+    --    game.print(dump(spidertronmk)) -- comment later
+    end
+
     if spidertronmk3 == nil then
         spidertronmk3 = {}
+    --elseif not spidertronmk3 == {} then -- comment later
+    --    game.print(dump(spidertronmk3)) -- comment later
+    end
+
+    if spidertron_builder == nil then
+        spidertron_builder = {}
+    --elseif not spidertron_builder == {} then -- comment later
+    --    game.print(dump(spidertron_builder)) -- comment later
+    end
+
+    if immolator == nil then
+        immolator = {}
+    --elseif not immolator == {} then -- comment later
+    --    game.print(dump(immolator)) -- comment later
     end
 
     if major_spidertron == nil then
         major_spidertron = {}
+    --elseif not spidertronmk3 == {} then -- comment later
+    --    game.print(dump(spidertronmk3)) -- comment later
     end
     
     -- adding these lines for compatibility with older saves
