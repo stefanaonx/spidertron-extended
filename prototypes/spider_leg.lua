@@ -41,6 +41,9 @@ major_spidertron_leg.name = "major-spidertron-leg"
 major_spidertron_leg.part_length = 4
 major_spidertron_leg.resistances = table_deepcopy(major_spidertron_resistances)
 major_spidertron_leg.resistances[3].percent = 100
+-- this might be an issue cause the cannon sheel keeps hiting it's feet dealing damage
+major_spidertron_leg.resistances[5].percent = 100
+major_spidertron_leg.resistances[7].percent = 100
 
 data:extend{
     spidertronmk2_leg,

@@ -7,7 +7,7 @@ local spidertronmk2_recipe = {
         {type = "item", name = "spidertron", amount = 1},
         {type = "item", name = "concrete", amount = 40},
         {type = "item", name = "fission-reactor-equipment", amount = 2},
-        {type = "item", name = "exoskeleton", amount = 2}
+        {type = "item", name = "exoskeleton-equipment", amount = 2}
     },
     energy_required = 10,
     results = {{type="item", name="spidertronmk2", amount=1}}
@@ -16,24 +16,24 @@ local spidertronmk2_recipe = {
 -- mk3 recipe
 local ingr = {
     {type = "item", name = "spidertronmk2", amount = 1},
-    {type = "fluid", name = "refined concrete", amount = 80},
+    {type = "item", name = "refined-concrete", amount = 80},
     {type = "item", name = "fission-reactor-equipment", amount = 4},
-    {type = "item", name = "exoskeleton", amount = 4}
+    {type = "item", name = "exoskeleton-equipment", amount = 4}
 }
 if settings.startup["disable-spidertronmk2"].value then
     -- if spidertronmk2 disabled use this recipe
     ingr = {
         {type = "item", name = "spidertron", amount = 1},
-        {type = "fluid", name = "refined concrete", amount = 80},
+        {type = "item", name = "refined-concrete", amount = 80},
         {type = "item", name = "fission-reactor-equipment", amount = 4},
-        {type = "item", name = "exoskeleton", amount = 4}
+        {type = "item", name = "exoskeleton-equipment", amount = 4}
     }
 end
 local spidertronmk3_recipe = {
     type = "recipe",
     name = "spidertronmk3",
     -- modify this
-    category = "crafting-with-fluid",
+    --category = "crafting-with-fluid",
     enabled = false,
     ingredients = ingr,
     energy_required = 10,
