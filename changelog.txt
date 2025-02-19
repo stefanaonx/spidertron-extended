@@ -1,11 +1,18 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.0
 Date: 2025.02.11
+  Features:
+    - Added Major Spidertron, a new military based spidertron (still requires balancing and some fixing);
+    - Active ability added for Major Spidertron = Bubblegum was added a powerful variant of the defender drone that only Major Spidertron can spawn (still requires balancing);
+    - Added tips and tricks for Spidertron Extended;
+    - Added features to changelog as requested by sgamez;
   Changes:
-    - Added Major Spidertron, a new military based spidertron (still requires balancing and work on skill +);
-    - Fixed booblehead issue;
-    - There is still an issue with unsyncronized eyes on the MK3, Immolator and Ghost Weaver;
-    - Compatibility fixes after spaceage have not been implemented yet, so the compatibility with other mods might not work properly (needs work);
+    - Fixed bobblehead issue (spidertrons had very big heads for some reason, I kinda want to implement it as a setting feature now, need to think about it);
+    - Refactoring over resistances (done by Gravari);
+    - Refactoring over disabling spidertrons for settings (done by sgamez);
+    - There is still an issue with unsyncronized eyes on the MK3, Immolator and Ghost Weaver (they will require new textures);
+    - Because of version 2.0 almost all compatibility with other mods must be re-written so they have been temporarily commented / disabled;
+    - Compatibility for some of the bobsmods have been worked by sgamez using the 2.0 github branch of bobsmods;
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.17
 Date: 2025.01.27

@@ -154,22 +154,60 @@ major_spidertron_resistances = {
     {
         type = "acid",
         decrease = 0,
-        percent = 50
+        percent = 75
     },
     {
         type = "electric",
         decrease = 0,
-        percent = 55
+        percent = 75
     },
     {
         type = "explosion",
-        decrease = 75,
+        decrease = 95,
         percent = 85
     },
     {
         type = "fire",
-        decrease = 10,
+        decrease = 15,
         percent = 65
+    },
+    {
+        type = "impact",
+        decrease = 50,
+        percent = 80
+    },
+    {
+        type = "laser",
+        decrease = 0,
+        percent = 65
+    },
+    {
+        type = "physical",
+        decrease = 25,
+        percent = 70
+    }
+}
+
+major_spidertron_bubblegum_resistances = {
+    {
+        type = "acid",
+        decrease = 0,
+        percent = 90
+    },
+    {
+        type = "electric",
+        decrease = 0,
+        percent = 90
+    },
+    {
+        type = "explosion",
+        decrease = 75,
+        percent = 90
+    },
+    {
+        type = "fire",
+        decrease = 10,
+        percent = 95
     },
     {
         type = "impact",
@@ -179,11 +217,11 @@ major_spidertron_resistances = {
     {
         type = "laser",
         decrease = 0,
-        percent = 60
+        percent = 80
     },
     {
         type = "physical",
         decrease = 75,
-        percent = 70
+        percent = 80
     }
 }

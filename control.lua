@@ -214,7 +214,7 @@ function launch_bubblegum(player_ev)
         return
     end
     drone_creation = player_ev.vehicle.surface.create_entity({
-        name="defender-capsule",
+        name="major-spidertron-bubblegum-capsule",
         amount=1,
         -- forgot to set source, maybe this fixes owner
         source=player_ev.vehicle,
@@ -296,7 +296,9 @@ script.on_event("immolator-passive1", function(event)
     player = game.get_player(event.player_index)
     vehicle = player.vehicle
     --game.print("activating or disabling passive")
-    local spider_legs_copy = vehicle.get_spider_legs()
+    if not (vehicle == nil) then
+        local spider_legs_copy = vehicle.get_spider_legs()
+    end
     --game.print(dump(spider_legs_copy))
     --game.print(spider_legs_copy["type"])
     ---- spider leg does not help
@@ -316,7 +318,7 @@ script.on_event("major-spidertron-active1", function(event)
     -- i tried if return but it just doesn't work
     if not (vehicle == nil) then
         if vehicle.name == "major-spidertron" then
-            game.print("You are tring to spawn bubblegum but it didnt get implemented yet")
+            --game.print("You are tring to spawn bubblegum but it didnt get implemented yet")
             -- creating cooldown if it doesn't exist
             if cooldown == nil then
                 cooldown = {}
@@ -387,42 +389,44 @@ script.on_nth_tick(6, function(event)
     end
 end)
 
+--putting them outside any function to properly load each time
+-- verify that all types of spidertrons arrays exists and if they do not, create them
+if spidertronmk2 == nil then
+    spidertronmk2 = {}
+end
+if spidertronmk3 == nil then
+    spidertronmk3 = {}
+end
+if spidertron_builder == nil then
+    spidertron_builder = {}
+end
+if immolator == nil then
+    immolator = {}
+end
+if major_spidertron == nil then
+    major_spidertron = {}
+end
 
 script.on_nth_tick(60, function(event)
     -- 60 ticks = 1 second
     -- compromising for version fixing
     -- i doubt this would have such a large impact on ups
 
-    -- verify that all types of spidertrons arrays exists and if they do not, create them
-    if spidertronmk2 == nil then
-        spidertronmk2 = {}
-    --elseif not spidertronmk2 == {} then -- comment later
-    --    game.print(dump(spidertronmk)) -- comment later
-    end
-
-    if spidertronmk3 == nil then
-        spidertronmk3 = {}
-    --elseif not spidertronmk3 == {} then -- comment later
+    --if not spidertronmk2 == {} then -- comment later
+    --    game.print(dump(spidertronmk2)) -- comment later
+    --end
+    --if not spidertronmk3 == {} then -- comment later
     --    game.print(dump(spidertronmk3)) -- comment later
-    end
-
-    if spidertron_builder == nil then
-        spidertron_builder = {}
-    --elseif not spidertron_builder == {} then -- comment later
+    --end
+    --if not spidertron_builder == {} then -- comment later
     --    game.print(dump(spidertron_builder)) -- comment later
-    end
-
-    if immolator == nil then
-        immolator = {}
-    --elseif not immolator == {} then -- comment later
+    --end
+    --if not immolator == {} then -- comment later
     --    game.print(dump(immolator)) -- comment later
-    end
-
-    if major_spidertron == nil then
-        major_spidertron = {}
-    --elseif not spidertronmk3 == {} then -- comment later
-    --    game.print(dump(spidertronmk3)) -- comment later
-    end
+    --end
+    --if not major_spidertron == {} then -- comment later
+    --    game.print(dump(major_spidertron)) -- comment later
+    --end
     
     -- adding these lines for compatibility with older saves
     spidertronmk3_health_regen = 15
@@ -430,11 +434,12 @@ script.on_nth_tick(60, function(event)
         spidertronmk3_health_regen = 0
     end
     
-    for key, spidertronmk3 in pairs(spidertronmk3) do
-        if spidertronmk3.valid then
+    for key, spidertronmk3_ent in pairs(spidertronmk3) do
+        if spidertronmk3_ent.valid then
+            -- game.print(dump(spidertronmk3))
             -- i want to try add this in a setting
-            spidertronmk3.health = spidertronmk3.health + spidertronmk3_health_regen
-        else
+            spidertronmk3_ent.health = spidertronmk3_ent.health + spidertronmk3_health_regen
+        else  --had an issue here but i think it got fixed
             table.remove(spidertronmk3, key)
         end
     end

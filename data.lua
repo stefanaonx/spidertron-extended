@@ -20,6 +20,9 @@ require("prototypes.spidertron_builder")
 require("prototypes.immolator")
 require("prototypes.major_spidertron")
 
+-- other stuff related to spidertron extended
+require("prototypes.bubblegum")
+
 -- compatibility files
 require("compatibility.space-age")
 --require("compatibility.krastorio2")

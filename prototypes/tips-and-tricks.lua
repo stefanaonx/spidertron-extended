@@ -641,6 +641,7 @@ data:extend({
         name = "spidertron-extended",
         category = "spidertron-extended",
         order = "a",
+        is_title = true,
         trigger =
         {
             type = "unlock-recipe",
@@ -654,7 +655,7 @@ data:extend({
           count = 5
         },
         --simulation = {} --simulations.spidertron_extended
-        dependencies = {"spidertron-extended"},
+        --dependencies = {"spidertron-extended"}, -- had issues with this before
         simulation = spidertron_extended
     },
     {
