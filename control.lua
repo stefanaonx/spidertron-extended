@@ -62,7 +62,7 @@ function(event)
             new_spidertronmk3.color = {0.5, 0, 0.5, 0.5}
         end
         -- when spidertronmk3 is created add it to the table
-        table.insert(spidertronmk3, new_spidertronmk3)
+        table.insert(storage.spidertronmk3, new_spidertronmk3)
     elseif event.entity.name == "spidertron-builder" then
         local spidertron_builder = event.entity
         if check_spider_colors(spidertron_builder.color) then
@@ -98,7 +98,7 @@ function(event)
         if check_spider_colors(new_immolator.color) then
             new_immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
         end
-        table.insert(immolator, new_immolator)
+        table.insert(storage.immolator, new_immolator)
         -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}
     elseif event.entity.name == "major-spidertron" then
         local new_major_spidertron = event.entity
@@ -106,7 +106,7 @@ function(event)
             new_major_spidertron.color = {0.2941, 0.3255, 0.1255, 0.5}
         end
         -- when major spidertron is created add it to the table
-        table.insert(major_spidertron, new_major_spidertron)
+        table.insert(storage.major_spidertron, new_major_spidertron)
     end
 end)
 
@@ -391,20 +391,20 @@ end)
 
 --putting them outside any function to properly load each time
 -- verify that all types of spidertrons arrays exists and if they do not, create them
-if spidertronmk2 == nil then
-    spidertronmk2 = {}
+if storage.spidertronmk2 == nil then
+    storage.spidertronmk2 = {}
 end
-if spidertronmk3 == nil then
-    spidertronmk3 = {}
+if storage.spidertronmk3 == nil then
+    storage.spidertronmk3 = {}
 end
-if spidertron_builder == nil then
-    spidertron_builder = {}
+if storage.spidertron_builder == nil then
+    storage.spidertron_builder = {}
 end
-if immolator == nil then
-    immolator = {}
+if storage.immolator == nil then
+    storage.immolator = {}
 end
-if major_spidertron == nil then
-    major_spidertron = {}
+if storage.major_spidertron == nil then
+    storage.major_spidertron = {}
 end
 
 script.on_nth_tick(60, function(event)
@@ -434,13 +434,13 @@ script.on_nth_tick(60, function(event)
         spidertronmk3_health_regen = 0
     end
     
-    for key, spidertronmk3_ent in pairs(spidertronmk3) do
+    for key, spidertronmk3_ent in pairs(storage.spidertronmk3) do
         if spidertronmk3_ent.valid then
             -- game.print(dump(spidertronmk3))
             -- i want to try add this in a setting
             spidertronmk3_ent.health = spidertronmk3_ent.health + spidertronmk3_health_regen
         else  --had an issue here but i think it got fixed
-            table.remove(spidertronmk3, key)
+            table.remove(storage.spidertronmk3, key)
         end
     end
     
@@ -463,14 +463,14 @@ script.on_init(function()
     cooldown = {}
     smarttoggle = {}
     smarttoggle.data = {}
-    immolator = {}
+    -- immolator = {}
     player = {}
     -- declare global spidertronmk3 on init
-    spidertronmk3 = {}
+    -- spidertronmk3 = {}
     spidertronmk3_health_regen = 15
     if settings.startup["disable-health-regenmk3"].value then
         spidertronmk3_health_regen = 0
     end
     -- declare global major spidertron on init
-    major_spidertron = {}
+    -- major_spidertron = {}
 end)
