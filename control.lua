@@ -39,6 +39,7 @@ end)
 
 
 -- script to modify the spidertronmk2 and spidertronmk3 color on placement
+-- this only applies when a player character constructs something
 script.on_event(defines.events.on_built_entity,
 function(event)
     local default_color = {
@@ -111,7 +112,103 @@ function(event)
 end)
 
 
+-- this version is the one that when a robot builds the entity
+script.on_event(defines.events.on_robot_built_entity,
+function(event)
+    local default_color = {
+        ["r"] = 1,
+        ["g"] = 0.5,
+        ["b"] = 0,
+        ["a"] = 0.5
+    }
+    if event.entity.name == "spidertronmk2" or
+        event.entity.name == "spidertronmk2-spidertronmk2-rocket-launcher-1" then
+        local spidertronmk2 = event.entity
+        if check_spider_colors(spidertronmk2.color) then
+            spidertronmk2.color = {1.0, 0, 0, 0.5}
+        end
+    elseif event.entity.name == "spidertronmk3" or
+        event.entity.name == "spidertronmk3-spidertronmk3-rocket-launcher-1" then
+
+        local new_spidertronmk3 = event.entity
+        -- game.print(dump(spidertronmk3.color))
+        if check_spider_colors(new_spidertronmk3.color) then
+            new_spidertronmk3.color = {0.5, 0, 0.5, 0.5}
+        end
+        -- when spidertronmk3 is created add it to the table
+        table.insert(storage.spidertronmk3, new_spidertronmk3)
+    elseif event.entity.name == "spidertron-builder" then
+        local spidertron_builder = event.entity
+        if check_spider_colors(spidertron_builder.color) then
+            spidertron_builder.color = {1, 1, 1, 0.5}
+        end
+        -- game.print(spidertron_builder.get_inventory)
+        -- adding the batteries automatically on placement
+        -- TODO need to add higher quality batteries if higher quality spidertron is placed
+        spidertron_builder.insert({name="retrofitted-battery"})
+        spidertron_builder.insert({name="retrofitted-battery2"})
+    elseif event.entity.name == "spidertron-builder-spidertron-experimental-laser" then
+        local spidertron_builder = event.entity
+        if check_spider_colors(spidertron_builder.color) then
+            spidertron_builder.color = {1, 1, 1, 0.5}
+        end
+        -- game.print(spidertron_builder.get_inventory)
+        -- adding the batteries automatically on placement
+        spidertron_builder.insert({name="retrofitted-battery"})
+    elseif event.entity.name == "spidertron-builder-spidertron-experimental-laser2" then
+        local spidertron_builder = event.entity
+        if check_spider_colors(spidertron_builder.color) then
+            spidertron_builder.color = {1, 1, 1, 0.5}
+        end
+        -- game.print(spidertron_builder.get_inventory)
+        -- adding the batteries automatically on placement
+        spidertron_builder.insert({name="retrofitted-battery2"})
+    elseif event.entity.name == "immolator" or
+        event.entity.name == "immolator-spidertron-immolator-flamethrower" then
+        if immolator == nil then
+            immolator = {}
+        end
+        local new_immolator = event.entity
+        if check_spider_colors(new_immolator.color) then
+            new_immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
+        end
+        table.insert(storage.immolator, new_immolator)
+        -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}
+    elseif event.entity.name == "major-spidertron" then
+        local new_major_spidertron = event.entity
+        if check_spider_colors(new_major_spidertron.color) then
+            new_major_spidertron.color = {0.2941, 0.3255, 0.1255, 0.5}
+        end
+        -- when major spidertron is created add it to the table
+        table.insert(storage.major_spidertron, new_major_spidertron)
+    end
+end)
+
+
+-- this is when player removes the item
 script.on_event(defines.events.on_pre_player_mined_item,
+function(event)
+    if event.entity.name == "spidertron-builder" then
+        local spidertron_builder = event.entity
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
+        spidertron_builder.remove_item({name="retrofitted-battery"})
+        spidertron_builder.remove_item({name="retrofitted-battery2"})
+    end
+    if event.entity.name == "spidertron-builder-spidertron-experimental-laser" then
+        local spidertron_builder = event.entity
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
+        spidertron_builder.remove_item({name="retrofitted-battery"})
+    end
+    if event.entity.name == "spidertron-builder-spidertron-experimental-laser2" then
+        local spidertron_builder = event.entity
+        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
+        spidertron_builder.remove_item({name="retrofitted-battery2"})
+    end
+end)
+
+
+-- this is when robot removes the item
+script.on_event(defines.events.on_robot_mined_entity,
 function(event)
     if event.entity.name == "spidertron-builder" then
         local spidertron_builder = event.entity

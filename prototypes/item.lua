@@ -115,7 +115,7 @@ spidertron_machine_gun_item.attack_parameters.range = 30
 local spidertron_cannon_item = table_deepcopy(data.raw["gun"]["tank-cannon"])
 spidertron_cannon_item.name = "major-spidertron-cannon"
 spidertron_cannon_item.attack_parameters.cooldown = 80
-spidertron_cannon_item.attack_parameters.range = 70
+spidertron_cannon_item.attack_parameters.range = 100 --70 before, increasing cause it seems it's still low range
 
 data:extend{
     spidertron_machine_gun_item,

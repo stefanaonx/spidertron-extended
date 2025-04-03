@@ -7,6 +7,8 @@ if mods["space-exploration"] then
     vanilla_grid_height = 8
 end
 
+-- I need to modify this if i want to ifs for checking if mods are enabled
+-- and maybe make it so that it's more modular as well
 data:extend({
     -- vanilla sizes
     {
@@ -298,6 +300,7 @@ data:extend({
         order = "d001"
     },
     -- bobs equipment
+    -- add an IF here to check if the mods is enabled
     {
         type = "bool-setting",
         name = "disable-bobs-equipment",
@@ -306,6 +309,7 @@ data:extend({
         order = "m0"
     },
     -- disable bobs equipment on vanilla
+    -- add an IF here to check if the mods is enabled
     {
         type = "bool-setting",
         name = "disable-bobs-vehicle-equipment-vanilla",
@@ -316,6 +320,7 @@ data:extend({
     -- someday i'm gonna make this into some kind
     -- of selector to select instead of several thingies
     -- bobs equipment + vehicle equipment
+    -- add an IF here to check if the mods is enabled
     {
         type = "bool-setting",
         name = "enable-bobs-all-equipment-spidertrons",
@@ -333,6 +338,7 @@ data:extend({
         order = "x1"
     },
     --]]
+    -- add an IF here to check if the mods is enabled
     {
         type = "bool-setting",
         name = "disable-krastorio-spidertron-burner",
