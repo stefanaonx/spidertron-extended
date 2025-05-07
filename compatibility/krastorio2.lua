@@ -222,9 +222,6 @@ end
 
 
 -- recipe changes
-
-
-
 if not settings.startup["disable-spidertronmk2"].value then
     data.raw["recipe"]["spidertronmk2"].ingredients = {
         {type = "item", name = "spidertron", amount = 1},
