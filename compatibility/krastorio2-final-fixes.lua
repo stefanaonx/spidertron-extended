@@ -10,6 +10,7 @@ if mods["Krastorio2"] then
     data.raw["equipment-grid"]["spidertronmk3-grid"].equipment_categories = data.raw["equipment-grid"]["kr-spidertron-equipment-grid"].equipment_categories
     data.raw["equipment-grid"]["spidertron-builder-grid"].equipment_categories = data.raw["equipment-grid"]["kr-spidertron-equipment-grid"].equipment_categories
     data.raw["equipment-grid"]["immolator-grid"].equipment_categories = data.raw["equipment-grid"]["kr-spidertron-equipment-grid"].equipment_categories
+    data.raw["equipment-grid"]["major-spidertron-grid"].equipment_categories = data.raw["equipment-grid"]["kr-spidertron-equipment-grid"].equipment_categories
 
     -- now adjust the grid size
     local vanilla_grid_width = settings.startup["vanilla-spidertron-width"].value
