@@ -222,61 +222,64 @@ end
 
 
 -- recipe changes
+
+
+
 if not settings.startup["disable-spidertronmk2"].value then
     data.raw["recipe"]["spidertronmk2"].ingredients = {
-        {"spidertron", 1},
-        {"energy-control-unit", 50},
-        {"speed-module-3", 30},
-        {"effectivity-module-3", 30},
-        {"low-density-structure", 150},
-        {"fusion-reactor-equipment", 2}
+        {type = "item", name = "spidertron", amount = 1},
+        {type = "item", name = "processing-unit", amount = 50},
+        {type = "item", name = "speed-module-3", amount = 30},
+        {type = "item", name = "efficiency-module-3", amount = 30},
+        {type = "item", name = "low-density-structure", amount = 150},
+        {type = "item", name = "kr-fusion-reactor-equipment", amount = 2}
     }
 end
 
 if not settings.startup["disable-immolator"].value then
     data.raw["recipe"]["immolator"].ingredients = {
-        {"spidertron", 1},
-        {"energy-control-unit", 50},
-        {"speed-module-3", 30},
-        {"effectivity-module-3", 30},
-        {"low-density-structure", 150},
-        {"fusion-reactor-equipment", 2}
+        {type = "item", name = "spidertron", amount = 1},
+        {type = "item", name = "processing-unit", amount = 50},
+        {type = "item", name = "speed-module-3", amount = 30},
+        {type = "item", name = "efficiency-module-3", amount = 30},
+        {type = "item", name = "low-density-structure", amount = 150},
+        {type = "item", name = "kr-fusion-reactor-equipment", amount = 2}
     }
 end
 
 if not settings.startup["disable-spidertronmk3"].value then
     data.raw["recipe"]["spidertronmk3"].category = "crafting-with-fluid"
     local ingr = {
-        {"spidertron",1},
-        {"ai-core", 50},
-        {"imersite-crystal", 25},
-        -- {"fluid-nitric-acid", 125},
+        {type = "item", name = "spidertron",amount = 1},
+        {type = "item", name = "kr-ai-core", amount = 50},
+        {type = "item", name = "kr-imersite-crystal", amount = 25},
+        -- {"fluid-kr-nitric-acid", 125},
         {
             type="fluid", 
-            name="nitric-acid", 
+            name="kr-nitric-acid", 
             amount=125, 
             catalyst_amount = 125
         },
-        {"heavy-rocket-launcher", 4},
-        {"imersium-plate", 100},
-        {"fusion-reactor-equipment", 2}
+        {type = "item", name = "kr-heavy-rocket-launcher", amount = 4},
+        {type = "item", name = "kr-imersium-plate", amount = 100},
+        {type = "item", name = "kr-fusion-reactor-equipment", amount = 2}
     }
     -- if spidertronmk2 not disabled use this recipe
     if not settings.startup["disable-spidertronmk2"].value then
         ingr = {
-            {"spidertronmk2", 1},
-            {"ai-core", 50},
-            {"imersite-crystal", 25},
-            -- {"fluid-nitric-acid", 125},
+            {type = "item", name = "spidertronmk2", amount = 1},
+            {type = "item", name = "kr-ai-core", amount = 50},
+            {type = "item", name = "kr-imersite-crystal", amount = 25},
+            -- {"fluid-kr-nitric-acid", 125},
             {
                 type="fluid", 
-                name="nitric-acid", 
+                name="kr-nitric-acid", 
                 amount=125, 
                 catalyst_amount = 125
             },
-            {"heavy-rocket-launcher", 4},
-            {"imersium-plate", 100},
-            {"fusion-reactor-equipment", 2}
+            {type = "item", name = "kr-heavy-rocket-launcher", amount = 4},
+            {type = "item", name = "kr-imersium-plate", amount = 100},
+            {type = "item", name = "kr-fusion-reactor-equipment", amount = 2}
         }
     end
     data.raw["recipe"]["spidertronmk3"].ingredients = ingr
@@ -285,25 +288,25 @@ end
 
 
 if not settings.startup["disable-spidertron-builder"].value then
-    if settings.startup["kr-containers"].value then
-        data.raw["recipe"]["spidertron-builder"].ingredients = {
-            {"ai-core", 1},
-            {"rocket-control-unit", 16},
-            {"low-density-structure", 150},
-            {"productivity-module-3", 2},
-            {"kr-medium-container", 10},
-            {"construction-robot", 50},
-            {"radar", 5}
-        }
-    else
-        data.raw["recipe"]["spidertron-builder"].ingredients = {
-            {"ai-core", 1},
-            {"rocket-control-unit", 16},
-            {"low-density-structure", 150},
-            {"productivity-module-3", 2},
-            {"steel-chest",10},
-            {"construction-robot", 50},
-            {"radar", 5}
-        }
-    end
+	if settings.startup["kr-containers"].value then
+		data.raw["recipe"]["spidertron-builder"].ingredients = {
+			{type = "item", name = "kr-ai-core", amount = 1},
+			{type = "item", name = "processing-unit", amount = 16},
+			{type = "item", name = "low-density-structure", amount = 150},
+			{type = "item", name = "productivity-module-3", amount = 2},
+			{type = "item", name = "kr-strongbox", amount = 10},
+			{type = "item", name = "construction-robot", amount = 50},
+			{type = "item", name = "radar", amount = 5}
+		}
+	else
+		data.raw["recipe"]["spidertron-builder"].ingredients = {
+			{type = "item", name = "kr-ai-core", amount = 1},
+			{type = "item", name = "rocket-control-unit", amount = 16},
+			{type = "item", name = "low-density-structure", amount = 150},
+			{type = "item", name = "productivity-module-3", amount = 2},
+			{type = "item", name = "steel-chest", amount = 10},
+			{type = "item", name = "construction-robot", amount = 50},
+			{type = "item", name = "radar", 5}
+		}
+	end
 end
