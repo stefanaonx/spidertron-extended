@@ -21,13 +21,13 @@ if not settings.startup["disable-krastorio-spidertron-burner"].value then
     if not settings.startup["disable-spidertronmk2"].value then
         data.raw["spider-vehicle"]["spidertronmk2"].energy_source = {
             type = "burner",
-            emissions_per_minute = 0,
+            emissions_per_minute = { pollution = 0 },
             effectivity = 1,
             render_no_power_icon = true,
             render_no_network_icon = false,
             fuel_inventory_size = 1,
             burnt_inventory_size = 1,
-            fuel_category = "fusion-fuel"
+            fuel_categories = { "kr-fusion-fuel" },
         }
         data.raw["spider-vehicle"]["spidertronmk2"].movement_energy_consumption = "3MW"
     end
@@ -35,13 +35,13 @@ if not settings.startup["disable-krastorio-spidertron-burner"].value then
     if not settings.startup["disable-immolator"].value then
         data.raw["spider-vehicle"]["immolator"].energy_source = {
             type = "burner",
-            emissions_per_minute = 0,
+            emissions_per_minute = { pollution = 0 },
             effectivity = 1,
             render_no_power_icon = true,
             render_no_network_icon = false,
             fuel_inventory_size = 1,
             burnt_inventory_size = 1,
-            fuel_category = "fusion-fuel"
+            fuel_categories = { "kr-fusion-fuel" },
         }
         data.raw["spider-vehicle"]["immolator"].movement_energy_consumption = "3MW"
     end
@@ -49,13 +49,13 @@ if not settings.startup["disable-krastorio-spidertron-burner"].value then
     if not settings.startup["disable-spidertronmk3"].value then
         data.raw["spider-vehicle"]["spidertronmk3"].energy_source = {
             type = "burner",
-            emissions_per_minute = 0,
+            emissions_per_minute = { pollution = 0 },
             effectivity = 1,
             render_no_power_icon = true,
             render_no_network_icon = false,
             fuel_inventory_size = 1,
             burnt_inventory_size = 1,
-            fuel_category = "fusion-fuel"
+            fuel_categories = { "kr-fusion-fuel" },
         }
         data.raw["spider-vehicle"]["spidertronmk3"].movement_energy_consumption = "3MW"
     end
@@ -63,13 +63,13 @@ if not settings.startup["disable-krastorio-spidertron-burner"].value then
     if not settings.startup["disable-spidertron-builder"].value then
     data.raw["spider-vehicle"]["spidertron-builder"].energy_source = {
         type = "burner",
-        emissions_per_minute = 0,
+        emissions_per_minute = { pollution = 0 },
         effectivity = 1,
         render_no_power_icon = true,
         render_no_network_icon = false,
         fuel_inventory_size = 1,
         burnt_inventory_size = 1,
-        fuel_category = "fusion-fuel"
+        fuel_categories = { "kr-fusion-fuel" },
     }
 	data.raw["spider-vehicle"]["spidertron-builder"].movement_energy_consumption = "3MW"
     end
@@ -92,7 +92,7 @@ if not settings.startup["disable-spidertronmk2"].value then
         ingredients = {
             {"utility-science-pack", 1},
             {"space-science-pack", 1},
-            {"advanced-tech-card", 1}
+            {"kr-advanced-tech-card", 1}
         },
         time = 30
     }
@@ -110,7 +110,7 @@ if not settings.startup["disable-immolator"].value then
         ingredients = {
             {"utility-science-pack", 1},
             {"space-science-pack", 1},
-            {"advanced-tech-card", 1}
+            {"kr-advanced-tech-card", 1}
         },
         time = 30
     }
@@ -134,8 +134,8 @@ if not settings.startup["disable-spidertronmk3"].value then
         ingredients = {
             {"utility-science-pack", 1},
             {"space-science-pack", 1},
-            {"advanced-tech-card", 1},
-            {"singularity-tech-card", 1},
+            {"kr-advanced-tech-card", 1},
+            {"kr-singularity-tech-card", 1},
         },
         time = 30
     }
@@ -153,7 +153,7 @@ if not settings.startup["disable-spidertron-builder"].value then
         ingredients = {
             {"utility-science-pack", 1},
             {"space-science-pack", 1},
-            {"advanced-tech-card", 1}
+            {"kr-advanced-tech-card", 1}
         },
         time = 30
     }
@@ -172,7 +172,7 @@ if not settings.startup["disable-spidertronmk3"].value then
         attack_parameters =
         {
             type = "projectile",
-            ammo_category = "heavy-rocket",
+            ammo_category = "kr-heavy-rocket",
             movement_slow_down_factor = 0.75,
             cooldown = 180,
             projectile_creation_distance = 0.6,
