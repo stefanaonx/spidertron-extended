@@ -73,6 +73,20 @@ if not settings.startup["disable-krastorio-spidertron-burner"].value then
     }
 	data.raw["spider-vehicle"]["spidertron-builder"].movement_energy_consumption = "3MW"
     end
+    --major spidertron changes for krastorio2
+    if not settings.startup["disable-major-spidertron"].value then
+        data.raw["spider-vehicle"]["major-spidertron"].energy_source = {
+            type = "burner",
+            emissions_per_minute = { pollution = 0 },
+            effectivity = 1,
+            render_no_power_icon = true,
+            render_no_network_icon = false,
+            fuel_inventory_size = 1,
+            burnt_inventory_size = 1,
+            fuel_categories = { "kr-fusion-fuel" },
+        }
+        data.raw["spider-vehicle"]["major-spidertron"].movement_energy_consumption = "3MW"
+    end
 end
 
 -- -- equipment grid changes
@@ -156,6 +170,24 @@ if not settings.startup["disable-spidertron-builder"].value then
             {"kr-advanced-tech-card", 1}
         },
         time = 30
+    }
+end
+--major spidertron tech
+if not settings.startup["disable-major-spidertron"].value then
+    data.raw["technology"]["major-spidertron-tech"].prerequisites = {
+        "spidertron",
+        "kr-energy-control-unit",
+        "space-science-pack",
+        "kr-advanced-tech-card"
+    }
+    data.raw["technology"]["major-spidertron-tech"].unit = {
+        count = 1000,
+        ingredients = {
+            {"utility-science-pack", 1},
+            {"space-science-pack", 1},
+            {"kr-advanced-tech-card", 1}
+        },
+        time=30
     }
 end
 -- krastorio heavy launcher for mk3

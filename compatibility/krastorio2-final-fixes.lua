@@ -110,3 +110,15 @@ if not settings.startup["disable-spidertron-builder"].value then
 		}
 	end
 end
+
+--major spidertron changes
+if not settings.startup["disable-major-spidertron"].value then
+    data.raw["recipe"]["major-spidertron"].ingredients = {
+        {type = "item", name = "spidertron", amount = 1},
+        {type = "item", name = "processing-unit", amount = 50},
+        {type = "item", name = "speed-module-3", amount = 30},
+        {type = "item", name = "efficiency-module-3", amount = 30},
+        {type = "item", name = "low-density-structure", amount = 150},
+        {type = "item", name = "kr-fusion-reactor-equipment", amount = 2}
+    }
+end
