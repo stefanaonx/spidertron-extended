@@ -106,7 +106,7 @@ if not settings.startup["disable-spidertron-builder"].value then
 			{type = "item", name = "productivity-module-3", amount = 2},
 			{type = "item", name = "steel-chest", amount = 10},
 			{type = "item", name = "construction-robot", amount = 50},
-			{type = "item", name = "radar", 5}
+			{type = "item", name = "radar", amount = 5}
 		}
 	end
 end
