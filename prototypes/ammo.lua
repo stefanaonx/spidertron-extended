@@ -104,11 +104,13 @@ data:extend{
 data:extend{
     {
         type = "ammo-category",
-        name = "retrofitted-battery"
+        name = "retrofitted-battery",
+        hidden_in_factoriopedia = true
     },
     {
         type = "ammo-category",
-        name = "retrofitted-battery2"
+        name = "retrofitted-battery2",
+        hidden_in_factoriopedia = true
     }
 }
 
