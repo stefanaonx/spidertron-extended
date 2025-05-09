@@ -1,14 +1,16 @@
--- checking if mod doesn't exists
+--skipping if Krastorio2 not present
 if not mods["Krastorio2"] then
     return
 end
-
+--defining local assets to avoid making the global nok2assets_launcher_png/ogg
+local assets = {}
+--assets table based on if k2assets is present we can now just use assets.nok2assets_launcher_png/ogg as a local
 if not mods["Krastorio2Assets"] then
-    nok2assets_launcher_png = "__Krastorio2__/graphics/icons/guns/heavy-rocket-launcher.png"
-    nok2assets_launcher_ogg = "__Krastorio2__/sounds/weapons/rocket-launch.ogg"
-else
-    nok2assets_launcher_png = "__Krastorio2Assets__/icons/guns/heavy-rocket-launcher.png"
-    nok2assets_launcher_ogg = "__Krastorio2Assets__/sounds/weapons/rocket-launch.ogg"
+        assets.nok2assets_launcher_png = "__Krastorio2__/graphics/icons/guns/heavy-rocket-launcher.png"
+        assets.nok2assets_launcher_ogg = "__Krastorio2__/sounds/weapons/rocket-launch.ogg"
+    else
+        assets.nok2assets_launcher_png = "__Krastorio2Assets__/icons/guns/heavy-rocket-launcher.png"
+        assets.nok2assets_launcher_ogg = "__Krastorio2Assets__/sounds/weapons/rocket-launch.ogg"
 end
 
 require "util"
@@ -59,7 +61,7 @@ if not settings.startup["disable-krastorio-spidertron-burner"].value then
         }
         data.raw["spider-vehicle"]["spidertronmk3"].movement_energy_consumption = "3MW"
     end
-	-- spider builder changes for krastorio2
+    -- spider builder changes for krastorio2
     if not settings.startup["disable-spidertron-builder"].value then
     data.raw["spider-vehicle"]["spidertron-builder"].energy_source = {
         type = "burner",
@@ -71,7 +73,7 @@ if not settings.startup["disable-krastorio-spidertron-burner"].value then
         burnt_inventory_size = 1,
         fuel_categories = { "kr-fusion-fuel" },
     }
-	data.raw["spider-vehicle"]["spidertron-builder"].movement_energy_consumption = "3MW"
+    data.raw["spider-vehicle"]["spidertron-builder"].movement_energy_consumption = "3MW"
     end
     --major spidertron changes for krastorio2
     if not settings.startup["disable-major-spidertron"].value then
@@ -197,7 +199,7 @@ if not settings.startup["disable-spidertronmk3"].value then
         name = "spidertron-heavy-rocket-launcher",
         -- TODO Check properly that krastorio2assets is available
         -- since the assets are mandatory for k2 i will leave it like this
-        icon = nok2assets_launcher_png,
+        icon = assets.nok2assets_launcher_png,
         icon_size = 64, icon_mipmaps = 4,
         subgroup = "gun",
         order = "d[spidertron-heavy-rocket-launcher]",
@@ -214,7 +216,7 @@ if not settings.startup["disable-spidertronmk3"].value then
             {
                 {
                     -- since the assets are mandatory for k2 i will leave it like this
-                    filename = nok2assets_launcher_ogg,
+                    filename = assets.nok2assets_launcher_ogg,
                     volume = 1
                 }
             }
