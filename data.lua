@@ -26,7 +26,7 @@ require("prototypes.bubblegum")
 -- compatibility files
 require("compatibility.space-age")
 require("compatibility.krastorio2")
---require("compatibility.bobvehicleequipment")
+require("compatibility.bobvehicleequipment")
 require("compatibility.bobsmods")
 require("compatibility.bobwarfare")
 --require("compatibility.vintage_spidertron")
