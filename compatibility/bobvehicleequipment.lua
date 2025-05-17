@@ -44,3 +44,12 @@ if not settings.startup["disable-immolator"].value then
         "armoured-vehicle"
     }
 end
+
+
+if not settings.startup["disable-major-spidertron"].value then
+    data.raw["equipment-grid"]["major-spidertron-grid"].equipment_categories = {
+        "spidertron",
+        "vehicle",
+        "armoured-vehicle"
+    }
+end
