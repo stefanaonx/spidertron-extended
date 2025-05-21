@@ -1,16 +1,16 @@
 --control.lua
 
 function dump(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. dump(v) .. ','
-      end
-      return s .. '} '
-   else
-      return tostring(o)
-   end
+    if type(o) == 'table' then
+        local s = '{ '
+        for k,v in pairs(o) do
+            if type(k) ~= 'number' then k = '"'..k..'"' end
+            s = s .. '['..k..'] = ' .. dump(v) .. ','
+        end
+        return s .. '} '
+    else
+        return tostring(o)
+    end
 end
 
 
@@ -18,10 +18,10 @@ end
 -- but was to lazy
 -- function checks if colors given are default for spider
 function check_spider_colors(colors)
-    if colors.r == 1 and 
-       colors.g == 0.5 and 
-       colors.b == 0 and 
-       colors.a == 0.5 then
+    if colors.r == 1 and
+        colors.g == 0.5 and
+        colors.b == 0 and
+        colors.a == 0.5 then
         return true
     end
     return false
