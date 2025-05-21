@@ -1,12 +1,6 @@
 -- vanilla grid size defaults
 local vanilla_grid_width, vanilla_grid_height = 0, 0
 
--- use different defaults for SE
-if mods["space-exploration"] then
-    vanilla_grid_width = 10
-    vanilla_grid_height = 8
-end
-
 -- I need to modify this if i want to ifs for checking if mods are enabled
 -- and maybe make it so that it's more modular as well
 data:extend({
@@ -299,51 +293,62 @@ data:extend({
         default_value = false,
         order = "d001"
     },
-    -- bobs equipment
-    -- add an IF here to check if the mods is enabled
-    {
-        type = "bool-setting",
-        name = "disable-bobs-equipment",
-        setting_type = "startup",
-        default_value = false,
-        order = "m0"
-    },
-    -- disable bobs equipment on vanilla
-    -- add an IF here to check if the mods is enabled
-    {
-        type = "bool-setting",
-        name = "disable-bobs-vehicle-equipment-vanilla",
-        setting_type = "startup",
-        default_value = false,
-        order = "m01"
-    },
-    -- someday i'm gonna make this into some kind
-    -- of selector to select instead of several thingies
-    -- bobs equipment + vehicle equipment
-    -- add an IF here to check if the mods is enabled
-    {
-        type = "bool-setting",
-        name = "enable-bobs-all-equipment-spidertrons",
-        setting_type = "startup",
-        default_value = false,
-        order = "m02"
-    },
-    --[[
-    -- to disable spidertronmk4
-    {
-        type = "bool-setting",
-        name = "disable-spidertronmk4",
-        setting_type = "startup",
-        default_value = false,
-        order = "x1"
-    },
-    --]]
-    -- add an IF here to check if the mods is enabled
-    {
-        type = "bool-setting",
-        name = "disable-krastorio-spidertron-burner",
-        setting_type = "startup",
-        default_value = false,
-        order = "m1"
-    }
 })
+
+if mods["bobvehicleequipment"] then
+    data:extend({
+        --New selective setting needs more to test the option to pysicly work with bobs.
+        {
+            type = "string-setting",
+            name = "vehicle-equipments-",
+            setting_type = "startup",
+            default_value = "disable-bobs-equipment",
+            allowed_values = {"enable-bobs-all-equipment-spidertrons", "disable-bobs-vehicle-equipment-vanilla", "disable-bobs-equipment"},
+            order = "x1"
+        },
+        --[[Someday make this into some kind of selector option instead of sperate settings.]]
+        -- Bobs equipment
+        --[[
+        {
+            type = "bool-setting",
+            name = "disable-bobs-equipment",
+            setting_type = "startup",
+            default_value = false,
+            order = "m0"
+        },
+        -- Disable Bobs equipment on vanilla
+        {
+            type = "bool-setting",
+            name = "disable-bobs-vehicle-equipment-vanilla",
+            setting_type = "startup",
+            default_value = false,
+            order = "m01"
+        },
+        -- Bobs equipment + vehicle equipment
+        {
+            type = "bool-setting",
+            name = "enable-bobs-all-equipment-spidertrons",
+            setting_type = "startup",
+            default_value = false,
+            order = "m02"
+        },
+        ]]
+    })
+end
+
+if mods["Krastorio2"] then
+    data:extend({
+        {
+            type = "bool-setting",
+            name = "disable-krastorio-spidertron-burner",
+            setting_type = "startup",
+            default_value = false,
+            order = "m1"
+        }
+    })
+end
+
+if mods["space-exploration"] then
+    vanilla_grid_width = 10-- use different defaults for SE
+    vanilla_grid_height = 8
+end
