@@ -1,13 +1,14 @@
  - add a logistics tab (devs confirmed planning to add a logistics tab in the future)
  - TBD: consider adding an early game Spidertron with limited functionality (maybe between car and tank tech ?) that requires fuel to move > similar to insectitron // to be honest i would like to add one after the car with guns and another one after the tank with cannons both with cycle on for maximum firing output
  - TBD: overall balancing
- - add impalement/damage on contact with enemies
+ - add impalement/damage on contact with enemies ... huh!!
  - LOW PRIORITY - fix Spidertron MK2 and Spidertron MK3 item icon iconsistencies if used as map pins 
  - REFACTORING (50% done, i think)
- - flamethrower quad legged > very small size 0.5 or .4 the normal size, faster, 4 legs with a flamethrower, rocket launcher and a gun without auto cyclying
+ - flamethrower quad legged > very small size 0.5 or .4 the normal size, faster, 4 legs with a flamethrower, rocket launcher and a gun without auto cyclying > isn't this the immolator?!
  - shield or tanky / paladin spidertron = skill to shield over or keep health in a point as active skill, passive skill to not die for 5 seconds when going under 10% hp.
  - turret spidertron, can deploy temporary turrets // like up to 3 turrets dissapears after like 30 seconds, if new one is placed destroy the first one? as active, as passive turret regen, or power for lazer turrets
- 
+ - kamikaze spidertron that can move really fast but with low health can be armed to explode when dying or activated to explode on command, similar explosion to nuke
+ - Add spidertrons with the new weapons added in space age but need to think on the type of abilities to add for it.
 
  - DONE: consider adding a weaponless Spidertron with a large inventory for use in construction // Ghost Weaver is having fun now
  - DONE: add self-repair to Spidertron MK3, also added setting for it
@@ -15,5 +16,5 @@
  - DONE: increase stride distance for maximum stickbugness
  - DONE: increase rocket launcher maximum range for Spidertron MK2 and Spidertron MK3
  - DONE: changed Spidertron MK2 and Spidertron MK3 base color on placement so they look different from the vanilla one
- - DONE: Added Krastorio 2 Compatibility
+ - : Added Krastorio 2 Compatibility > needs re-doing
  - DONE: Added a mod setting to use vanilla spidertron sizes for all

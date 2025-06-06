@@ -23,8 +23,13 @@ require("prototypes.major_spidertron")
 -- other stuff related to spidertron extended
 require("prototypes.bubblegum")
 
+-- adding fuel only via settings
+require("prototypes.fuel")
+
 -- compatibility files
 require("compatibility.space-age")
 require("compatibility.krastorio2")
 require("compatibility.bobvehicleequipment")
 require("compatibility.bobsmods")
+require("compatibility.vintage_spidertron")
+require("compatibility.deal_with_it")

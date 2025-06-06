@@ -50,7 +50,7 @@ if not settings.startup["disable-spidertronmk2"].value then
 end
 
 if not settings.startup["disable-spidertronmk3"].value then
-    local scalemk3 = 0.7
+    local scalemk3 = 1.0
     if settings.startup["vanilla-spidertron-size"].value then
         scalemk3 = 0.5
     end
@@ -64,11 +64,43 @@ if not settings.startup["disable-spidertronmk3"].value then
 end
 
 if not settings.startup["disable-spidertron-builder"].value then
+    local scale_builder = 0.4
+    if settings.startup["vanilla-spidertron-size"].value then
+        scale_builder = 0.5
+    end
     data.raw["spider-vehicle"]["spidertron-builder"].graphics_set.animation = {
         layers = {
-            gen_layer("back", 0.5),
+            gen_layer("back", scale_builder),
             data.raw["spider-vehicle"]["spidertron-builder"].graphics_set.animation,
-            gen_layer("front", 0.5)
+            gen_layer("front", scale_builder)
+        }
+    }
+end
+
+if not settings.startup["disable-major-spidertron"].value then
+    local scale_ms = 0.6
+    if settings.startup["vanilla-spidertron-size"].value then
+        scale_ms = 0.5
+    end
+    data.raw["spider-vehicle"]["major-spidertron"].graphics_set.animation = {
+        layers = {
+            gen_layer("back", scale_ms),
+            data.raw["spider-vehicle"]["major-spidertron"].graphics_set.animation,
+            gen_layer("front", scale_ms)
+        }
+    }
+end
+
+if not settings.startup["disable-immolator"].value then
+    local scale_immolator = 0.4
+    if settings.startup["vanilla-spidertron-size"].value then
+        scale_immolator = 0.5
+    end
+    data.raw["spider-vehicle"]["immolator"].graphics_set.animation = {
+        layers = {
+            gen_layer("back", scale_immolator),
+            data.raw["spider-vehicle"]["immolator"].graphics_set.animation,
+            gen_layer("front", scale_immolator)
         }
     }
 end

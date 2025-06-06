@@ -1,5 +1,13 @@
 -- vanilla grid size defaults
-local vanilla_grid_width, vanilla_grid_height = 0, 0
+local vanilla_grid_width, vanilla_grid_height, vanilla_inv_size, vanilla_hp = 10, 6, 80, 3000
+-- default is 10x6, 80 inv size, 3000 hp
+-- default for SE is 10x6, 80 inv size, 3000 hp
+if mods["space-exploration"] then
+    vanilla_grid_width = 10
+    vanilla_grid_height = 6
+    vanilla_inv_size = 80
+    vanilla_hp = 3000
+end
 
 -- I need to modify this if i want to ifs for checking if mods are enabled
 -- and maybe make it so that it's more modular as well
@@ -35,7 +43,7 @@ data:extend({
         name = "vanilla-spidertron-invsize",
         setting_type = "startup",
         minimum_value = 0,
-        default_value = 0,
+        default_value = vanilla_inv_size,
         order = "a13"
     },
     -- hp for vanilla
@@ -43,8 +51,8 @@ data:extend({
         type = "int-setting",
         name = "vanilla-spidertron-hp",
         setting_type = "startup",
-        minimum_value = 0,
-        default_value = 0,
+        minimum_value = 1,
+        default_value = vanilla_hp,
         order = "a14"
     },
     -- to disable spidertronmk2
@@ -300,7 +308,7 @@ if mods["bobvehicleequipment"] then
         --New selective setting needs more to test the option to pysicly work with bobs.
         {
             type = "string-setting",
-            name = "vehicle-equipments-",
+            name = "s-extended-bob-vehicle-equipments",
             setting_type = "startup",
             default_value = "disable-bobs-equipment",
             allowed_values = {"enable-bobs-all-equipment-spidertrons", "disable-bobs-vehicle-equipment-vanilla", "disable-bobs-equipment"},
@@ -348,7 +356,12 @@ if mods["Krastorio2"] then
     })
 end
 
-if mods["space-exploration"] then
-    vanilla_grid_width = 10-- use different defaults for SE
-    vanilla_grid_height = 8
-end
+data:extend({
+    {
+        type = "bool-setting",
+        name = "enable-spidertron-extended-burner",
+        setting_type = "startup",
+        default_value = false,
+        order = "m1"
+    }
+})

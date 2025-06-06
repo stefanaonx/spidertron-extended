@@ -208,7 +208,8 @@ end)
 
 
 -- this is when robot removes the item
-script.on_event(defines.events.on_robot_mined_entity,
+-- i swear they just added this on_robot_pre_mined
+script.on_event(defines.events.on_robot_pre_mined,
 function(event)
     if event.entity.name == "spidertron-builder" then
         local spidertron_builder = event.entity

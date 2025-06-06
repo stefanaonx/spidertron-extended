@@ -1,7 +1,13 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.1
-Date: ????
+Date: 2025.06.06
+  Features:
+    - Added a feature where you can enable fuel usage for spidertron extended spiders, similar to train fuel usage;
   Changes:
+    - Fixes for ghost entities not being properly generated or removed, more exactly the ghost weaver will have it's ammo removed pre-bot pickup and it will be added ammo on deployment automatically even when doing so as a ghost entity;
+    - Several changes and fixes for both spidertron extended and bob's mods by SGZ-Creations / sgamez;
+    - Fixed compatibility with deal-with-it;
+    - Fixed compatibility with vintage-spidertron;
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.0
 Date: 2025.02.11
