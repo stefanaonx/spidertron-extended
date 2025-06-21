@@ -305,7 +305,7 @@ data:extend({
 
 if mods["bobvehicleequipment"] then
     data:extend({
-        --New selective setting needs more to test the option to pysicly work with bobs.
+        --New selective setting needs more to test the option to physically work with bobs.
         {
             type = "string-setting",
             name = "s-extended-bob-vehicle-equipments",
