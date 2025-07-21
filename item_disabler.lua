@@ -9,6 +9,9 @@ if SS["disable-spidertronmk2"].value == true then
     DRT["spidertronmk2-tech"].hidden = true
     DRR["spidertronmk2"].hidden = true
     --DRI["spidertronmk2"].hidden = true --not needed
+else
+    DRT["spidertronmk2-tech"].enabled = true
+    DRT["spidertronmk2-tech"].hidden = false
 end
 
 -- disabling spidertronmk3 if required
