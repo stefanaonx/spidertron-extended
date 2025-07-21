@@ -207,6 +207,16 @@ data:extend({
         default_value = false,
         order = "b16"
     },
+	    -- trash inventory size for spidertron-builder
+    {
+        type = "int-setting",
+        name = "spidertron-builder-trashsize",
+        setting_type = "startup",
+        minimum_value = 0,
+        default_value = 20,
+        maximum_value = 100,
+        order = "b17"
+    },
     -- immolator settings
     {
         type = "bool-setting",
@@ -305,7 +315,7 @@ data:extend({
 
 if mods["bobvehicleequipment"] then
     data:extend({
-        --New selective setting needs more to test the option to physically work with bobs.
+        --New selective setting needs more to test the option to pysicly work with bobs.
         {
             type = "string-setting",
             name = "s-extended-bob-vehicle-equipments",
