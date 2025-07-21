@@ -3,6 +3,7 @@ require "__spidertron-extended__.resistance_data"
 local table_deepcopy = util.table.deepcopy
 
 local builder_inv_size = settings.startup["spidertron-builder-invsize"].value
+local builder_trash_size = settings.startup["spidertron-builder-trashsize"].value
 local builder_hp = settings.startup["spidertron-builder-hp"].value
 
 local leg_hit_the_ground_trigger = {
@@ -37,6 +38,7 @@ spidertron_builder_entity.minable.result = "spidertron-builder"
 -- extra
 spidertron_builder_entity.max_health = builder_hp
 spidertron_builder_entity.inventory_size = builder_inv_size
+spidertron_builder_entity.trash_inventory_size = builder_trash_size
 spidertron_builder_entity.equipment_grid = "spidertron-builder-grid"
 spidertron_builder_entity.resistances = table_deepcopy(spidertron_builder_resistances)
 spidertron_builder_entity.chunk_exploration_radius = 7
