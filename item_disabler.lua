@@ -31,7 +31,6 @@ if SS["disable-immolator"].value == true then
     Tech["immolator-tech"].enabled = false
     Tech["immolator-tech"].hidden = true
     Recipe["immolator"].hidden = true
-    --DRI["immolator"].hidden = true --not needed
 end
 
 -- disabling major-spidertron if required
