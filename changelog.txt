@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.2
+Date: 22.07.25
+  Changes:
+    - Added setting checks for bobwarfare regarding "bobmods-warfare-spidertron-overhaul".  
+  Bugfixes:
+    - Crashing due to missing "bob-mech-armor-plate".
+  Info:
+    - Fixed By SGZ-Creations.
+---------------------------------------------------------------------------------------------------
 Version: 0.4.1
 Date: 2025.06.06
   Features:
