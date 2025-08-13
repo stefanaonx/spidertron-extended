@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.3
+Date: 2025.08.14
+  Bugfixes:
+    - Fixed an issue where the Ghost Weaver would remove it's ammo on trash unrequested. Issue was noticed and reported by warboyv8.
+---------------------------------------------------------------------------------------------------
 Version: 0.4.2
 Date: 2025.07.22
   Changes:
