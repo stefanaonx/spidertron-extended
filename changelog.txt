@@ -1,12 +1,11 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.2
-Date: 22.07.25
+Date: 2025.07.22
   Changes:
-    - Added setting checks for bobwarfare regarding "bobmods-warfare-spidertron-overhaul".  
+    - Added setting checks for bobwarfare regarding "bobmods-warfare-spidertron-overhaul". Added By SGZ-Creations.
+    - Added configurable trash slot count for Ghost Weaver. Added by Brkostoner.
   Bugfixes:
-    - Crashing due to missing "bob-mech-armor-plate".
-  Info:
-    - Fixed By SGZ-Creations.
+    - Crashing due to missing "bob-mech-armor-plate". Fixed By SGZ-Creations.
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.1
 Date: 2025.06.06
