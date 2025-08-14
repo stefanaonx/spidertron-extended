@@ -29,7 +29,7 @@ if BobWar then
         table.insert(DRR["spidertronmk2"].ingredients, {type = "item", name = "bob-mech-armor-plate", amount = 35})
         table.insert(DRR["spidertronmk2"].ingredients, {type = "item", name = "bob-mech-brain", amount =5})
         table.insert(DRR["spidertronmk2"].ingredients, {type = "item", name = "bob-mech-leg", amount = 8})
-    elseif SS["bobmods-warfare-spidertron-overhaul"].value == false then return end
+    else return end
 end
 if BobPR then
     remove_ingredient("spidertronmk2", "concrete")
@@ -59,7 +59,7 @@ if SS["disable-spidertronmk2"].value == false then
             table.insert(DRR["spidertronmk3"].ingredients, {type = "item", name = "bob-mech-armor-plate", amount = 50})
             table.insert(DRR["spidertronmk3"].ingredients, {type = "item", name = "bob-mech-leg", amount = 8})
             table.insert(DRR["spidertronmk3"].ingredients, {type = "item", name = "bob-mech-brain", amount = 5})
-        elseif SS["bobmods-warfare-spidertron-overhaul"].value == false then return end
+        else return end
     end
     if BobPR then
         remove_ingredient("spidertronmk3", "refined-concrete")
@@ -87,7 +87,7 @@ elseif SS["disable-spidertronmk2"].value == true then
             table.insert(DRR["spidertronmk3"].ingredients,{type = "item", name = "bob-mech-armor-plate", amount = 50})
             table.insert(DRR["spidertronmk3"].ingredients, {type = "item", name = "bob-mech-brain", amount = 5})
             table.insert(DRR["spidertronmk3"].ingredients, {type = "item", name = "bob-mech-leg",amount = 8})
-        elseif SS["bobmods-warfare-spidertron-overhaul"].value == false then return end
+        else return end
     end
     if BobPR then
         remove_ingredient("spidertronmk3", "refined-concrete")
@@ -115,7 +115,7 @@ if BobWar then
         table.insert(DRR["immolator"].ingredients, {type = "item", name = "bob-mech-armor-plate", amount = 50})
         table.insert(DRR["immolator"].ingredients, {type = "item", name = "bob-mech-frame", amount = 1})
         table.insert(DRR["immolator"].ingredients, {type = "item", name = "bob-mech-leg", amount = 8})
-    elseif SS["bobmods-warfare-spidertron-overhaul"].value == false then return end
+    else return end
 end
 if BobPR then
     remove_ingredient("immolator", "storage-tank")
@@ -148,7 +148,7 @@ if BobWar then
         table.insert(DRR["spidertron-builder"].ingredients, {type = "item", name = "bob-mech-frame", amount = 1})
         table.insert(DRR["spidertron-builder"].ingredients, {type = "item", name = "bob-mech-leg", amount = 8})
         table.insert(DRR["spidertron-builder"].ingredients, {type = "item", name = "bob-mech-brain", amount = 5})
-    elseif SS["bobmods-warfare-spidertron-overhaul"].value == false then return end
+    else return end
 end
 if BobPR then
     remove_ingredient("spidertron-builder", "radar")
@@ -181,7 +181,7 @@ if BobWar then
         table.insert(DRR["major-spidertron"].ingredients, {type = "item", name = "bob-mech-frame", amount =1})
         table.insert(DRR["major-spidertron"].ingredients, {type = "item", name = "bob-mech-brain", amount =5})
         table.insert(DRR["major-spidertron"].ingredients, {type = "item", name = "bob-mech-leg", amount =8})
-    elseif SS["bobmods-warfare-spidertron-overhaul"].value == false then return end
+    else return end
 end
 if BobPR then
     remove_ingredient("major-spidertron", "steel-plate")
