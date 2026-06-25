@@ -27,7 +27,8 @@ if not settings.startup["disable-immolator"].value then
 end
 
 if not settings.startup["disable-spidertronmk3"].value then
-    data.raw["recipe"]["spidertronmk3"].category = "crafting-with-fluid"
+    -- data.raw["recipe"]["spidertronmk3"].category = "crafting-with-fluid" -- if 2.0 or under add an if
+    data.raw["recipe"]["spidertronmk3"].categories = {"crafting-with-fluid"}
     local ingr = {
         {type = "item", name = "spidertron",amount = 1},
         {type = "item", name = "kr-ai-core", amount = 50},

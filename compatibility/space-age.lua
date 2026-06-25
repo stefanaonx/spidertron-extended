@@ -28,7 +28,8 @@ if settings.startup["disable-spidertronmk2"].value then
         {type = "item", name = "quantum-processor", amount = 2}
     }
 end
-data.raw["recipe"]["spidertronmk3"].category = "crafting-with-fluid"
+-- data.raw["recipe"]["spidertronmk3"].category = "crafting-with-fluid" -- need an if 2.0 or under
+data.raw["recipe"]["spidertronmk3"].categories = {"crafting-with-fluid"}
 
 -- ghost weaver
 data.raw["recipe"]["spidertron-builder"].ingredients = {
