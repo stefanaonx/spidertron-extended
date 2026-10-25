@@ -204,9 +204,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 walking_group = 1,
                 mount_position = {-0.46875 * leg_scale, 0.53125 * leg_scale}
             }
-        },
-        military_target = 'spidertron-military-target',
-        resistances = table_deepcopy(immolator_resistances)
+        }
     }
 	
 -- modify the main body size

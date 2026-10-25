@@ -41,16 +41,6 @@ data.raw["recipe"]["spidertron-builder"].ingredients = {
     {type = "item", name = "radar", amount = 5},
     {type = "item", name = "laser-turret", amount = 2},
 }
--- batteries for ghost weaver
-data.raw["recipe"]["retrofitted-battery"].ingredients = {
-    {type = "item", name = "fission-reactor-equipment", amount = 1},
-    {type = "item", name = "productivity-module-2", amount = 5}
-}
-data.raw["recipe"]["retrofitted-battery2"].ingredients = {
-    {type = "item", name = "fission-reactor-equipment", amount = 1},
-    {type = "item", name = "productivity-module-2", amount = 5}
-}
-
 -- immolator
 data.raw["recipe"]["immolator"].ingredients = {
     {type = "item", name = "raw-fish", amount = 1},

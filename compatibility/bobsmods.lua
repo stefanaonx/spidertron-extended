@@ -4,6 +4,11 @@ local BobPR = mods["bobrevamp"] and mods["bobplates"]
 local BobWar = mods["bobwarfare"]
 local SAge = mods["space-age"]
 
+-- only touch recipes when bob's warfare or bob's plates + revamp are actually installed
+if not (BobWar or BobPR) then
+    return
+end
+
 local function remove_ingredient(recipe_name, ingredient_name)
     for i, ingredient in pairs(DRR[recipe_name].ingredients) do
         if ingredient.name == ingredient_name then

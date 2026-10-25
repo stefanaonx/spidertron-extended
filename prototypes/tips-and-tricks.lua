@@ -1,4 +1,3 @@
---local simulations = require("__spidertron-extended__/prototypes/tips-and-tricks-simulations")
 local spidertron_extended = {
   init =
   [[

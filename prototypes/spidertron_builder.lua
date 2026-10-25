@@ -44,15 +44,8 @@ spidertron_builder_entity.resistances = table_deepcopy(spidertron_builder_resist
 spidertron_builder_entity.chunk_exploration_radius = 7
 spidertron_builder_entity.automatic_weapon_cycling = false
 
-spidertron_builder_entity.guns = {
-    "spidertron-experimental-laser",
-    "spidertron-experimental-laser2"
-}
-if settings.startup["disable-spidertron-builder-reaper-beam"].value then
-    spidertron_builder_entity.guns = {
-        "spidertron-experimental-laser"
-    }
-end
+-- remove guns
+spidertron_builder_entity.guns = nil
 spidertron_builder_entity.minimap_representation = {
     filename = "__spidertron-extended__/icons/spidertron_extended_builder_map.png",
     flags = {"icon"},
@@ -196,9 +189,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 walking_group = 1,
                 mount_position = {-0.46875 * 1, 0.53125 * 1}
             }
-        },
-        military_target = 'spidertron-military-target',
-        resistances = table_deepcopy(spidertron_builder_resistances)
+        }
     }
 end
 

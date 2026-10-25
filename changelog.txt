@@ -1,4 +1,70 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.14
+Date: 2026.10.25
+  Bugfixes:
+    - Fixed the Artillery Targeting Remote still saying "No artillery in range" next to a loaded Major Spidertron: the game's automatic weapon cycling (on since 0.4.9) stops it from counting as artillery, so it is off again, as in 0.4.4.
+  Changes:
+    - The Major Spidertron's guns now take turns by script instead: every 30 ticks, with enemies within 100 tiles, it moves on to the next gun that has ammo and the nearest enemy in range (machine gun up to 30, cannon 5 to 100, artillery from 32 tiles). With no enemy within 100 tiles the artillery stays selected.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.13
+Date: 2026.10.25
+  Bugfixes:
+    - Fixed the Artillery Targeting Remote saying "No artillery in range" next to a loaded Major Spidertron (broken since 0.4.9). The Major Spidertron uses the vanilla artillery wagon cannon again, as in 0.4.4, which the game recognises as artillery; the Artillery Targeting Remote icon is now set on that gun instead of a renamed copy.
+  Changes:
+    - Removed the scripted artillery remote support from 0.4.12, the game handles the remote natively again.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.12
+Date: 2026.10.25
+  Features:
+    - Major Spidertron artillery now works with the Artillery Targeting Remote. Event driven: artillery flares raise a script trigger when placed, and every Major Spidertron of that force within artillery range (32 to 224 tiles, plus artillery range research) fires one shell at the target as soon as its artillery is ready (shooting speed research applies). No map searching for flares.
+  Changes:
+    - Major Spidertron skips the machine gun and cannon when no enemy is within their range (and guns without ammo), so the weapon rotation reaches the artillery; the artillery is skipped while the nearest enemy is inside its 32 tile minimum range. This reuses the existing combat check (one nearest-enemy search every 30 ticks).
+    - The experimental static-target filter and flare polling from the 0.4.10 / 0.4.11 test builds are not included.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.9
+Date: 2026.10.25
+  Changes:
+    - Major Spidertron now cycles automatically through its machine gun (SMG ammo), cannon (tank cannon shells) and artillery (artillery shells), firing whichever has ammo, with or without a gunner and in either driver/passenger weapon mode. This is independent of the Bubblegum escort.
+    - None of the Major Spidertron's guns slow it down any more, so it keeps walking while firing.
+    - The Major Spidertron artillery is now its own gun ("Spidertron Artillery") with the Artillery Targeting Remote icon; the vanilla artillery wagon cannon is no longer modified or shared.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.8
+Date: 2026.10.25
+  Changes:
+    - Ghost Weaver beams now hit every tick: 1/2/3/4/5 damage (Reaping Beam) or repair (Weaving Beam) per tick for normal/uncommon/rare/epic/legendary quality.
+    - Ghost Weaver beams now sweep smoothly from target to target instead of jumping; a new beam sweeps out from the Ghost Weaver, and damage/repair starts once the beam reaches its target.
+    - The "Weaving Beam strength" setting is now relative to the Reaping Beam (10 = same strength, default).
+    - Major Spidertron Bubblegums now launch from the spidertron's head and fly out to their orbit around the body.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.7
+Date: 2026.10.25
+  Changes:
+    - Ghost Weaver now uses only one beam at a time: the Reaping Beam when an enemy is within range, otherwise the Weaving Beam.
+    - Major Spidertron now launches Bubblegum escort drones automatically: one when an enemy comes within 30 tiles, then one every 5 seconds while the fight lasts, up to 3/4/5/6/7 drones for normal/uncommon/rare/epic/legendary quality. The drones orbit the Major Spidertron until they expire or are destroyed. Works driven, remote controlled or parked.
+    - Shift-F in the Major Spidertron now launches one extra Bubblegum right away (still limited by quality, 10 second cooldown).
+    - Removed the unused Bubblegum capsule projectile.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.6
+Date: 2026.10.25
+  Changes:
+    - The Ghost Weaver's Reconstruction and Disintegration Energy Cells no longer exist as items: there is nothing to craft, carry, pick up or lose. Their recipes, ammo categories and the two beam guns were removed.
+    - The Weaving Beam and Reaping Beam are now built-in abilities: every 1/3 second the Ghost Weaver repairs the most damaged friendly entity within 24 tiles and hits the nearest enemy within 24 tiles for 10 laser damage. They work whether the Ghost Weaver is driven, remote controlled or parked.
+    - The "healing ray amount" and "disable Reaper Beam" settings still apply to the new beams.
+    - Existing saves: leftover energy cells are removed by the game when loading, and already placed Ghost Weavers start using the new beams automatically.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.5
+Date: 2026.10.25
+  Changes:
+    - All spidertrons (including the vanilla one) are now explicitly military targets.
+    - MK3 self-repair now uses the prototype healing_per_tick (works on vehicles since 2.1) instead of a script running every second.
+    - Rewrote control.lua: ability cooldowns and immolator fire waves are now kept in storage, so they survive save/load and are multiplayer safe; removed the unused entity lists and the no-op on_entity_damaged handler; build/mine handlers use event filters and also react to script_raised_built/revive.
+    - Removed unused files (item_disabler.lua merged into data-final-fixes.lua, ignore.lua, leg_smoke.lua, artillery muzzle flash stub, unused tips-and-tricks simulation file) and dead spider_engine keys.
+    - Base dependency raised to 2.1.
+  Bugfixes:
+    - Fixed the "disable artillery for Major Spidertron" setting being ignored.
+    - Fixed Bob's mods recipe changes being applied even when Bob's mods were not installed (this overwrote the Space Age recipes).
+    - Fixed Bubblegum drones being spawned without the player's force.
+---------------------------------------------------------------------------------------------------
 Version: 0.4.4
 Date: 2026.06.25
   Changes:
@@ -263,4 +329,4 @@ Date: 2020.08.16
 Version: 0.1.0
 Date: 2020.08.15
   Changes:
-    - Initial Release.
+    - Initial Release.
