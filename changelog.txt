@@ -2,6 +2,7 @@
 Version: 0.5.0
 Date: 2026.10.25
   Features:
+    - Immolator: the fire walk (burning footsteps) can now be toggled per Immolator with Shift-G (the former "passive skill 1" control), while driving it or with it selected by a spidertron remote. It is on by default; the startup setting to disable it entirely still applies.
     - Ghost Weaver: the Reconstruction and Disintegration Energy Cells no longer exist as items; there is nothing to craft, carry, pick up or lose. The Weaving Beam (repair) and Reaping Beam (attack) are now built-in abilities that work whether the Ghost Weaver is driven, remote controlled or parked.
     - Ghost Weaver: uses one beam at a time, attacking first. The Reaping Beam hits the nearest enemy within 24 tiles; with no enemy in range, the Weaving Beam repairs the most damaged friendly entity within 24 tiles.
     - Ghost Weaver: beams hit every tick for 1/2/3/4/5 damage or repair per tick at normal/uncommon/rare/epic/legendary quality. Beams sweep smoothly from target to target, and damage/repair starts once the beam reaches its target.
@@ -9,6 +10,7 @@ Date: 2026.10.25
     - Major Spidertron: Shift-F launches one extra Bubblegum right away (still limited by quality, 10 second cooldown).
     - Major Spidertron: the machine gun (SMG ammo), cannon (tank cannon shells) and artillery (artillery shells) take turns automatically, with or without a gunner and in either driver/passenger weapon mode. With enemies within 100 tiles, every 30 ticks it moves on to the next gun that has ammo and the nearest enemy in range (machine gun up to 30, cannon 5 to 100, artillery from 32 tiles). With no enemy within 100 tiles the artillery stays selected.
   Changes:
+    - Immolator: the fire walk now also works with the "vanilla spidertron size" setting (those legs had no fire trigger before).
     - All spidertrons, including the vanilla one, are now explicitly military targets.
     - Spidertron MK3 self-repair now uses the prototype healing_per_tick (works on vehicles since 2.1) instead of a script.
     - Major Spidertron: none of its guns slow it down any more, so it keeps walking while firing.

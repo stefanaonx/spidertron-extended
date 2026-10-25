@@ -2,6 +2,8 @@
 -- All state that has to survive saving/loading (and stay in sync in multiplayer) lives in `storage`:
 --   storage.cooldowns[player_index] = tick at which that player's active ability is ready again
 --   storage.fire_waves              = list of {vehicle = LuaEntity, stage = 1..7} for running immolator waves
+--   storage.firewalk_off[unit_number] = true for immolators whose fire walk was toggled off (default is on)
+--   storage.immolators[reg_number]  = {entity, feet = {[leg index] = {prev = MapPosition, planted = MapPosition}}}
 --   storage.weavers[reg_number]     = {entity, repair_target?, next_search, enemy?, next_enemy_search,
 --                                       beam?, beam_kind?, beam_expires, aim? = MapPosition}
 --   storage.majors[reg_number]      = {entity, in_combat, next_spawn, drones = {{entity = LuaEntity, born = tick}}}
@@ -46,6 +48,14 @@ for name in pairs(prototypes.get_entity_filtered{{filter = "type", type = "spide
     end
 end
 
+-- the Immolator and any variants other mods generate from it (e.g. AAI programmable vehicles)
+local immolator_names = {}
+for name in pairs(prototypes.get_entity_filtered{{filter = "type", type = "spider-vehicle"}}) do
+    if name == "immolator" or name:find("^immolator%-") then
+        immolator_names[name] = true
+    end
+end
+
 -- Major Spidertron Bubblegum escort
 local MAJOR_NAME = "major-spidertron"
 local BUBBLEGUM_NAME = "major-spidertron-bubblegum"
@@ -83,21 +93,31 @@ local function register_major(entity)
     storage.majors[id] = storage.majors[id] or {entity = entity, in_combat = false, next_spawn = 0, drones = {}}
 end
 
+local function register_immolator(entity)
+    if not (entity and entity.valid and immolator_names[entity.name]) then return end
+    local id = script.register_on_object_destroyed(entity)
+    storage.immolators[id] = storage.immolators[id] or {entity = entity, feet = {}}
+end
+
 local function register_spider(entity)
     register_weaver(entity)
+    register_immolator(entity)
     register_major(entity)
 end
 
 local function init_storage()
     storage.cooldowns = storage.cooldowns or {}
     storage.fire_waves = storage.fire_waves or {}
+    storage.firewalk_off = storage.firewalk_off or {}
     -- (re)find every Ghost Weaver and Major Spidertron, also picks up the ones built before this version
-    -- (existing Bubblegum escorts are kept)
+    -- (existing Bubblegum escorts are kept), and every Immolator for the fire walk
     local old_majors = storage.majors or {}
     storage.weavers = {}
     storage.majors = {}
+    storage.immolators = {}
     local names = {}
     for name in pairs(weaver_names) do table.insert(names, name) end
+    for name in pairs(immolator_names) do table.insert(names, name) end
     if prototypes.entity[MAJOR_NAME] then table.insert(names, MAJOR_NAME) end
     if #names > 0 then
         for _, surface in pairs(game.surfaces) do
@@ -188,7 +208,7 @@ local function name_filters(names)
     end
     return filters
 end
-local built_filters = name_filters{placement_colors, weaver_names, {[MAJOR_NAME] = true}}
+local built_filters = name_filters{placement_colors, weaver_names, immolator_names, {[MAJOR_NAME] = true}}
 
 script.on_event(defines.events.on_built_entity, on_spider_built, built_filters)
 script.on_event(defines.events.on_robot_built_entity, on_spider_built, built_filters)
@@ -201,6 +221,8 @@ script.on_event(defines.events.on_object_destroyed, function(event)
     if weaver and weaver.beam and weaver.beam.valid then weaver.beam.destroy() end
     storage.weavers[event.registration_number] = nil
     storage.majors[event.registration_number] = nil
+    if storage.immolators then storage.immolators[event.registration_number] = nil end
+    if event.useful_id and storage.firewalk_off then storage.firewalk_off[event.useful_id] = nil end
 end)
 
 ---------------------------------------------------------------------------------------------------
@@ -368,7 +390,102 @@ script.on_nth_tick(6, function()
     end
 end)
 
--- immolator passive ability (SHIFT + G) is not implemented yet; the custom input is kept for it
+---------------------------------------------------------------------------------------------------
+-- immolator passive ability: fire walk (SHIFT + G toggles it per immolator, on by default)
+-- The flames are placed by script: every FIREWALK_CHECK ticks each leg is looked at, and a leg that
+-- has come to rest at a new spot (it just stepped) gets a purifier flame under its foot.
+---------------------------------------------------------------------------------------------------
+
+local FIREWALK_CHECK = 3          -- ticks between leg checks
+local FIREWALK_STEP = 0.5         -- tiles a foot has to move before its next landing gets a flame
+local FIREWALK_REST = 0.01        -- tiles; a foot that moved less than this since the last check is planted
+-- with this startup setting there is no fire walk at all
+local FIREWALK_DISABLED = settings.startup["disable-immolator-fire"].value
+
+local function firewalk_enabled(immolator)
+    return not (immolator.unit_number and storage.firewalk_off[immolator.unit_number])
+end
+
+local function moved(a, b, limit)
+    local dx, dy = a.x - b.x, a.y - b.y
+    return dx * dx + dy * dy > limit * limit
+end
+
+local function firewalk_tick(data)
+    local immolator = data.entity
+    local feet = data.feet
+    local enabled = firewalk_enabled(immolator)
+    local surface = immolator.surface
+    for i, leg in pairs(immolator.get_spider_legs()) do
+        if leg.valid then
+            local position = leg.position
+            local foot = feet[i]
+            if not foot then
+                -- first look at this leg: remember where it stands, no flame
+                feet[i] = {prev = position, planted = position}
+            else
+                if not moved(position, foot.prev, FIREWALK_REST) and moved(position, foot.planted, FIREWALK_STEP) then
+                    -- the foot has landed on a new spot
+                    foot.planted = position
+                    if enabled then
+                        surface.create_entity{name = "purifier-flame", position = position, force = "neutral"}
+                    end
+                end
+                foot.prev = position
+            end
+        end
+    end
+end
+
+if not FIREWALK_DISABLED then
+    script.on_nth_tick(FIREWALK_CHECK, function()
+        for id, data in pairs(storage.immolators) do
+            if data.entity.valid then
+                firewalk_tick(data)
+            else
+                storage.immolators[id] = nil
+            end
+        end
+    end)
+end
+
+-- the immolators a player controls: the one they are in, otherwise the ones selected with a spidertron remote
+local function player_immolators(player)
+    local vehicle = player.vehicle
+    if vehicle and vehicle.valid and immolator_names[vehicle.name] then return {vehicle} end
+    local list = {}
+    for _, spider in pairs(player.spidertron_remote_selection or {}) do
+        if spider.valid and immolator_names[spider.name] then table.insert(list, spider) end
+    end
+    return list
+end
+
+script.on_event("immolator-passive1", function(event)
+    local player = game.get_player(event.player_index)
+    if not (player and player.valid) then return end
+    local immolators = player_immolators(player)
+    if #immolators == 0 then return end
+    if FIREWALK_DISABLED then
+        player.create_local_flying_text{text = {"spidertron-extended.firewalk-disabled"}, create_at_cursor = true}
+        return
+    end
+    -- with several selected, they all follow the first one's new state
+    local enable = not firewalk_enabled(immolators[1])
+    for _, immolator in pairs(immolators) do
+        if immolator.unit_number then
+            if enable then
+                storage.firewalk_off[immolator.unit_number] = nil
+            else
+                storage.firewalk_off[immolator.unit_number] = true
+                script.register_on_object_destroyed(immolator) -- clears the entry once it is gone
+            end
+        end
+    end
+    player.create_local_flying_text{
+        text = {enable and "spidertron-extended.firewalk-on" or "spidertron-extended.firewalk-off"},
+        create_at_cursor = true
+    }
+end)
 
 ---------------------------------------------------------------------------------------------------
 -- Major Spidertron: Bubblegum escort

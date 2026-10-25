@@ -5,25 +5,19 @@ local imres = table_deepcopy(immolator_resistances)
 local immolator_inv_size = settings.startup["immolator-invsize"].value
 local immolator_hp = settings.startup["immolator-hp"].value
 
+-- footsteps only make the usual building smoke; the fire walk flames are placed by control.lua
+-- (so the fire walk can be toggled per Immolator with SHIFT + G at runtime)
 local leg_hit_the_ground_trigger = {
     {
-        entity_name = "purifier-flame",
-        type = "create-fire"
+        offset_deviation = {{-0.2, -0.2}, {0.2, 0.2}},
+        repeat_count = 4,
+        smoke_name = "smoke-building",
+        speed_from_center = 0.03,
+        starting_frame_deviation = 5,
+        starting_frame_speed_deviation = 5,
+        type = "create-trivial-smoke"
     }
 }
-if settings.startup["disable-immolator-fire"].value then
-    leg_hit_the_ground_trigger = {
-        {
-            offset_deviation = {{-0.2, -0.2}, {0.2, 0.2}},
-            repeat_count = 4,
-            smoke_name = "smoke-building",
-            speed_from_center = 0.03,
-            starting_frame_deviation = 5,
-            starting_frame_speed_deviation = 5,
-            type = "create-trivial-smoke"
-        }
-    }
-end
 
 
 local immicon = {
@@ -225,6 +219,11 @@ if not settings.startup["vanilla-spidertron-size"].value then
 
 	immolator_entity.graphics_set.shadow_base_animation.scale = general_scale
 	--immolator_entity.graphics_set.shadow_base_animation.hr_version.scale = general_hr_scale
+end
+
+-- same footstep smoke for every leg, also with the vanilla sized legs
+for _, leg in pairs(immolator_entity.spider_engine.legs) do
+    leg.leg_hit_the_ground_trigger = leg_hit_the_ground_trigger
 end
 
 data:extend{
