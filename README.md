@@ -6,7 +6,7 @@ A Factorio mod that adds five upgraded Spidertrons: the **Spidertron MK2**, **Sp
 
 - **Factorio:** 2.1 (`base >= 2.1`)
 - **Space Age:** supported, with its own recipes
-- **Current version:** 0.4.14. See [changelog.txt](changelog.txt).
+- **Current version:** 0.5. See [changelog.txt](changelog.txt).
 
 ## The spidertrons
 
