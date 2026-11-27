@@ -68,27 +68,17 @@ end
 
 
 if not settings.startup["disable-spidertron-builder"].value then
-    if settings.startup["kr-containers"].value then
-        data.raw["recipe"]["spidertron-builder"].ingredients = {
-            {type = "item", name = "kr-ai-core", amount = 1},
-            {type = "item", name = "processing-unit", amount = 16},
-            {type = "item", name = "low-density-structure", amount = 150},
-            {type = "item", name = "productivity-module-3", amount = 2},
-            {type = "item", name = "kr-strongbox", amount = 10},
-            {type = "item", name = "construction-robot", amount = 50},
-            {type = "item", name = "radar", amount = 5}
-        }
-    else
-        data.raw["recipe"]["spidertron-builder"].ingredients = {
-            {type = "item", name = "kr-ai-core", amount = 1},
-            {type = "item", name = "rocket-control-unit", amount = 16},
-            {type = "item", name = "low-density-structure", amount = 150},
-            {type = "item", name = "productivity-module-3", amount = 2},
-            {type = "item", name = "steel-chest", amount = 10},
-            {type = "item", name = "construction-robot", amount = 50},
-            {type = "item", name = "radar", amount = 5}
-        }
-    end
+    -- kr-containers should be by default nowdays
+    -- rocket-control-unit seems to not be a thing anymore so removed that directly
+    data.raw["recipe"]["spidertron-builder"].ingredients = {
+        {type = "item", name = "kr-ai-core", amount = 1},
+        {type = "item", name = "processing-unit", amount = 16},
+        {type = "item", name = "low-density-structure", amount = 150},
+        {type = "item", name = "productivity-module-3", amount = 2},
+        {type = "item", name = "kr-strongbox", amount = 10},
+        {type = "item", name = "construction-robot", amount = 50},
+        {type = "item", name = "radar", amount = 5}
+    }
 end
 
 --major spidertron changes
