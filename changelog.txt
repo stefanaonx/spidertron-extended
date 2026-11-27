@@ -20,6 +20,7 @@ Date: 2026.10.25
     - Removed unused files (item_disabler.lua merged into data-final-fixes.lua, ignore.lua, leg_smoke.lua, artillery muzzle flash stub, unused tips-and-tricks simulation file) and dead spider_engine keys.
     - Base dependency raised to 2.1.
     - Existing saves: leftover energy cells are removed by the game on load, and existing Ghost Weavers and Major Spidertrons pick up the new behaviour automatically.
+    - Removed rocket-control-unit required for krastorio 2.
   Scripting:
     - Rewrote control.lua: ability cooldowns, immolator fire waves, Ghost Weaver and Major Spidertron state are kept in storage, so they survive save/load and are multiplayer safe. Removed the unused entity lists and the no-op on_entity_damaged handler. Build handlers use event filters and also react to script_raised_built/revive and entity cloning.
   Bugfixes:
@@ -291,4 +292,4 @@ Date: 2020.08.16
 Version: 0.1.0
 Date: 2020.08.15
   Changes:
-    - Initial Release.
+    - Initial Release.
