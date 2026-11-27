@@ -66,11 +66,13 @@ major_spidertron_entity.inventory_size = ms_inv_size
 major_spidertron_entity.equipment_grid = "major-spidertron-grid"
 major_spidertron_entity.resistances = table_deepcopy(major_spidertron_resistances)
 major_spidertron_entity.chunk_exploration_radius = 5
+-- no engine weapon cycling: with it on, the game no longer counts the Major Spidertron as artillery for the
+-- Artillery Targeting Remote. control.lua rotates between the guns instead (machine gun / cannon / artillery).
 major_spidertron_entity.automatic_weapon_cycling = false
 
 -- make new guns for him
 -- user should be able to disable the artillery if he wants to
-if settings.startup["disable-artillery-major-spidertron"] == true then
+if settings.startup["disable-artillery-major-spidertron"].value then
     major_spidertron_entity.guns = {
         "major-spidertron-machine-gun",
         "major-spidertron-cannon"
@@ -79,7 +81,7 @@ else
     major_spidertron_entity.guns = {
         "major-spidertron-machine-gun",
         "major-spidertron-cannon",
-        "artillery-wagon-cannon"
+        "artillery-wagon-cannon" -- must be the vanilla gun for the Artillery Targeting Remote to work
     }
 end
 major_spidertron_entity.chain_shooting_cooldown_modifier = 0.4
@@ -167,9 +169,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 mount_position = {-0.46875 * 1.2, 0.53125 * 1.2},
                 walking_group = 1
             }
-        },
-        military_target = 'spidertron-military-target',
-        resistances = table_deepcopy(major_spidertron_resistances)
+        }
     }
 	
 -- modify the main body size

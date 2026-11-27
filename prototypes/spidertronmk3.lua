@@ -52,17 +52,11 @@ spidertronmk3_entity.guns = {
 spidertronmk3_entity.chain_shooting_cooldown_modifier = 0.3
 spidertronmk3_entity.braking_force = 4
 
--- for some reason the line below this doesn't do anything
--- spidertronmk3_entity.healing_per_tick = 0.5
-
--- table.insert(data.raw["technology"]["military-2"]["effects"], {type = "unlock-recipe", recipe = "basic-grenade-2"})
--- trying to add health_regen setting to spidertronmk3
--- local health_regen = 15
--- table.insert(spidertronmk3_entity, health_regen)
--- -- spidertronmk3_entity.health_regen = 15
--- if settings.startup["disable-health-regenmk3"].value then
-    -- spidertronmk3_entity.health_regen = 0
--- end
+-- self-repair: 15 HP per second (0.25 per tick)
+-- healing_per_tick works on vehicles since Factorio 2.1, so this no longer needs a runtime script
+if not settings.startup["disable-health-regenmk3"].value then
+    spidertronmk3_entity.healing_per_tick = 0.25
+end
 
 -- modifies the icon displayed on the map
 spidertronmk3_entity.minimap_representation = {
@@ -194,9 +188,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 walking_group = 1,
                 mount_position = {-0.46875 * 1.4, 0.53125 * 1.4}
             }
-        },
-        military_target = 'spidertron-military-target',
-        resistances = table_deepcopy(spidertronmk3_resistances)
+        }
     }
 	
 -- modify the main body size

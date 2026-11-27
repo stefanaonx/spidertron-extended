@@ -133,9 +133,7 @@ if not settings.startup["vanilla-spidertron-size"].value then
                 mount_position = {-0.46875 * 1.2, 0.53125 * 1.2},
                 walking_group = 1
             }
-        },
-        military_target = 'spidertron-military-target',
-        resistances = table_deepcopy(spidertronmk2_resistances)
+        }
     }
 	
 -- modify the main body size
