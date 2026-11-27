@@ -106,16 +106,27 @@ data:extend{
     major_spidertron_item
 }
 
--- major spidertron machine gun and cannon
+-- major spidertron guns: machine gun (bullets / SMG ammo), cannon (tank cannon shells), artillery (artillery shells)
+-- movement_slow_down_factor = 0 so none of them slow the spidertron down: it keeps walking while firing
 local spidertron_machine_gun_item = table_deepcopy(data.raw["gun"]["tank-machine-gun"])
 spidertron_machine_gun_item.name = "major-spidertron-machine-gun"
 spidertron_machine_gun_item.attack_parameters.cooldown = 2
 spidertron_machine_gun_item.attack_parameters.range = 30
+spidertron_machine_gun_item.attack_parameters.movement_slow_down_factor = 0
 
 local spidertron_cannon_item = table_deepcopy(data.raw["gun"]["tank-cannon"])
 spidertron_cannon_item.name = "major-spidertron-cannon"
 spidertron_cannon_item.attack_parameters.cooldown = 80
 spidertron_cannon_item.attack_parameters.range = 100 --70 before, increasing cause it seems it's still low range
+spidertron_cannon_item.attack_parameters.movement_slow_down_factor = 0
+
+-- the Major Spidertron uses the vanilla artillery wagon cannon: the game only counts a vehicle as artillery
+-- for the Artillery Targeting Remote when it carries that gun. Its gun slot icon is changed to the
+-- Artillery Targeting Remote icon (this also shows on the artillery wagon's gun).
+local artillery_gun = data.raw["gun"]["artillery-wagon-cannon"]
+artillery_gun.icon = "__base__/graphics/icons/artillery-targeting-remote.png"
+artillery_gun.icon_size = 64
+artillery_gun.icons = nil
 
 data:extend{
     spidertron_machine_gun_item,

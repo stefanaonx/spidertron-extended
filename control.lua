@@ -1,574 +1,679 @@
 --control.lua
+-- All state that has to survive saving/loading (and stay in sync in multiplayer) lives in `storage`:
+--   storage.cooldowns[player_index] = tick at which that player's active ability is ready again
+--   storage.fire_waves              = list of {vehicle = LuaEntity, stage = 1..7} for running immolator waves
+--   storage.firewalk_off[unit_number] = true for immolators whose fire walk was toggled off (default is on)
+--   storage.immolators[reg_number]  = {entity, feet = {[leg index] = {prev = MapPosition, planted = MapPosition}}}
+--   storage.weavers[reg_number]     = {entity, repair_target?, next_search, enemy?, next_enemy_search,
+--                                       beam?, beam_kind?, beam_expires, aim? = MapPosition}
+--   storage.majors[reg_number]      = {entity, in_combat, next_spawn, drones = {{entity = LuaEntity, born = tick}}}
+-- MK3 self-repair is done by the prototype (healing_per_tick), so no entity tracking is needed anymore.
 
-function dump(o)
-    if type(o) == 'table' then
-        local s = '{ '
-        for k,v in pairs(o) do
-            if type(k) ~= 'number' then k = '"'..k..'"' end
-            s = s .. '['..k..'] = ' .. dump(v) .. ','
+local DEFAULT_SPIDER_COLOR = {r = 1, g = 0.5, b = 0, a = 0.5}
+
+-- colour given on placement when the spidertron still has the default colour
+-- (the long names are the AAI programmable vehicles variants)
+local placement_colors = {
+    ["spidertronmk2"]                                       = {1.0, 0, 0, 0.5},
+    ["spidertronmk2-spidertronmk2-rocket-launcher-1"]       = {1.0, 0, 0, 0.5},
+    ["spidertronmk3"]                                       = {0.5, 0, 0.5, 0.5},
+    ["spidertronmk3-spidertronmk3-rocket-launcher-1"]       = {0.5, 0, 0.5, 0.5},
+    ["spidertron-builder"]                                  = {1, 1, 1, 0.5},
+    ["immolator"]                                           = {0.17647, 0.56863, 0.86275, 0.5},
+    ["immolator-spidertron-immolator-flamethrower"]         = {0.17647, 0.56863, 0.86275, 0.5},
+    ["major-spidertron"]                                    = {0.2941, 0.3255, 0.1255, 0.5},
+}
+
+-- Ghost Weaver built-in beams (no guns, ammo or energy cell items involved)
+local WEAVER_IDLE_SEARCH = 60       -- ticks between repair target searches when nothing needed repair
+local WEAVER_ENEMY_SEARCH = 10      -- ticks between enemy searches (the current target is hit every tick)
+local WEAVER_RANGE = 24             -- tiles
+local WEAVER_BEAM_OFFSET = {0, -0.9}
+local WEAVER_BEAM_LIFETIME = 600    -- ticks; the beam entity is renewed before it runs out
+-- the beam end moves towards its target by this fraction of the remaining distance each tick,
+-- but at least WEAVER_AIM_MIN_STEP tiles, so it sweeps smoothly from target to target
+local WEAVER_AIM_EASE = 0.25
+local WEAVER_AIM_MIN_STEP = 0.35
+-- damage / repair per tick, by Ghost Weaver quality
+local WEAVER_POWER_BY_QUALITY = {normal = 1, uncommon = 2, rare = 3, epic = 4, legendary = 5}
+-- Weaving Beam strength relative to the Reaping Beam (setting, 10 = same as the Reaping Beam)
+local WEAVER_REPAIR_FACTOR = settings.startup["spidertron-builder-healing-beam-ammount"].value / 10
+local WEAVER_REAPER_ENABLED = not settings.startup["disable-spidertron-builder-reaper-beam"].value
+
+-- the Ghost Weaver and any variants other mods generate from it (e.g. AAI programmable vehicles)
+local weaver_names = {}
+for name in pairs(prototypes.get_entity_filtered{{filter = "type", type = "spider-vehicle"}}) do
+    if name == "spidertron-builder" or name:find("^spidertron%-builder%-") then
+        weaver_names[name] = true
+    end
+end
+
+-- the Immolator and any variants other mods generate from it (e.g. AAI programmable vehicles)
+local immolator_names = {}
+for name in pairs(prototypes.get_entity_filtered{{filter = "type", type = "spider-vehicle"}}) do
+    if name == "immolator" or name:find("^immolator%-") then
+        immolator_names[name] = true
+    end
+end
+
+-- Major Spidertron Bubblegum escort
+local MAJOR_NAME = "major-spidertron"
+local BUBBLEGUM_NAME = "major-spidertron-bubblegum"
+local BUBBLEGUM_COMBAT_RANGE = 30       -- tiles; an enemy this close means the Major Spidertron is in combat
+local BUBBLEGUM_COMBAT_CHECK = 30       -- ticks between combat checks
+local BUBBLEGUM_SPAWN_INTERVAL = 5 * 60 -- ticks between spawns while in combat
+local BUBBLEGUM_ORBIT_RADIUS = 4        -- tiles
+local BUBBLEGUM_ORBIT_PERIOD = 4 * 60   -- ticks for one full orbit
+local BUBBLEGUM_LAUNCH_TICKS = 40       -- ticks a new Bubblegum takes to fly from the head to its orbit slot
+-- height of the Major Spidertron's head above its ground position (its prototype `height`)
+local MAJOR_HEAD_HEIGHT = settings.startup["vanilla-spidertron-size"].value and 1.5 or 1.75
+-- Major Spidertron guns
+local MAJOR_ENEMY_SEARCH = 100          -- tiles; one nearest-enemy search per check covers combat and gun choice
+local ARTILLERY_GUN = "artillery-wagon-cannon" -- vanilla gun, the game handles the Artillery Targeting Remote for it
+-- maximum number of Bubblegums per Major Spidertron, by quality
+local BUBBLEGUM_MAX_BY_QUALITY = {normal = 3, uncommon = 4, rare = 5, epic = 6, legendary = 7}
+
+local IMMOLATOR_COOLDOWN = 3 * 60 -- ticks
+local BUBBLEGUM_COOLDOWN = 10 * 60 -- ticks
+local FIRE_WAVE_STAGES = 7 -- wave radius goes 3, 5, 7 ... 15, one ring every 6 ticks
+
+---------------------------------------------------------------------------------------------------
+-- storage setup / migration
+---------------------------------------------------------------------------------------------------
+
+local function register_weaver(entity)
+    if not (entity and entity.valid and weaver_names[entity.name]) then return end
+    local id = script.register_on_object_destroyed(entity)
+    storage.weavers[id] = storage.weavers[id] or {entity = entity, next_search = 0, next_enemy_search = 0, beam_expires = 0}
+end
+
+local function register_major(entity)
+    if not (entity and entity.valid and entity.name == MAJOR_NAME) then return end
+    local id = script.register_on_object_destroyed(entity)
+    storage.majors[id] = storage.majors[id] or {entity = entity, in_combat = false, next_spawn = 0, drones = {}}
+end
+
+local function register_immolator(entity)
+    if not (entity and entity.valid and immolator_names[entity.name]) then return end
+    local id = script.register_on_object_destroyed(entity)
+    storage.immolators[id] = storage.immolators[id] or {entity = entity, feet = {}}
+end
+
+local function register_spider(entity)
+    register_weaver(entity)
+    register_immolator(entity)
+    register_major(entity)
+end
+
+local function init_storage()
+    storage.cooldowns = storage.cooldowns or {}
+    storage.fire_waves = storage.fire_waves or {}
+    storage.firewalk_off = storage.firewalk_off or {}
+    -- (re)find every Ghost Weaver and Major Spidertron, also picks up the ones built before this version
+    -- (existing Bubblegum escorts are kept), and every Immolator for the fire walk
+    local old_majors = storage.majors or {}
+    storage.weavers = {}
+    storage.majors = {}
+    storage.immolators = {}
+    local names = {}
+    for name in pairs(weaver_names) do table.insert(names, name) end
+    for name in pairs(immolator_names) do table.insert(names, name) end
+    if prototypes.entity[MAJOR_NAME] then table.insert(names, MAJOR_NAME) end
+    if #names > 0 then
+        for _, surface in pairs(game.surfaces) do
+            for _, entity in pairs(surface.find_entities_filtered{name = names}) do
+                register_spider(entity)
+            end
         end
-        return s .. '} '
+    end
+    for id, data in pairs(storage.majors) do
+        local old = old_majors[id]
+        if old then
+            -- 0.4.7 kept plain drone entities, newer versions keep {entity, born}
+            for i, drone in pairs(old.drones) do
+                if type(drone) == "userdata" then old.drones[i] = {entity = drone, born = 0} end
+            end
+            storage.majors[id] = old
+        end
+    end
+    -- entity lists used by versions <= 0.4.4, no longer needed
+    storage.spidertronmk2 = nil
+    storage.spidertronmk3 = nil
+    storage.spidertron_builder = nil
+    storage.immolator = nil
+    storage.major_spidertron = nil
+end
+
+script.on_init(init_storage)
+script.on_configuration_changed(init_storage)
+
+---------------------------------------------------------------------------------------------------
+-- helpers
+---------------------------------------------------------------------------------------------------
+
+local function has_default_color(color)
+    if not color then return true end
+    local function close(a, b) return math.abs(a - b) < 0.001 end
+    return close(color.r, DEFAULT_SPIDER_COLOR.r) and close(color.g, DEFAULT_SPIDER_COLOR.g)
+        and close(color.b, DEFAULT_SPIDER_COLOR.b) and close(color.a, DEFAULT_SPIDER_COLOR.a)
+end
+
+local function is_on_cooldown(player_index)
+    local ready_at = storage.cooldowns[player_index]
+    return ready_at ~= nil and game.tick < ready_at
+end
+
+local function start_cooldown(player_index, ticks)
+    storage.cooldowns[player_index] = game.tick + ticks
+end
+
+-- returns the player's vehicle if it is the given spidertron, nil otherwise
+local function get_player_spider(player_index, name)
+    local player = game.get_player(player_index)
+    if not (player and player.valid) then return nil, nil end
+    local vehicle = player.vehicle
+    if vehicle and vehicle.valid and vehicle.name == name then
+        return vehicle, player
+    end
+    return nil, player
+end
+
+---------------------------------------------------------------------------------------------------
+-- placement / removal
+---------------------------------------------------------------------------------------------------
+
+local function on_spider_built(event)
+    local entity = event.entity
+    if not (entity and entity.valid) then return end
+
+    local color = placement_colors[entity.name] or (weaver_names[entity.name] and placement_colors["spidertron-builder"])
+    if color and has_default_color(entity.color) then
+        entity.color = color
+    end
+
+    register_spider(entity)
+end
+
+-- event filters only for entities that exist (the AAI variants are only there with AAI installed)
+local function name_filters(names)
+    local filters = {}
+    local seen = {}
+    for _, list in pairs(names) do
+        for name in pairs(list) do
+            if prototypes.entity[name] and not seen[name] then
+                seen[name] = true
+                table.insert(filters, {filter = "name", name = name})
+            end
+        end
+    end
+    return filters
+end
+local built_filters = name_filters{placement_colors, weaver_names, immolator_names, {[MAJOR_NAME] = true}}
+
+script.on_event(defines.events.on_built_entity, on_spider_built, built_filters)
+script.on_event(defines.events.on_robot_built_entity, on_spider_built, built_filters)
+script.on_event(defines.events.script_raised_built, on_spider_built, built_filters)
+script.on_event(defines.events.script_raised_revive, on_spider_built, built_filters)
+script.on_event(defines.events.on_entity_cloned, function(event) register_spider(event.destination) end)
+
+script.on_event(defines.events.on_object_destroyed, function(event)
+    local weaver = storage.weavers[event.registration_number]
+    if weaver and weaver.beam and weaver.beam.valid then weaver.beam.destroy() end
+    storage.weavers[event.registration_number] = nil
+    storage.majors[event.registration_number] = nil
+    if storage.immolators then storage.immolators[event.registration_number] = nil end
+    if event.useful_id and storage.firewalk_off then storage.firewalk_off[event.useful_id] = nil end
+end)
+
+---------------------------------------------------------------------------------------------------
+-- Ghost Weaver: Weaving Beam (repair) and Reaping Beam (attack)
+-- Always active, whether the Ghost Weaver is driven, remote controlled or parked.
+---------------------------------------------------------------------------------------------------
+
+local function needs_repair(weaver, target)
+    return target and target.valid and target ~= weaver and target.surface == weaver.surface
+        and target.health and target.health < target.max_health
+        and target.type ~= "spider-leg"
+        and (target.position.x - weaver.position.x) ^ 2 + (target.position.y - weaver.position.y) ^ 2 <= WEAVER_RANGE ^ 2
+end
+
+local function find_repair_target(weaver)
+    local best, best_ratio
+    for _, entity in pairs(weaver.surface.find_entities_filtered{
+        position = weaver.position, radius = WEAVER_RANGE, force = weaver.force
+    }) do
+        if needs_repair(weaver, entity) then
+            local ratio = entity.health / entity.max_health
+            if not best_ratio or ratio < best_ratio then
+                best, best_ratio = entity, ratio
+            end
+        end
+    end
+    return best
+end
+
+local function quality_power(entity)
+    local quality = entity.quality
+    if not quality then return 1 end
+    -- modded qualities fall back to their level (normal = 0 -> 1, capped at 5)
+    return WEAVER_POWER_BY_QUALITY[quality.name] or math.min(5, 1 + quality.level)
+end
+
+local function in_range(weaver, target)
+    local dx, dy = target.position.x - weaver.position.x, target.position.y - weaver.position.y
+    return dx * dx + dy * dy <= WEAVER_RANGE * WEAVER_RANGE
+end
+
+local function stop_beam(data)
+    if data.beam and data.beam.valid then data.beam.destroy() end
+    data.beam, data.beam_kind, data.aim = nil, nil, nil
+end
+
+-- makes sure a beam of the right kind exists, starting at the current aim point
+local function ensure_beam(data, kind, tick)
+    local beam = data.beam
+    if beam and beam.valid and data.beam_kind == kind and tick < data.beam_expires then return end
+    if beam and beam.valid then beam.destroy() end
+    local weaver = data.entity
+    -- a fresh beam starts right at the Ghost Weaver and sweeps out to its target
+    data.aim = data.aim or {x = weaver.position.x, y = weaver.position.y + WEAVER_BEAM_OFFSET[2]}
+    data.beam = weaver.surface.create_entity{
+        name = kind,
+        position = weaver.position,
+        source = weaver,
+        source_offset = WEAVER_BEAM_OFFSET,
+        target_position = data.aim,
+        duration = WEAVER_BEAM_LIFETIME,
+        max_length = WEAVER_RANGE + 2
+    }
+    data.beam_kind = kind
+    data.beam_expires = tick + WEAVER_BEAM_LIFETIME - 1
+end
+
+-- moves the beam end towards the target, returns true once it is on the target
+local function sweep_beam(data, target)
+    local aim, goal = data.aim, target.position
+    local dx, dy = goal.x - aim.x, goal.y - aim.y
+    local dist = math.sqrt(dx * dx + dy * dy)
+    local step = math.max(WEAVER_AIM_MIN_STEP, dist * WEAVER_AIM_EASE)
+    local arrived = dist <= step
+    if arrived then
+        aim.x, aim.y = goal.x, goal.y
     else
-        return tostring(o)
+        aim.x, aim.y = aim.x + dx / dist * step, aim.y + dy / dist * step
     end
+    if data.beam and data.beam.valid then data.beam.set_beam_target(aim) end
+    return arrived
 end
 
-
--- was looking to make a general function for comparison arrays
--- but was to lazy
--- function checks if colors given are default for spider
-function check_spider_colors(colors)
-    if colors.r == 1 and
-        colors.g == 0.5 and
-        colors.b == 0 and
-        colors.a == 0.5 then
-        return true
+local function find_enemy(data, tick)
+    local weaver = data.entity
+    local enemy = data.enemy
+    if enemy and enemy.valid and enemy.health and in_range(weaver, enemy) and tick < data.next_enemy_search then
+        return enemy
     end
-    return false
+    data.next_enemy_search = tick + WEAVER_ENEMY_SEARCH
+    enemy = weaver.surface.find_nearest_enemy{position = weaver.position, max_distance = WEAVER_RANGE, force = weaver.force}
+    if not (enemy and enemy.valid and enemy.health) then enemy = nil end
+    data.enemy = enemy
+    return enemy
 end
 
-
-script.on_event(defines.events.on_entity_damaged,
-function(event)
-    if event.entity.name == "immolator" then
-        if event.damage_type.name == "fire" then
-            -- event.entity.health = event.entity.health + event.final_damage_amount
+local function find_repair(data, tick)
+    local weaver = data.entity
+    if needs_repair(weaver, data.repair_target) then return data.repair_target end
+    data.repair_target = nil
+    if tick >= data.next_search then
+        data.repair_target = find_repair_target(weaver)
+        if not data.repair_target then
+            data.next_search = tick + WEAVER_IDLE_SEARCH
         end
     end
-end)
-
-
--- script to modify the spidertronmk2 and spidertronmk3 color on placement
--- this only applies when a player character constructs something
-script.on_event(defines.events.on_built_entity,
-function(event)
-    local default_color = {
-        ["r"] = 1,
-        ["g"] = 0.5,
-        ["b"] = 0,
-        ["a"] = 0.5
-    }
-    if event.entity.name == "spidertronmk2" or
-        event.entity.name == "spidertronmk2-spidertronmk2-rocket-launcher-1" then
-        local spidertronmk2 = event.entity
-        if check_spider_colors(spidertronmk2.color) then
-            spidertronmk2.color = {1.0, 0, 0, 0.5}
-        end
-    elseif event.entity.name == "spidertronmk3" or
-        event.entity.name == "spidertronmk3-spidertronmk3-rocket-launcher-1" then
-
-        local new_spidertronmk3 = event.entity
-        -- game.print(dump(spidertronmk3.color))
-        if check_spider_colors(new_spidertronmk3.color) then
-            new_spidertronmk3.color = {0.5, 0, 0.5, 0.5}
-        end
-        -- when spidertronmk3 is created add it to the table
-        table.insert(storage.spidertronmk3, new_spidertronmk3)
-    elseif event.entity.name == "spidertron-builder" then
-        local spidertron_builder = event.entity
-        if check_spider_colors(spidertron_builder.color) then
-            spidertron_builder.color = {1, 1, 1, 0.5}
-        end
-        -- game.print(spidertron_builder.get_inventory)
-        -- adding the batteries automatically on placement
-        -- TODO need to add higher quality batteries if higher quality spidertron is placed
-        spidertron_builder.insert({name="retrofitted-battery"})
-        spidertron_builder.insert({name="retrofitted-battery2"})
-    elseif event.entity.name == "spidertron-builder-spidertron-experimental-laser" then
-        local spidertron_builder = event.entity
-        if check_spider_colors(spidertron_builder.color) then
-            spidertron_builder.color = {1, 1, 1, 0.5}
-        end
-        -- game.print(spidertron_builder.get_inventory)
-        -- adding the batteries automatically on placement
-        spidertron_builder.insert({name="retrofitted-battery"})
-    elseif event.entity.name == "spidertron-builder-spidertron-experimental-laser2" then
-        local spidertron_builder = event.entity
-        if check_spider_colors(spidertron_builder.color) then
-            spidertron_builder.color = {1, 1, 1, 0.5}
-        end
-        -- game.print(spidertron_builder.get_inventory)
-        -- adding the batteries automatically on placement
-        spidertron_builder.insert({name="retrofitted-battery2"})
-    elseif event.entity.name == "immolator" or
-        event.entity.name == "immolator-spidertron-immolator-flamethrower" then
-        if immolator == nil then
-            immolator = {}
-        end
-        local new_immolator = event.entity
-        if check_spider_colors(new_immolator.color) then
-            new_immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
-        end
-        table.insert(storage.immolator, new_immolator)
-        -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}
-    elseif event.entity.name == "major-spidertron" then
-        local new_major_spidertron = event.entity
-        if check_spider_colors(new_major_spidertron.color) then
-            new_major_spidertron.color = {0.2941, 0.3255, 0.1255, 0.5}
-        end
-        -- when major spidertron is created add it to the table
-        table.insert(storage.major_spidertron, new_major_spidertron)
-    end
-end)
-
-
--- this version is the one that when a robot builds the entity
-script.on_event(defines.events.on_robot_built_entity,
-function(event)
-    local default_color = {
-        ["r"] = 1,
-        ["g"] = 0.5,
-        ["b"] = 0,
-        ["a"] = 0.5
-    }
-    if event.entity.name == "spidertronmk2" or
-        event.entity.name == "spidertronmk2-spidertronmk2-rocket-launcher-1" then
-        local spidertronmk2 = event.entity
-        if check_spider_colors(spidertronmk2.color) then
-            spidertronmk2.color = {1.0, 0, 0, 0.5}
-        end
-    elseif event.entity.name == "spidertronmk3" or
-        event.entity.name == "spidertronmk3-spidertronmk3-rocket-launcher-1" then
-
-        local new_spidertronmk3 = event.entity
-        -- game.print(dump(spidertronmk3.color))
-        if check_spider_colors(new_spidertronmk3.color) then
-            new_spidertronmk3.color = {0.5, 0, 0.5, 0.5}
-        end
-        -- when spidertronmk3 is created add it to the table
-        table.insert(storage.spidertronmk3, new_spidertronmk3)
-    elseif event.entity.name == "spidertron-builder" then
-        local spidertron_builder = event.entity
-        if check_spider_colors(spidertron_builder.color) then
-            spidertron_builder.color = {1, 1, 1, 0.5}
-        end
-        -- game.print(spidertron_builder.get_inventory)
-        -- adding the batteries automatically on placement
-        -- TODO need to add higher quality batteries if higher quality spidertron is placed
-        spidertron_builder.insert({name="retrofitted-battery"})
-        spidertron_builder.insert({name="retrofitted-battery2"})
-    elseif event.entity.name == "spidertron-builder-spidertron-experimental-laser" then
-        local spidertron_builder = event.entity
-        if check_spider_colors(spidertron_builder.color) then
-            spidertron_builder.color = {1, 1, 1, 0.5}
-        end
-        -- game.print(spidertron_builder.get_inventory)
-        -- adding the batteries automatically on placement
-        spidertron_builder.insert({name="retrofitted-battery"})
-    elseif event.entity.name == "spidertron-builder-spidertron-experimental-laser2" then
-        local spidertron_builder = event.entity
-        if check_spider_colors(spidertron_builder.color) then
-            spidertron_builder.color = {1, 1, 1, 0.5}
-        end
-        -- game.print(spidertron_builder.get_inventory)
-        -- adding the batteries automatically on placement
-        spidertron_builder.insert({name="retrofitted-battery2"})
-    elseif event.entity.name == "immolator" or
-        event.entity.name == "immolator-spidertron-immolator-flamethrower" then
-        if immolator == nil then
-            immolator = {}
-        end
-        local new_immolator = event.entity
-        if check_spider_colors(new_immolator.color) then
-            new_immolator.color = {0.17647, 0.56863, 0.86275, 0.5}
-        end
-        table.insert(storage.immolator, new_immolator)
-        -- immolator.surface.create_entity{name="fire-flame", position=immolator.position, force="neutral"}
-    elseif event.entity.name == "major-spidertron" then
-        local new_major_spidertron = event.entity
-        if check_spider_colors(new_major_spidertron.color) then
-            new_major_spidertron.color = {0.2941, 0.3255, 0.1255, 0.5}
-        end
-        -- when major spidertron is created add it to the table
-        table.insert(storage.major_spidertron, new_major_spidertron)
-    end
-end)
-
-
--- this is when player removes the item
-script.on_event(defines.events.on_pre_player_mined_item,
-function(event)
-    if event.entity.name == "spidertron-builder" then
-        local spidertron_builder = event.entity
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
-        spidertron_builder.remove_item({name="retrofitted-battery"})
-        spidertron_builder.remove_item({name="retrofitted-battery2"})
-    end
-    if event.entity.name == "spidertron-builder-spidertron-experimental-laser" then
-        local spidertron_builder = event.entity
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
-        spidertron_builder.remove_item({name="retrofitted-battery"})
-    end
-    if event.entity.name == "spidertron-builder-spidertron-experimental-laser2" then
-        local spidertron_builder = event.entity
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
-        spidertron_builder.remove_item({name="retrofitted-battery2"})
-    end
-end)
-
-
--- this is when robot removes the item
--- i swear they just added this on_robot_pre_mined
-script.on_event(defines.events.on_robot_pre_mined,
-function(event)
-    if event.entity.name == "spidertron-builder" then
-        local spidertron_builder = event.entity
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
-        spidertron_builder.remove_item({name="retrofitted-battery"})
-        spidertron_builder.remove_item({name="retrofitted-battery2"})
-    end
-    if event.entity.name == "spidertron-builder-spidertron-experimental-laser" then
-        local spidertron_builder = event.entity
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
-        spidertron_builder.remove_item({name="retrofitted-battery"})
-    end
-    if event.entity.name == "spidertron-builder-spidertron-experimental-laser2" then
-        local spidertron_builder = event.entity
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
-        spidertron_builder.remove_item({name="retrofitted-battery2"})
-    end
-end)
-
-
--- this didn't work, i'll leave this code here for future reference
---[[
-script.on_event(defines.events.on_player_mined_entity,
-function(event)
-    -- removing batteries when it's mined 
-    if event.entity.name == "spidertron-builder" then
-        --- i tried removing from buffer but in buffer is only the vehicle
-        local inv_buff = event.buffer
-        game.print(dump(inv_buff.get_contents()))
-        -- inv_buff.remove({name="retrofitted-battery"})
-        -- inv_buff.remove({name="retrofitted-battery2"})
-        
-        local spidertron_builder = event.entity
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo)))
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.editor_ammo).get_contents()))
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_ammo).get_contents()))
-        -- game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_trash).get_contents()))
-        game.print(dump(spidertron_builder.get_inventory(defines.inventory.spider_trunk).get_contents()))
-        
-        spidertron_builder.get_inventory(defines.inventory.editor_ammo).remove({name="retrofitted-battery"})
-        spidertron_builder.get_inventory(defines.inventory.editor_ammo).remove({name="retrofitted-battery2"})
-        -- inv_items = spidertron_builder.get_inventory()
-        -- game.print(dump(spidertron_builder.get_contents()))
-        -- spidertron_builder.remove_item({name="retrofitted-battery"})
-        -- spidertron_builder.remove_item({name="retrofitted-battery2"})
-        
-        -- tried removing from player but if he has full inv it bugs out
-        -- leaving this in case he still has it for some reason in his inventory
-        
-        --player_id = event.player_index
-        --player = game.get_player(event.player_index)
-        --player.remove_item({name="retrofitted-battery"})
-        --player.remove_item({name="retrofitted-battery2"})
-    end
-end)
---]]
-
-function player_cooldown(seconds, cid)
-    if cooldown == nil then
-        cooldown = {}
-    end
-    something = {
-        cooldown = seconds,
-        cid = cid
-    }
-    -- basic id to know who's cooldown is it
-    table.insert(cooldown, something)
+    return data.repair_target
 end
 
-
-function fire_wave(vehicle_ent, size)
-    if not vehicle_ent.valid then
+-- one beam at a time, every tick; offense first
+local function weaver_tick(data, tick)
+    local weaver = data.entity
+    local enemy = WEAVER_REAPER_ENABLED and find_enemy(data, tick) or nil
+    local target = enemy or find_repair(data, tick)
+    if not target then
+        stop_beam(data)
         return
     end
-    if size == nil then
-        size = 15
+    ensure_beam(data, enemy and "weaver-reaper-beam" or "weaver-repair-beam", tick)
+    if not sweep_beam(data, target) then return end -- still sweeping towards the target
+    local power = quality_power(weaver)
+    if enemy then
+        enemy.damage(power, weaver.force, "laser", weaver, weaver)
+    else
+        target.health = math.min(target.max_health, target.health + power * WEAVER_REPAIR_FACTOR)
     end
-    local circle_size = 360 -- default 360, full circle
-    local dots_per_circle = 30 -- default 180
-    local x, y, r = 0, 0, 1
-    for i = 1, circle_size do
+end
+
+---------------------------------------------------------------------------------------------------
+-- immolator active ability: fire wave
+---------------------------------------------------------------------------------------------------
+
+local function fire_ring(vehicle, size)
+    local surface = vehicle.surface
+    local center = vehicle.position
+    local dots_per_circle = 30
+    for i = 1, 360 do
         local angle = i * math.pi / dots_per_circle
-        local ptx, pty = x + r * math.cos(angle), y + r * math.sin(angle)
-        local newptx = ptx * size -- default 15
-        local newpty = pty * size -- default 15
-        vehicle_ent.surface.create_entity{
-            name="purifier-flame", 
-            position={
-                x = newptx + vehicle_ent.position.x, 
-                y = newpty + vehicle_ent.position.y
-            }, 
-            force="neutral"
+        surface.create_entity{
+            name = "purifier-flame",
+            position = {x = center.x + math.cos(angle) * size, y = center.y + math.sin(angle) * size},
+            force = "neutral"
         }
     end
 end
 
-
-function launch_bubblegum(player_ev)
-    if not player.valid then
-        return
-    end
-    drone_creation = player_ev.vehicle.surface.create_entity({
-        name="major-spidertron-bubblegum-capsule",
-        amount=1,
-        -- forgot to set source, maybe this fixes owner
-        source=player_ev.vehicle,
-        -- yes the source fixed it
-        position={player_ev.position.x,player_ev.position.y},
-        target={player_ev.position.x+1,player_ev.position.y+1},
-        -- this forces the bot to be friendly / allied with the player
-        force=game.forces.player_ev,
-        -- trying to make the player the owner of the drone
-        player = player_ev,
-        -- doesn't work
-        render_player_index=player_ev
-        -- doesn't work
-    })
-end
-
-
 script.on_event("immolator-active1", function(event)
-    player_id = event.player_index
-    player = game.get_player(event.player_index)
-    vehicle = player.vehicle
-    --game.print(vehicle.name)
-    --game.print(vehicle.name == "immolator")
-    -- check if the trigger is for the immolator when same button combination is pressed
-    if not (vehicle == nil) then
-        if vehicle.name == "immolator" then
-            --return -- i tried exiting the function here directly, but never works
+    local vehicle = get_player_spider(event.player_index, "immolator")
+    if not vehicle or is_on_cooldown(event.player_index) then return end
+    start_cooldown(event.player_index, IMMOLATOR_COOLDOWN)
+    table.insert(storage.fire_waves, {vehicle = vehicle, stage = 1})
+end)
 
-            -- define a basic variable to append with all the data
-            --cheap fix for the smart toggle, this will need refactoring later
-            if smarttoggle == nil then
-                smarttoggle = {}
-            end
-            if smarttoggle.data == nil then
-                smarttoggle.data = {}
-            end
-
-            local is_it_pressed = false
-            for x in pairs(smarttoggle.data) do
-                if smarttoggle.data[x].player_id == player_id then
-                    is_it_pressed = true
-                end
-            end
-
-            if cooldown == nil then
-                cooldown = {}
-            end
-
-            local cooldown_pl = false
-            for x in pairs(cooldown) do
-                if cooldown == {} then
-                    cooldown_pl = false
-                elseif cooldown[x].cid == player_id then
-                    cooldown_pl = true
-                end
-            end
-
-            -- is it pressed is that ppl don't spam it
-            if (vehicle.name == "immolator") and (is_it_pressed == false) and
-                (cooldown_pl == false) then
-                local something = {}
-                something.active_stage = 1
-                something.vehicle = vehicle
-                something.player_id = player_id
-
-                -- add the cooldown
-                player_cooldown(3, player_id)
-                -- add the fire-wave starting
-                table.insert(smarttoggle.data, something)
-                -- game.print("added the table")
-            end
+script.on_nth_tick(6, function()
+    local waves = storage.fire_waves
+    for i = #waves, 1, -1 do
+        local wave = waves[i]
+        if wave.vehicle.valid then
+            fire_ring(wave.vehicle, 1 + 2 * wave.stage)
+        end
+        wave.stage = wave.stage + 1
+        if wave.stage > FIRE_WAVE_STAGES or not wave.vehicle.valid then
+            table.remove(waves, i)
         end
     end
 end)
 
+---------------------------------------------------------------------------------------------------
+-- immolator passive ability: fire walk (SHIFT + G toggles it per immolator, on by default)
+-- The flames are placed by script: every FIREWALK_CHECK ticks each leg is looked at, and a leg that
+-- has come to rest at a new spot (it just stepped) gets a purifier flame under its foot.
+---------------------------------------------------------------------------------------------------
+
+local FIREWALK_CHECK = 3          -- ticks between leg checks
+local FIREWALK_STEP = 0.5         -- tiles a foot has to move before its next landing gets a flame
+local FIREWALK_REST = 0.01        -- tiles; a foot that moved less than this since the last check is planted
+-- with this startup setting there is no fire walk at all
+local FIREWALK_DISABLED = settings.startup["disable-immolator-fire"].value
+
+local function firewalk_enabled(immolator)
+    return not (immolator.unit_number and storage.firewalk_off[immolator.unit_number])
+end
+
+local function moved(a, b, limit)
+    local dx, dy = a.x - b.x, a.y - b.y
+    return dx * dx + dy * dy > limit * limit
+end
+
+local function firewalk_tick(data)
+    local immolator = data.entity
+    local feet = data.feet
+    local enabled = firewalk_enabled(immolator)
+    local surface = immolator.surface
+    for i, leg in pairs(immolator.get_spider_legs()) do
+        if leg.valid then
+            local position = leg.position
+            local foot = feet[i]
+            if not foot then
+                -- first look at this leg: remember where it stands, no flame
+                feet[i] = {prev = position, planted = position}
+            else
+                if not moved(position, foot.prev, FIREWALK_REST) and moved(position, foot.planted, FIREWALK_STEP) then
+                    -- the foot has landed on a new spot
+                    foot.planted = position
+                    if enabled then
+                        surface.create_entity{name = "purifier-flame", position = position, force = "neutral"}
+                    end
+                end
+                foot.prev = position
+            end
+        end
+    end
+end
+
+if not FIREWALK_DISABLED then
+    script.on_nth_tick(FIREWALK_CHECK, function()
+        for id, data in pairs(storage.immolators) do
+            if data.entity.valid then
+                firewalk_tick(data)
+            else
+                storage.immolators[id] = nil
+            end
+        end
+    end)
+end
+
+-- the immolators a player controls: the one they are in, otherwise the ones selected with a spidertron remote
+local function player_immolators(player)
+    local vehicle = player.vehicle
+    if vehicle and vehicle.valid and immolator_names[vehicle.name] then return {vehicle} end
+    local list = {}
+    for _, spider in pairs(player.spidertron_remote_selection or {}) do
+        if spider.valid and immolator_names[spider.name] then table.insert(list, spider) end
+    end
+    return list
+end
 
 script.on_event("immolator-passive1", function(event)
-    player_id = event.player_index
-    player = game.get_player(event.player_index)
-    vehicle = player.vehicle
-    --game.print("activating or disabling passive")
-    if not (vehicle == nil) then
-        local spider_legs_copy = vehicle.get_spider_legs()
+    local player = game.get_player(event.player_index)
+    if not (player and player.valid) then return end
+    local immolators = player_immolators(player)
+    if #immolators == 0 then return end
+    if FIREWALK_DISABLED then
+        player.create_local_flying_text{text = {"spidertron-extended.firewalk-disabled"}, create_at_cursor = true}
+        return
     end
-    --game.print(dump(spider_legs_copy))
-    --game.print(spider_legs_copy["type"])
-    ---- spider leg does not help
-    --game.print(dump(spider_legs_copy[1]))
-    ---- need spider vehicle entity
-
-end)
-
-
-script.on_event("major-spidertron-active1", function(event)
-    player_id = event.player_index
-    player = game.get_player(event.player_index)
-    vehicle = player.vehicle
-    -- check if the trigger is for the immolator when same button combination is pressed
-    --game.print(vehicle.name)
-    --game.print(vehicle.name == "major-spidertron")
-    -- i tried if return but it just doesn't work
-    if not (vehicle == nil) then
-        if vehicle.name == "major-spidertron" then
-            --game.print("You are tring to spawn bubblegum but it didnt get implemented yet")
-            -- creating cooldown if it doesn't exist
-            if cooldown == nil then
-                cooldown = {}
-            end
-            -- checking cooldown
-            --game.print("added cooldown stage1")
-            local cooldown_pl = false
-            for x in pairs(cooldown) do
-                if cooldown == {} then
-                    cooldown_pl = false
-                elseif cooldown[x].cid == player_id then
-                    cooldown_pl = true
-                end
-            end
-            --game.print("verified cooldown stage 2")
-            if cooldown_pl == false then
-                --game.print("STARTING")
-                -- add the player cooldown
-                player_cooldown(10, player_id)
-                -- use the skill function
-                launch_bubblegum(player)
-            end
-            --game.print("finished and exiting now")
-        end
-    end
-end)
-
-
-script.on_nth_tick(6, function(event)
-    --cheap fix for the smart toggle, this will need refactoring later
-    if smarttoggle == nil then
-        smarttoggle = {}
-    end
-    if smarttoggle.data == nil then    
-        smarttoggle.data = {}
-    end
-    -- script for fire_wave
-    -- this might kill ups, also i have no idea how multiplayer will handle
-    for x in pairs(smarttoggle.data) do
-        -- writing whiles are so hard ... (sarcastic)
-        if smarttoggle.data[x].active_stage == 1 then
-            smarttoggle.data[x].active_stage = 2
-            fire_wave(smarttoggle.data[x].vehicle, 3)
-        elseif smarttoggle.data[x].active_stage == 2 then
-            smarttoggle.data[x].active_stage = 3
-            fire_wave(smarttoggle.data[x].vehicle, 5)
-        elseif smarttoggle.data[x].active_stage == 3 then
-            smarttoggle.data[x].active_stage = 4
-            fire_wave(smarttoggle.data[x].vehicle, 7)
-        elseif smarttoggle.data[x].active_stage == 4 then
-            smarttoggle.data[x].active_stage = 5
-            fire_wave(smarttoggle.data[x].vehicle, 9)
-        elseif smarttoggle.data[x].active_stage == 5 then
-            smarttoggle.data[x].active_stage = 6
-            fire_wave(smarttoggle.data[x].vehicle, 11)
-        elseif smarttoggle.data[x].active_stage == 6 then
-            smarttoggle.data[x].active_stage = 7
-            fire_wave(smarttoggle.data[x].vehicle, 13)
-        elseif smarttoggle.data[x].active_stage == 7 then
-            smarttoggle.data[x].active_stage = 99 --exit stage
-            fire_wave(smarttoggle.data[x].vehicle, 15)
-            -- remove the table here somehow
-            table.remove(smarttoggle.data, x)
-            -- for y in pairs(smarttoggle.data) do
-                -- game.print(y)
-            -- end
-        end
-    end
-end)
-
---putting them outside any function to properly load each time
--- verify that all types of spidertrons arrays exists and if they do not, create them
-if storage.spidertronmk2 == nil then
-    storage.spidertronmk2 = {}
-end
-if storage.spidertronmk3 == nil then
-    storage.spidertronmk3 = {}
-end
-if storage.spidertron_builder == nil then
-    storage.spidertron_builder = {}
-end
-if storage.immolator == nil then
-    storage.immolator = {}
-end
-if storage.major_spidertron == nil then
-    storage.major_spidertron = {}
-end
-
-script.on_nth_tick(60, function(event)
-    -- 60 ticks = 1 second
-    -- compromising for version fixing
-    -- i doubt this would have such a large impact on ups
-
-    --if not spidertronmk2 == {} then -- comment later
-    --    game.print(dump(spidertronmk2)) -- comment later
-    --end
-    --if not spidertronmk3 == {} then -- comment later
-    --    game.print(dump(spidertronmk3)) -- comment later
-    --end
-    --if not spidertron_builder == {} then -- comment later
-    --    game.print(dump(spidertron_builder)) -- comment later
-    --end
-    --if not immolator == {} then -- comment later
-    --    game.print(dump(immolator)) -- comment later
-    --end
-    --if not major_spidertron == {} then -- comment later
-    --    game.print(dump(major_spidertron)) -- comment later
-    --end
-    
-    -- adding these lines for compatibility with older saves
-    spidertronmk3_health_regen = 15
-    if settings.startup["disable-health-regenmk3"].value then
-        spidertronmk3_health_regen = 0
-    end
-    
-    for key, spidertronmk3_ent in pairs(storage.spidertronmk3) do
-        if spidertronmk3_ent.valid then
-            -- game.print(dump(spidertronmk3))
-            -- i want to try add this in a setting
-            spidertronmk3_ent.health = spidertronmk3_ent.health + spidertronmk3_health_regen
-        else  --had an issue here but i think it got fixed
-            table.remove(storage.spidertronmk3, key)
-        end
-    end
-    
-    -- cooldown testing
-    if not (cooldown == nil) then
-        --game.print(dump(cooldown)) -- remove later
-        for x in pairs(cooldown) do
-            if cooldown[x].cooldown > 0 then
-                cooldown[x].cooldown = cooldown[x].cooldown - 1
+    -- with several selected, they all follow the first one's new state
+    local enable = not firewalk_enabled(immolators[1])
+    for _, immolator in pairs(immolators) do
+        if immolator.unit_number then
+            if enable then
+                storage.firewalk_off[immolator.unit_number] = nil
             else
-                table.remove(cooldown, x)
+                storage.firewalk_off[immolator.unit_number] = true
+                script.register_on_object_destroyed(immolator) -- clears the entry once it is gone
+            end
+        end
+    end
+    player.create_local_flying_text{
+        text = {enable and "spidertron-extended.firewalk-on" or "spidertron-extended.firewalk-off"},
+        create_at_cursor = true
+    }
+end)
+
+---------------------------------------------------------------------------------------------------
+-- Major Spidertron: Bubblegum escort
+-- A Bubblegum is spawned when the Major Spidertron enters combat (an enemy within
+-- BUBBLEGUM_COMBAT_RANGE) and every 5 seconds while it stays in combat, up to a maximum that
+-- depends on the Major Spidertron's quality. Bubblegums orbit the Major Spidertron until they
+-- expire or are destroyed. Works whether the Major Spidertron is driven, remote controlled or parked.
+---------------------------------------------------------------------------------------------------
+
+local function bubblegum_max(major)
+    local quality = major.quality
+    if not quality then return BUBBLEGUM_MAX_BY_QUALITY.normal end
+    -- modded qualities fall back to their level (normal = 0 -> 3, capped at 7)
+    return BUBBLEGUM_MAX_BY_QUALITY[quality.name] or math.min(7, 3 + quality.level)
+end
+
+local function prune_drones(data)
+    local drones = data.drones
+    for i = #drones, 1, -1 do
+        local drone = drones[i].entity
+        if not (drone.valid and drone.surface == data.entity.surface) then
+            table.remove(drones, i)
+        end
+    end
+end
+
+local function orbit_position(major, index, count, tick)
+    local angle = 2 * math.pi * (tick / BUBBLEGUM_ORBIT_PERIOD + (index - 1) / count)
+    local center = major.position
+    return {x = center.x + math.cos(angle) * BUBBLEGUM_ORBIT_RADIUS,
+            y = center.y + math.sin(angle) * BUBBLEGUM_ORBIT_RADIUS}
+end
+
+local function head_position(major)
+    return {x = major.position.x, y = major.position.y - MAJOR_HEAD_HEIGHT}
+end
+
+-- spawns one Bubblegum from the Major Spidertron's head if below the quality limit, returns true on success
+local function spawn_bubblegum(data, tick)
+    local major = data.entity
+    prune_drones(data)
+    if #data.drones >= bubblegum_max(major) then return false end
+    local drone = major.surface.create_entity{
+        name = BUBBLEGUM_NAME,
+        position = head_position(major),
+        force = major.force
+    }
+    if not drone then return false end
+    table.insert(data.drones, {entity = drone, born = tick})
+    return true
+end
+
+local function smoothstep(t) return t * t * (3 - 2 * t) end
+
+-- new drones fly out from the head to their orbit slot, then keep orbiting the body
+local function bubblegum_tick(data, tick)
+    local drones = data.drones
+    if #drones == 0 then return end
+    prune_drones(data)
+    local major = data.entity
+    local count = #drones
+    local head
+    for i = 1, count do
+        local drone = drones[i]
+        local goal = orbit_position(major, i, count, tick)
+        local age = tick - drone.born
+        if age < BUBBLEGUM_LAUNCH_TICKS then
+            head = head or head_position(major)
+            local t = smoothstep(age / BUBBLEGUM_LAUNCH_TICKS)
+            goal = {x = head.x + (goal.x - head.x) * t, y = head.y + (goal.y - head.y) * t}
+        end
+        drone.entity.teleport(goal)
+    end
+end
+
+---------------------------------------------------------------------------------------------------
+-- Major Spidertron: gun rotation
+-- Engine weapon cycling is off (it stops the Artillery Targeting Remote from working), so the combat
+-- check (every 30 ticks, reusing its one nearest-enemy search) rotates the selected gun instead:
+--  * enemies within 100 tiles: move on to the next gun that has ammo and the nearest enemy in range
+--    (machine gun 0-30, cannon 5-100, artillery from 32), so every usable gun gets turns while walking
+--  * no enemy within 100 tiles: select the artillery (if loaded), ready for far targets and the remote
+---------------------------------------------------------------------------------------------------
+
+-- {name, range, min_range} for each gun slot of the Major Spidertron, read from the prototypes
+local major_guns = {}
+if prototypes.entity[MAJOR_NAME] then
+    for i, gun in pairs(prototypes.entity[MAJOR_NAME].indexed_guns or {}) do
+        local attack = gun.attack_parameters or {}
+        major_guns[i] = {name = gun.name, range = attack.range or 0, min_range = attack.min_range or 0}
+    end
+end
+local artillery_slot
+for i, gun in pairs(major_guns) do
+    if gun.name == ARTILLERY_GUN then artillery_slot = i end
+end
+
+local function gun_usable(major, ammo, slot, distance)
+    local stack = ammo[slot]
+    if not (stack and stack.valid_for_read) then return false end
+    local gun = major_guns[slot]
+    if slot == artillery_slot then
+        -- artillery targets are usually far away: usable unless the nearest enemy is inside its minimum range
+        return distance == nil or distance >= gun.min_range
+    end
+    return distance ~= nil and distance >= gun.min_range and distance <= gun.range
+end
+
+local function choose_gun(major, distance)
+    local count = #major_guns
+    if count == 0 then return end
+    local current = major.selected_gun_index
+    local ammo = major.get_inventory(defines.inventory.spider_ammo)
+    if not (current and ammo) then return end
+    if distance == nil then
+        -- nothing nearby: keep the artillery selected for far targets and the Artillery Targeting Remote
+        if artillery_slot and current ~= artillery_slot and gun_usable(major, ammo, artillery_slot, nil) then
+            major.selected_gun_index = artillery_slot
+        end
+        return
+    end
+    -- enemies nearby: next usable gun after the current one (the current one again if it is the only one)
+    for step = 1, count do
+        local slot = (current - 1 + step) % count + 1
+        if gun_usable(major, ammo, slot, distance) then
+            if slot ~= current then major.selected_gun_index = slot end
+            return
+        end
+    end
+end
+
+script.on_nth_tick(BUBBLEGUM_COMBAT_CHECK, function(event)
+    for id, data in pairs(storage.majors) do
+        local major = data.entity
+        if not major.valid then
+            storage.majors[id] = nil
+        else
+            local enemy = major.surface.find_nearest_enemy{
+                position = major.position, max_distance = MAJOR_ENEMY_SEARCH, force = major.force
+            }
+            local distance
+            if enemy then
+                local dx, dy = enemy.position.x - major.position.x, enemy.position.y - major.position.y
+                distance = math.sqrt(dx * dx + dy * dy)
+            end
+            choose_gun(major, distance)
+            if distance and distance <= BUBBLEGUM_COMBAT_RANGE then
+                if not data.in_combat then
+                    -- entering combat: spawn right away
+                    data.in_combat = true
+                    spawn_bubblegum(data, event.tick)
+                    data.next_spawn = event.tick + BUBBLEGUM_SPAWN_INTERVAL
+                elseif event.tick >= data.next_spawn then
+                    spawn_bubblegum(data, event.tick)
+                    data.next_spawn = event.tick + BUBBLEGUM_SPAWN_INTERVAL
+                end
+            else
+                data.in_combat = false
             end
         end
     end
 end)
 
-
-script.on_init(function()
-    -- declare global immolator on init
-    cooldown = {}
-    smarttoggle = {}
-    smarttoggle.data = {}
-    -- immolator = {}
-    player = {}
-    -- declare global spidertronmk3 on init
-    -- spidertronmk3 = {}
-    spidertronmk3_health_regen = 15
-    if settings.startup["disable-health-regenmk3"].value then
-        spidertronmk3_health_regen = 0
+-- every tick: Ghost Weaver beams and the Bubblegum escort movement
+script.on_event(defines.events.on_tick, function(event)
+    local tick = event.tick
+    for id, data in pairs(storage.weavers) do
+        if data.entity.valid then
+            weaver_tick(data, tick)
+        else
+            stop_beam(data)
+            storage.weavers[id] = nil
+        end
     end
-    -- declare global major spidertron on init
-    -- major_spidertron = {}
+    for _, data in pairs(storage.majors) do
+        if data.entity.valid then
+            bubblegum_tick(data, tick)
+        end
+    end
+end)
+
+-- SHIFT + F while driving: spawn one extra Bubblegum right away (still limited by quality, 10 s cooldown)
+script.on_event("major-spidertron-active1", function(event)
+    local vehicle = get_player_spider(event.player_index, MAJOR_NAME)
+    if not vehicle or is_on_cooldown(event.player_index) then return end
+    register_major(vehicle)
+    local data = storage.majors[script.register_on_object_destroyed(vehicle)]
+    if data and spawn_bubblegum(data, event.tick) then
+        start_cooldown(event.player_index, BUBBLEGUM_COOLDOWN)
+    end
 end)

@@ -1,4 +1,32 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.0
+Date: 2026.10.25
+  Features:
+    - Immolator: the fire walk (burning footsteps) can now be toggled per Immolator with Shift-G (the former "passive skill 1" control), while driving it or with it selected by a spidertron remote. It is on by default; the startup setting to disable it entirely still applies.
+    - Ghost Weaver: the Reconstruction and Disintegration Energy Cells no longer exist as items; there is nothing to craft, carry, pick up or lose. The Weaving Beam (repair) and Reaping Beam (attack) are now built-in abilities that work whether the Ghost Weaver is driven, remote controlled or parked.
+    - Ghost Weaver: uses one beam at a time, attacking first. The Reaping Beam hits the nearest enemy within 24 tiles; with no enemy in range, the Weaving Beam repairs the most damaged friendly entity within 24 tiles.
+    - Ghost Weaver: beams hit every tick for 1/2/3/4/5 damage or repair per tick at normal/uncommon/rare/epic/legendary quality. Beams sweep smoothly from target to target, and damage/repair starts once the beam reaches its target.
+    - Major Spidertron: launches Bubblegum escort drones automatically, one when an enemy comes within 30 tiles, then one every 5 seconds while the fight lasts, up to 3/4/5/6/7 drones at normal/uncommon/rare/epic/legendary quality. Drones launch from the spidertron's head and orbit its body until they expire or are destroyed. Works driven, remote controlled or parked.
+    - Major Spidertron: Shift-F launches one extra Bubblegum right away (still limited by quality, 10 second cooldown).
+    - Major Spidertron: the machine gun (SMG ammo), cannon (tank cannon shells) and artillery (artillery shells) take turns automatically, with or without a gunner and in either driver/passenger weapon mode. With enemies within 100 tiles, every 30 ticks it moves on to the next gun that has ammo and the nearest enemy in range (machine gun up to 30, cannon 5 to 100, artillery from 32 tiles). With no enemy within 100 tiles the artillery stays selected.
+  Changes:
+    - Immolator: the fire walk now also works with the "vanilla spidertron size" setting (those legs had no fire trigger before).
+    - All spidertrons, including the vanilla one, are now explicitly military targets.
+    - Spidertron MK3 self-repair now uses the prototype healing_per_tick (works on vehicles since 2.1) instead of a script.
+    - Major Spidertron: none of its guns slow it down any more, so it keeps walking while firing.
+    - Major Spidertron: the artillery gun (vanilla artillery wagon cannon) now shows the Artillery Targeting Remote icon; this icon also shows on the artillery wagon's gun.
+    - The Ghost Weaver "healing ray amount" setting is now the Weaving Beam strength relative to the Reaping Beam (10 = same strength, default). The "disable Reaper Beam" setting still applies.
+    - Removed the energy cell items, their recipes and ammo categories, the two Ghost Weaver beam guns, and the unused Bubblegum capsule projectile.
+    - Removed unused files (item_disabler.lua merged into data-final-fixes.lua, ignore.lua, leg_smoke.lua, artillery muzzle flash stub, unused tips-and-tricks simulation file) and dead spider_engine keys.
+    - Base dependency raised to 2.1.
+    - Existing saves: leftover energy cells are removed by the game on load, and existing Ghost Weavers and Major Spidertrons pick up the new behaviour automatically.
+  Scripting:
+    - Rewrote control.lua: ability cooldowns, immolator fire waves, Ghost Weaver and Major Spidertron state are kept in storage, so they survive save/load and are multiplayer safe. Removed the unused entity lists and the no-op on_entity_damaged handler. Build handlers use event filters and also react to script_raised_built/revive and entity cloning.
+  Bugfixes:
+    - Fixed the "disable artillery for Major Spidertron" setting being ignored.
+    - Fixed Bob's mods recipe changes being applied even when Bob's mods were not installed, which overwrote the Space Age recipes.
+    - Fixed Bubblegum drones being spawned without the player's force.
+---------------------------------------------------------------------------------------------------
 Version: 0.4.4
 Date: 2026.06.25
   Changes:
@@ -263,4 +291,4 @@ Date: 2020.08.16
 Version: 0.1.0
 Date: 2020.08.15
   Changes:
-    - Initial Release.
+    - Initial Release.

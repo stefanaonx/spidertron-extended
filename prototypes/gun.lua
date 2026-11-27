@@ -36,53 +36,6 @@ local spidertronmk3_rocket_launcher_4_item = table_deepcopy(data.raw["gun"]["spi
 spidertronmk3_rocket_launcher_4_item.name = "spidertronmk3-rocket-launcher-4"
 spidertronmk3_rocket_launcher_4_item.attack_parameters.range = 72
 
-local spidertron_builder_laser = {
-    name = "spidertron-experimental-laser",
-    type = "gun",
-    subgroup = "gun",
-    icon = "__spidertron-extended__/graphics/spidertron_builder_laser_turret_1.png",
-    icon_size = 64,
-    stack_size = 5,
-    -- i tried, it didn't work
-    -- attack_parameters = data.raw["active-defense-equipment"]["personal-laser-defense-equipment"].attack_parameters
-    attack_parameters = {
-        type = "beam",
-        range = 50,
-        cooldown = 1,
-        ammo_consumption_modifier = 0,
-        ammo_category = "retrofitted-battery",
-        sound = {
-            {
-                filename = "__base__/sound/fight/laser-1.ogg",
-                volume = 0.75
-            }
-        }
-    }
-}
-local spidertron_builder_laser2 = {
-    name = "spidertron-experimental-laser2",
-    type = "gun",
-    subgroup = "gun",
-    icon = "__spidertron-extended__/graphics/spidertron_builder_laser_turret_2.png",
-    icon_size = 64,
-    stack_size = 5,
-    attack_parameters = {
-        type = "beam",
-        range = 50,
-        cooldown = 1,
-        ammo_consumption_modifier = 0,
-        ammo_category = "retrofitted-battery2",
-        sound = {
-            {
-                filename = "__base__/sound/fight/laser-1.ogg",
-                volume = 0.75
-            }
-        }
-    }
-}
--- spidertron_builder_laser.attack_parameters.ammo_consumption_modifier = 0
--- spidertron_builder_laser.ammo_type.energy_consumption = 0
-
 local immolator_flame_parameters = table_deepcopy(data.raw["gun"]["tank-flamethrower"].attack_parameters)
 immolator_flame_parameters.range = 30
 immolator_flame_parameters.ammo_consumption_modifier = 1
@@ -146,7 +99,5 @@ data:extend{
     spidertronmk3_rocket_launcher_2_item,
     spidertronmk3_rocket_launcher_3_item,
     spidertronmk3_rocket_launcher_4_item,
-    spidertron_builder_laser,
-    spidertron_builder_laser2,
     immolator_flamethrower
 }

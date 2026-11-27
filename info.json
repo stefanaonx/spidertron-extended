@@ -1,6 +1,6 @@
 {
     "name": "spidertron-extended",
-    "version": "0.4.4",
+    "version": "0.5",
     "title": "Spidertron Extended",
     "author": "charleans, resarium, pdunham113, Gravari",
     "factorio_version": "2.1",
@@ -9,4 +9,4 @@
         "base >= 1.0", 
         "? space-exploration >= 0.5.78"
     ]
-}
+}

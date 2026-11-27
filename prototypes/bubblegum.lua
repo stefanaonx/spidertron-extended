@@ -95,11 +95,3 @@ major_spidertron_bubblegum.dying_trigger_effect[1].particle_name = "major-spider
 data:extend{
    major_spidertron_bubblegum
 }
-
--- create projectile for when it is spawned
-local major_spidertron_bubblegum_projectile = table_deepcopy(data.raw["projectile"]["defender-capsule"])
-major_spidertron_bubblegum_projectile.name = "major-spidertron-bubblegum-capsule"
-major_spidertron_bubblegum_projectile.action.action_delivery.target_effects[1].entity_name = "major-spidertron-bubblegum"
-data:extend{
-    major_spidertron_bubblegum_projectile
-}
