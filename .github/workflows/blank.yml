@@ -1,0 +1,45 @@
+name: Build mod archive
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 1
+
+      - name: Package mod
+        id: package
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          version="$(jq -r '.version // empty' info.json)"
+          if [[ -z "$version" || ! "$version" =~ ^[A-Za-z0-9._+-]+$ ]]; then
+            echo "info.json must contain a valid version string" >&2
+            exit 1
+          fi
+
+          folder="spidertron-extended_${version}"
+          archive="${folder}.zip"
+          mkdir "$folder"
+          git archive --format=tar HEAD | tar -xf - -C "$folder"
+          zip -qr "$archive" "$folder"
+
+          echo "archive=$archive" >> "$GITHUB_OUTPUT"
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.package.outputs.archive }}
+          path: ${{ steps.package.outputs.archive }}
+          if-no-files-found: error
+          compression-level: 0
